@@ -1,8 +1,3 @@
 <resources>
     <string name="app_name">HIM</string>
-
-    <string name="id">아이디</string>
-    <string name="password">패스워드</string>
-    <string name="login">로그인</string>
-    <string name="register">회원가입</string>
 </resources>
