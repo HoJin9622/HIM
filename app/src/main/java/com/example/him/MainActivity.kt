@@ -12,9 +12,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        // View binding 완료. 아래부터 작성.
+        // View Binding 적용 완료. 아래부터 작성.
 
-        // View binding 사용 예시 코드.
+        // View Binding 사용 예시 코드.
         val world = "Hello World!"
         binding.hello.text = world
     }
