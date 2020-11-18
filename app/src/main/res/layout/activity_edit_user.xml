@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".EditUserActivity">
 
-
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
@@ -24,7 +23,7 @@
         android:layout_height="wrap_content"
         android:autofillHints=""
         android:ems="10"
-        android:hint="@string/password"
+        android:hint="@string/current_password"
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/passwordEdit"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,7 +36,7 @@
         android:layout_height="wrap_content"
         android:autofillHints=""
         android:ems="10"
-        android:hint="@string/edit_password"
+        android:hint="@string/new_password"
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/passwordCheck"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +49,7 @@
         android:layout_height="wrap_content"
         android:autofillHints=""
         android:ems="10"
-        android:hint="@string/check_password"
+        android:hint="@string/new_password_confirmation"
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/modifyButton"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,12 +60,11 @@
         android:id="@+id/modifyButton"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="@string/modify_password"
+        android:text="@string/confirm"
         app:backgroundTint="@color/green_2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordCheck" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

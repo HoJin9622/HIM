@@ -13,5 +13,6 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         // View Binding 완료. 아래부터 작성.
+
     }
 }
