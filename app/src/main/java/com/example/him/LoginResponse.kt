@@ -1,4 +1,8 @@
 package com.example.him
 
-class LoginResponse {
-}
+data class LoginResponse (
+    val _id: String,
+    val name: String,
+    val id: String,
+    val isProvider: Boolean
+)

@@ -18,6 +18,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
         // View Binding 완료. 아래부터 작성.
 
+        showIngredients()
+    }
+
+    private fun showIngredients() {
         RetrofitClient.instance.getIngredients().enqueue(object: Callback<ArrayList<IngredientResponse>>{
             override fun onFailure(call: Call<ArrayList<IngredientResponse>>, t: Throwable) {
                 Log.d("Response", t.message.toString())
