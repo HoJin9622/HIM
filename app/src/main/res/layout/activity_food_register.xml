@@ -7,7 +7,7 @@
     tools:context=".RegisterActivity">
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/photoButton"
         android:layout_width="90dp"
         android:layout_height="90dp"
         android:layout_marginBottom="20dp"
@@ -18,14 +18,14 @@
         app:srcCompat="@android:drawable/ic_input_add" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/photoView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/picture"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton"
-        app:layout_constraintStart_toStartOf="@+id/imageButton" />
+        app:layout_constraintBottom_toTopOf="@+id/photoButton"
+        app:layout_constraintEnd_toEndOf="@+id/photoButton"
+        app:layout_constraintStart_toStartOf="@+id/photoButton" />
 
     <EditText
         android:id="@+id/shelfLifeEdit"
@@ -67,7 +67,7 @@
         app:layout_constraintTop_toBottomOf="@+id/categoryEdit" />
 
     <Button
-        android:id="@+id/registerButton"
+        android:id="@+id/confirmButton"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -78,18 +78,17 @@
         app:layout_constraintTop_toBottomOf="@+id/memoEdit" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/barcodeView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
-        android:text="@string/scan_barcode"
+        android:layout_marginBottom="10dp"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/scanBarCordButton"
-        app:layout_constraintEnd_toEndOf="@+id/scanBarCordButton"
-        app:layout_constraintStart_toStartOf="@+id/scanBarCordButton" />
+        app:layout_constraintBottom_toTopOf="@+id/barcodeButton"
+        app:layout_constraintEnd_toEndOf="@+id/barcodeButton"
+        app:layout_constraintStart_toStartOf="@+id/barcodeButton" />
 
     <Button
-        android:id="@+id/scanBarCordButton"
+        android:id="@+id/barcodeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
