@@ -7,6 +7,5 @@ data class IngredientResponse(
     var image: String?,
     var category: String,
     var memo: String,
-    var barcode: String,
-    var __v: Int
+    var barcode: String
 )
