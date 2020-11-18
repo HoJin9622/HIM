@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HIM">
-        <activity android:name=".EditUserActivity"></activity>
+        <activity android:name=".Food_Register_Activity"></activity>
+        <activity android:name=".Food_Register" />
+        <activity android:name=".EditUserActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>

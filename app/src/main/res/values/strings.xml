@@ -10,6 +10,11 @@
     <string name="edit_password">변경할 비밀번호</string>
     <string name="check_password">비밀번호 확인</string>
     <string name="modify_password">비밀번호 변경</string>
+    <string name="scan_bar_cord">바코드 입력</string>
+    <string name="register">등록</string>
+    <string name="shelf_life">유통기한</string>
+    <string name="category">카테고리</string>
+    <string name="memo">메모</string>
 
 
 </resources>
