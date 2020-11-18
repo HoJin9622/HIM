@@ -62,9 +62,22 @@
         android:layout_height="wrap_content"
         android:text="@string/confirm"
         app:backgroundTint="@color/green_2"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/withdrawButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordCheck" />
+
+    <Button
+        android:id="@+id/withdrawButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:text="@string/withdraw"
+        android:textColor="@color/black"
+        app:backgroundTint="@color/green_5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/modifyButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
