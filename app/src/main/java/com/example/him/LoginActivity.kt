@@ -2,8 +2,6 @@ package com.example.him
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import com.example.him.databinding.ActivityLoginBinding
 import retrofit2.Call
@@ -25,20 +23,6 @@ class LoginActivity : AppCompatActivity() {
         body.put("password", "123456")
 
         loginHandler(body)
-
-        binding.idEdit.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                TODO("Not yet implemented")
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                TODO("Not yet implemented")
-            }
-        })
     }
 
     private fun loginHandler(body: HashMap<String, String>) {
