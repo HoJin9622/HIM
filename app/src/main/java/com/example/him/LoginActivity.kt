@@ -19,8 +19,8 @@ class LoginActivity : AppCompatActivity() {
         // View Binding 완료. 아래부터 작성.
 
         val body = HashMap<String, String>()
-        body.put("id", "example1")
-        body.put("password", "123456")
+        body["id"] = "example1"
+        body["password"] = "123456"
 
         loginHandler(body)
     }
