@@ -14,18 +14,18 @@
         android:theme="@style/Theme.HIM"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".EditUserActivity" />
-        <activity android:name=".FoodRegisterActivity" />
-        <activity android:name=".FoodEdit" />
-        <activity android:name=".OrderList">
+        <activity android:name=".EditUserActivity"></activity>
+        <activity android:name=".EditFoodActivity"></activity>
+        <activity android:name=".RegisterFoodActivity"></activity>
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".OrderListActivity"></activity>
+        <activity android:name=".RegisterUserActivity"></activity>
     </application>
 </manifest>

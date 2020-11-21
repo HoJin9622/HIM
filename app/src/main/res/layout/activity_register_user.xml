@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".RegisterUserActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -25,14 +25,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.07999998"
+            app:layout_constraintVertical_bias="0.100000024"
             app:srcCompat="@drawable/logo_title" />
 
         <EditText
             android:id="@+id/idEdit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="40dp"
             android:autofillHints=""
             android:ems="10"
             android:hint="@string/id"
@@ -46,36 +46,39 @@
             android:id="@+id/passwordEdit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="40dp"
             android:autofillHints=""
             android:ems="10"
             android:hint="@string/password"
-            android:imeOptions="actionDone"
+            android:imeOptions="actionNext"
             android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="@+id/idEdit"
             app:layout_constraintStart_toStartOf="@+id/idEdit"
             app:layout_constraintTop_toBottomOf="@+id/idEdit" />
 
-        <Button
-            android:id="@+id/loginButton"
+        <EditText
+            android:id="@+id/nameEdit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
-            android:text="@string/login"
-            app:backgroundTint="@color/green_2"
+            android:layout_marginTop="40dp"
+            android:autofillHints=""
+            android:ems="10"
+            android:hint="@string/name"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="@+id/passwordEdit"
             app:layout_constraintStart_toStartOf="@+id/passwordEdit"
             app:layout_constraintTop_toBottomOf="@+id/passwordEdit" />
 
         <Button
-            android:id="@+id/signInButton"
+            android:id="@+id/sign_upButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:text="@string/sign_up"
+            android:layout_marginTop="70dp"
+            android:text="@string/confirm"
             app:backgroundTint="@color/green_2"
-            app:layout_constraintEnd_toEndOf="@+id/loginButton"
-            app:layout_constraintStart_toStartOf="@+id/loginButton"
-            app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+            app:layout_constraintEnd_toEndOf="@+id/nameEdit"
+            app:layout_constraintStart_toStartOf="@+id/nameEdit"
+            app:layout_constraintTop_toBottomOf="@+id/nameEdit" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

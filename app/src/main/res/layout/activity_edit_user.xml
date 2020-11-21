@@ -1,86 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".EditUserActivity">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/logo"
-        app:layout_constraintBottom_toTopOf="@+id/password"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo_title" />
+        android:minHeight="800dp">
 
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/current_password"
-        android:imeOptions="actionNext"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/passwordEdit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginEnd="60dp"
+            android:layout_marginRight="60dp"
+            android:contentDescription="@string/logo"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.060000002"
+            app:srcCompat="@drawable/logo_title" />
 
-    <EditText
-        android:id="@+id/passwordEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/new_password"
-        android:imeOptions="actionNext"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/passwordCheck"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password" />
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:autofillHints=""
+            android:ems="10"
+            android:hint="@string/current_password"
+            android:imeOptions="actionNext"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toStartOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-    <EditText
-        android:id="@+id/passwordCheck"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/new_password_confirmation"
-        android:imeOptions="actionDone"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/modifyButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordEdit" />
+        <EditText
+            android:id="@+id/passwordEdit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:autofillHints=""
+            android:ems="10"
+            android:hint="@string/new_password"
+            android:imeOptions="actionNext"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="@+id/password"
+            app:layout_constraintStart_toStartOf="@+id/password"
+            app:layout_constraintTop_toBottomOf="@+id/password" />
 
-    <Button
-        android:id="@+id/modifyButton"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="@string/confirm"
-        app:backgroundTint="@color/green_2"
-        app:layout_constraintBottom_toTopOf="@+id/withdrawButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordCheck" />
+        <EditText
+            android:id="@+id/passwordCheck"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:autofillHints=""
+            android:ems="10"
+            android:hint="@string/new_password_confirmation"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="@+id/passwordEdit"
+            app:layout_constraintStart_toStartOf="@+id/passwordEdit"
+            app:layout_constraintTop_toBottomOf="@+id/passwordEdit" />
 
-    <Button
-        android:id="@+id/withdrawButton"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:text="@string/withdraw"
-        android:textColor="@color/black"
-        app:backgroundTint="@color/green_5"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/modifyButton" />
+        <Button
+            android:id="@+id/modifyButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:text="@string/confirm"
+            app:backgroundTint="@color/green_2"
+            app:layout_constraintEnd_toEndOf="@+id/passwordCheck"
+            app:layout_constraintStart_toStartOf="@+id/passwordCheck"
+            app:layout_constraintTop_toBottomOf="@+id/passwordCheck" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/withdrawButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:text="@string/withdraw"
+            android:textColor="@color/black"
+            app:backgroundTint="@color/green_5"
+            app:layout_constraintEnd_toEndOf="@+id/modifyButton"
+            app:layout_constraintStart_toStartOf="@+id/modifyButton"
+            app:layout_constraintTop_toBottomOf="@+id/modifyButton" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
