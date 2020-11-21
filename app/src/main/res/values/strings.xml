@@ -16,7 +16,7 @@
     <string name="category">카테고리</string>
     <string name="memo">메모</string>
     <string name="picture">사진</string>
-    <string name="cancel_order">상품취소</string>
-    <string name="register_order">상품주문등록</string>
-
+    <string name="cancel">취소</string>
+    <string name="price">가격</string>
+    <string name="register_order">주문 등록</string>
 </resources>

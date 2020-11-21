@@ -1,99 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".OrderList">
 
-    <TableLayout
-        android:id="@+id/tableLayout"
-        android:layout_width="405dp"
-        android:layout_height="164dp"
-        android:layout_margin="8dp"
-        android:stretchColumns="*"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TableRow
-            android:layout_width="305dp"
-            android:splitMotionEvents="false">
-
-            <TextView
-                android:layout_width="84dp"
-                android:layout_height="82dp"
-                android:background="#F44336"
-                android:gravity="center"
-                android:text="@string/picture"
-                android:textColor="#FFFFFF"
-                android:textSize="24sp" />
-
-            <TextView
-                android:layout_width="75dp"
-                android:layout_height="match_parent"
-                android:background="#ffffff"
-                android:gravity="center"
-                android:text="@string/shelf_life"
-                android:textColor="#000000"
-                android:textSize="24sp" />
-
-            <TextView
-                android:layout_width="61dp"
-                android:layout_height="82dp"
-                android:background="#ffffff"
-                android:gravity="center"
-                android:text="@string/name"
-                android:textColor="#000000"
-                android:textSize="24sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="53dp"
-                android:background="#ffffff"
-                android:gravity="center"
-                android:text="@string/scan_barcode"
-                android:textColor="#000000"
-                android:textSize="24sp" />
-
-            <Button
-                android:id="@+id/button"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:text="@string/cancel_order"
-                android:textColor="#000000"
-                app:backgroundTint="@color/white" />
-
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="152dp"
-            android:layout_height="60dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#F44336"
-                android:gravity="center"
-                android:text="@string/picture"
-                android:textColor="#FFFFFF"
-                android:textSize="24sp" />
-
-        </TableRow>
-
-    </TableLayout>
-
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/register_order"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
+        android:minHeight="800dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ingredientLayout"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="130dp"
+                    android:layout_height="0dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@color/green_1"
+                    android:contentDescription="@string/picture"
+                    app:layout_constraintBottom_toBottomOf="@+id/priceView"
+                    app:layout_constraintEnd_toStartOf="@+id/barcodeView"
+                    app:layout_constraintTop_toTopOf="@+id/barcodeView"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+                <TextView
+                    android:id="@+id/barcodeView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="170dp"
+                    android:layout_marginLeft="170dp"
+                    android:layout_marginEnd="110dp"
+                    android:layout_marginRight="110dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.17000002" />
+
+                <TextView
+                    android:id="@+id/nameView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintEnd_toEndOf="@+id/barcodeView"
+                    app:layout_constraintStart_toStartOf="@+id/barcodeView"
+                    app:layout_constraintTop_toBottomOf="@+id/barcodeView" />
+
+                <TextView
+                    android:id="@+id/shelfLifeView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintEnd_toEndOf="@+id/nameView"
+                    app:layout_constraintStart_toStartOf="@+id/nameView"
+                    app:layout_constraintTop_toBottomOf="@+id/nameView" />
+
+                <TextView
+                    android:id="@+id/priceView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintEnd_toEndOf="@+id/shelfLifeView"
+                    app:layout_constraintStart_toStartOf="@+id/shelfLifeView"
+                    app:layout_constraintTop_toBottomOf="@+id/shelfLifeView" />
+
+                <Button
+                    android:id="@+id/cancelOrderButton"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:paddingLeft="0dp"
+                    android:paddingRight="0dp"
+                    android:text="@string/cancel"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:backgroundTint="@color/green_1"
+                    app:layout_constraintBottom_toBottomOf="@+id/priceView"
+                    app:layout_constraintStart_toEndOf="@+id/shelfLifeView"
+                    app:layout_constraintTop_toTopOf="@+id/shelfLifeView" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/registerOrderButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:contentDescription="@string/register_order"
+            android:focusable="true"
+            app:backgroundTint="@color/green_1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@android:drawable/ic_input_add" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
 
