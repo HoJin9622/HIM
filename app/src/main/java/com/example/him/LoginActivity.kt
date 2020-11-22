@@ -1,9 +1,11 @@
 package com.example.him
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.him.databinding.ActivityLoginBinding
+import kotlinx.android.synthetic.main.activity_login.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,6 +20,9 @@ class LoginActivity : AppCompatActivity() {
         setContentView(view)
         // View Binding 완료. 아래부터 작성.
 
+        signInButton.setOnClickListener { moveRegisterPage() }
+        loginButton.setOnClickListener { moveMainPage() }
+
         val body = HashMap<String, String>()
         body["id"] = "example1"
         body["password"] = "123456"
@@ -26,7 +31,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun loginHandler(body: HashMap<String, String>) {
-        RetrofitClient.instance.login(body).enqueue(object: Callback<LoginResponse>{
+        RetrofitClient.instance.login(body).enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 Log.d("Response", response.toString())
                 Log.d("Response", "로그인 성공")
@@ -40,5 +45,13 @@ class LoginActivity : AppCompatActivity() {
                 Log.d("Response", t.message.toString())
             }
         })
+    }
+
+    fun moveRegisterPage() {
+        startActivity(Intent(this, RegisterUserActivity::class.java))
+    }
+
+    fun moveMainPage() {
+        startActivity(Intent(this, MainActivity::class.java))
     }
 }
