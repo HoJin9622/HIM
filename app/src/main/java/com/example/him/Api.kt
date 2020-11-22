@@ -15,7 +15,7 @@ interface Api {
     ): Call<UserResponse>
 
     @GET("ingredients/{userId}")
-    fun getIngredients(@Path("userId") userId: String): Call<ArrayList<IngredientResponse>>
+    fun getIngredients(@Path("userId") userId: String?): Call<ArrayList<IngredientResponse>>
 
     @POST("ingredients")
     fun registerIngredient(

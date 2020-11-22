@@ -38,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
                     Log.d("Response", "id: " + response.body()?.id.toString())
                     Log.d("Response", "isProvider: " + response.body()?.isProvider.toString())
                     Toast.makeText(this@LoginActivity, "로그인 성공", Toast.LENGTH_SHORT).show()
-                    moveMainPage()
+                    moveMainPage(response.body()?._id.toString())
                 } else {
                     Toast.makeText(
                         this@LoginActivity,
@@ -58,8 +58,8 @@ class LoginActivity : AppCompatActivity() {
         startActivity(Intent(this, RegisterUserActivity::class.java))
     }
 
-    fun moveMainPage() {
-        startActivity(Intent(this, MainActivity::class.java))
+    fun moveMainPage(_id: String) {
+        startActivity(Intent(this, MainActivity::class.java).putExtra("userId", _id))
         finish()
     }
 }
