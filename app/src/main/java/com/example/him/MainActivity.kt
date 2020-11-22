@@ -1,5 +1,6 @@
 package com.example.him
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -17,6 +18,8 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         // View Binding 완료. 아래부터 작성.
+
+        binding.registerOrderButton.setOnClickListener { moveRegisterIngredientPage() }
 
         showIngredients("5fb9027a6225f61c95d73396")
     }
@@ -36,5 +39,9 @@ class MainActivity : AppCompatActivity() {
                     Log.d("Response", t.message.toString())
                 }
             })
+    }
+
+    fun moveRegisterIngredientPage() {
+        startActivity(Intent(this, RegisterIngredientActivity::class.java))
     }
 }
