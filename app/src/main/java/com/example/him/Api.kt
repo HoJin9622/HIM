@@ -10,5 +10,10 @@ interface Api {
     @POST("users/login")
     fun login(
         @Body params: HashMap<String, String>
-    ): Call<LoginResponse>
+    ): Call<UserResponse>
+
+    @POST("users")
+    fun register(
+        @Body params: HashMap<String, Any>
+    ): Call<UserResponse>
 }

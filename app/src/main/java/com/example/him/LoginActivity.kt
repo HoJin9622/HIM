@@ -29,8 +29,8 @@ class LoginActivity : AppCompatActivity() {
         body["id"] = binding.idEdit.text.toString()
         body["password"] = binding.passwordEdit.text.toString()
 
-        RetrofitClient.instance.login(body).enqueue(object : Callback<LoginResponse> {
-            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+        RetrofitClient.instance.login(body).enqueue(object : Callback<UserResponse> {
+            override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
                 if (response.code() == 200) {
                     Log.d("Response", response.toString())
                     Log.d("Response", "_id: " + response.body()?._id.toString())
@@ -48,7 +48,7 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+            override fun onFailure(call: Call<UserResponse>, t: Throwable) {
                 Log.d("Response", t.message.toString())
             }
         })
@@ -56,7 +56,6 @@ class LoginActivity : AppCompatActivity() {
 
     fun moveRegisterPage() {
         startActivity(Intent(this, RegisterUserActivity::class.java))
-        finish()
     }
 
     fun moveMainPage() {
