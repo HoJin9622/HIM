@@ -13,48 +13,48 @@
 
         <ImageView
             android:id="@+id/imageView"
+            android:layout_width="291dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:contentDescription="@string/logo"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toTopOf="@+id/idEdit"
+            app:layout_constraintEnd_toEndOf="@+id/idEdit"
+            app:layout_constraintStart_toStartOf="@+id/idEdit"
+            app:srcCompat="@drawable/logo_title" />
+
+        <EditText
+            android:id="@+id/idEdit"
+            android:layout_width="291dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:autofillHints=""
+            android:ems="10"
+            android:hint="@string/id"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            app:layout_constraintBottom_toTopOf="@+id/passwordEdit"
+            app:layout_constraintEnd_toEndOf="@+id/passwordEdit"
+            app:layout_constraintStart_toStartOf="@+id/passwordEdit" />
+
+        <EditText
+            android:id="@+id/passwordEdit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="60dp"
             android:layout_marginLeft="60dp"
             android:layout_marginEnd="60dp"
             android:layout_marginRight="60dp"
-            android:contentDescription="@string/logo"
-            android:scaleType="fitCenter"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.100000024"
-            app:srcCompat="@drawable/logo_title" />
-
-        <EditText
-            android:id="@+id/idEdit"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/id"
-            android:imeOptions="actionNext"
-            android:inputType="text"
-            app:layout_constraintEnd_toEndOf="@+id/imageView"
-            app:layout_constraintStart_toStartOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-        <EditText
-            android:id="@+id/passwordEdit"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
             android:autofillHints=""
             android:ems="10"
             android:hint="@string/password"
             android:imeOptions="actionNext"
             android:inputType="textPassword"
-            app:layout_constraintEnd_toEndOf="@+id/idEdit"
-            app:layout_constraintStart_toStartOf="@+id/idEdit"
-            app:layout_constraintTop_toBottomOf="@+id/idEdit" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.48000002" />
 
         <EditText
             android:id="@+id/nameEdit"
@@ -74,7 +74,6 @@
             android:id="@+id/sign_upButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
             android:text="@string/confirm"
             app:backgroundTint="@color/green_2"
             app:layout_constraintEnd_toEndOf="@+id/nameEdit"
@@ -91,17 +90,31 @@
             app:layout_constraintStart_toStartOf="@+id/passwordEdit"
             app:layout_constraintTop_toBottomOf="@+id/passwordEdit">
 
-            <RadioButton
-                android:id="@+id/consumerButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/consumer" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <RadioButton
-                android:id="@+id/providerButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/provider" />
+                <RadioButton
+                    android:id="@+id/consumerButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/consumer"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/providerButton"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <RadioButton
+                    android:id="@+id/providerButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/provider"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/consumerButton"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </RadioGroup>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
