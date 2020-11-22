@@ -32,7 +32,7 @@ class LoginActivity : AppCompatActivity() {
 
         RetrofitClient.instance.login(body).enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                if(response.code().toString() == "200") {
+                if(response.code() == 200) {
                     Log.d("Response", response.toString())
                     Log.d("Response", "_id: " + response.body()?._id.toString())
                     Log.d("Response", "name: " + response.body()?.name.toString())
