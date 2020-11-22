@@ -18,19 +18,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
         // View Binding 완료. 아래부터 작성.
 
-        showIngredients()
+        showIngredients("5fb9027a6225f61c95d73396")
     }
 
-    private fun showIngredients() {
-        RetrofitClient.instance.getIngredients()
+    private fun showIngredients(userId: String) {
+        RetrofitClient.instance.getIngredients(userId)
             .enqueue(object : Callback<ArrayList<IngredientResponse>> {
                 override fun onResponse(
                     call: Call<ArrayList<IngredientResponse>>,
                     response: Response<ArrayList<IngredientResponse>>
                 ) {
                     val responseCode = response.code().toString()
-                    Log.d("Response", responseCode)
-                    Log.d("Response", response.body().toString())
+                    Log.d("Response", "식재료 목록: " + response.body().toString())
                 }
 
                 override fun onFailure(call: Call<ArrayList<IngredientResponse>>, t: Throwable) {
