@@ -9,23 +9,24 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="700dp">
+        android:minHeight="800dp">
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="291dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="40dp"
             android:contentDescription="@string/logo"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toTopOf="@+id/idEdit"
             app:layout_constraintEnd_toEndOf="@+id/idEdit"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/idEdit"
             app:srcCompat="@drawable/logo_title" />
 
         <EditText
             android:id="@+id/idEdit"
-            android:layout_width="291dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="40dp"
             android:autofillHints=""
@@ -54,7 +55,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.48000002" />
+            app:layout_constraintVertical_bias="0.42" />
 
         <EditText
             android:id="@+id/nameEdit"
@@ -66,19 +67,21 @@
             android:hint="@string/name"
             android:imeOptions="actionDone"
             android:inputType="textPassword"
-            app:layout_constraintEnd_toEndOf="@+id/radioGroup"
-            app:layout_constraintStart_toStartOf="@+id/radioGroup"
-            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+            app:layout_constraintEnd_toEndOf="@+id/passwordEdit"
+            app:layout_constraintStart_toStartOf="@+id/passwordEdit"
+            app:layout_constraintTop_toBottomOf="@+id/passwordEdit" />
 
         <Button
             android:id="@+id/sign_upButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
             android:text="@string/confirm"
             app:backgroundTint="@color/green_2"
             app:layout_constraintEnd_toEndOf="@+id/nameEdit"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/nameEdit"
-            app:layout_constraintTop_toBottomOf="@+id/nameEdit" />
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
         <RadioGroup
             android:id="@+id/radioGroup"
@@ -86,35 +89,27 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:orientation="horizontal"
+            android:weightSum="2"
             app:layout_constraintEnd_toEndOf="@+id/passwordEdit"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/passwordEdit"
-            app:layout_constraintTop_toBottomOf="@+id/passwordEdit">
+            app:layout_constraintTop_toBottomOf="@+id/nameEdit">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            <RadioButton
+                android:id="@+id/providerButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/provider" />
 
-                <RadioButton
-                    android:id="@+id/consumerButton"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/consumer"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/providerButton"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <RadioButton
-                    android:id="@+id/providerButton"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/provider"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/consumerButton"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <RadioButton
+                android:id="@+id/consumerButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/consumer" />
 
         </RadioGroup>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

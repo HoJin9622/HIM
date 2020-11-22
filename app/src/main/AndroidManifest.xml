@@ -17,8 +17,8 @@
         tools:targetApi="m">
         <activity android:name=".RegisterOrderActivity"></activity>
         <activity android:name=".EditUserActivity" />
-        <activity android:name=".EditFoodActivity" />
-        <activity android:name=".RegisterFoodActivity" />
+        <activity android:name=".EditIngredientActivity" />
+        <activity android:name=".RegisterIngredientActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

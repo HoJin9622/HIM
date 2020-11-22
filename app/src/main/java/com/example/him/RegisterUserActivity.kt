@@ -21,6 +21,12 @@ class RegisterUserActivity : AppCompatActivity() {
         // View Binding 완료. 아래부터 작성.
 
         binding.signUpButton.setOnClickListener { registerHandler() }
+        binding.radioGroup.setOnCheckedChangeListener { group, checkedId ->
+            when (checkedId) {
+                R.id.providerButton -> Log.d("isProvider", "true")
+                R.id.consumerButton -> Log.d("isProvider", "false")
+            }
+        }
     }
 
     private fun registerHandler() {
@@ -29,6 +35,7 @@ class RegisterUserActivity : AppCompatActivity() {
         body["password"] = binding.passwordEdit.text.toString()
         body["name"] = binding.nameEdit.text.toString()
         body["isProvider"] = false
+        Log.d("isProvider", binding.radioGroup.checkedRadioButtonId.toString())
 
         RetrofitClient.instance.register(body).enqueue(object : Callback<UserResponse> {
             override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
