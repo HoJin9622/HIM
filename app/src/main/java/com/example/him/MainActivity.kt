@@ -22,19 +22,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showIngredients() {
-        RetrofitClient.instance.getIngredients().enqueue(object: Callback<ArrayList<IngredientResponse>>{
-            override fun onFailure(call: Call<ArrayList<IngredientResponse>>, t: Throwable) {
-                Log.d("Response", t.message.toString())
-            }
+        RetrofitClient.instance.getIngredients()
+            .enqueue(object : Callback<ArrayList<IngredientResponse>> {
+                override fun onResponse(
+                    call: Call<ArrayList<IngredientResponse>>,
+                    response: Response<ArrayList<IngredientResponse>>
+                ) {
+                    val responseCode = response.code().toString()
+                    Log.d("Response", responseCode)
+                    Log.d("Response", response.body().toString())
+                }
 
-            override fun onResponse(
-                call: Call<ArrayList<IngredientResponse>>,
-                response: Response<ArrayList<IngredientResponse>>
-            ) {
-                val responseCode = response.code().toString()
-                Log.d("Response", responseCode)
-                Log.d("Response", response.body().toString())
-            }
-        })
+                override fun onFailure(call: Call<ArrayList<IngredientResponse>>, t: Throwable) {
+                    Log.d("Response", t.message.toString())
+                }
+            })
     }
 }

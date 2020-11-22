@@ -32,13 +32,17 @@ class LoginActivity : AppCompatActivity() {
 
         RetrofitClient.instance.login(body).enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                Log.d("Response", response.toString())
-                Log.d("Response", "_id: " + response.body()?._id.toString())
-                Log.d("Response", "name: " + response.body()?.name.toString())
-                Log.d("Response", "id: " + response.body()?.id.toString())
-                Log.d("Response", "isProvider: " + response.body()?.isProvider.toString())
+                if(response.code().toString() == "200") {
+                    Log.d("Response", response.toString())
+                    Log.d("Response", "_id: " + response.body()?._id.toString())
+                    Log.d("Response", "name: " + response.body()?.name.toString())
+                    Log.d("Response", "id: " + response.body()?.id.toString())
+                    Log.d("Response", "isProvider: " + response.body()?.isProvider.toString())
 
-                moveMainPage()
+                    moveMainPage()
+                } else {
+                    Toast.makeText(this@LoginActivity, "아이디 혹은 비밀번호가 올바르지 않습니다.", Toast.LENGTH_SHORT).show()
+                }
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
