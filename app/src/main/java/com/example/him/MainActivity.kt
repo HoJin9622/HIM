@@ -21,10 +21,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.registerOrderButton.setOnClickListener { moveRegisterIngredientPage() }
 
-        showIngredients("5fb9027a6225f61c95d73396")
+        showIngredients(intent.getStringExtra("userId"))
     }
 
-    private fun showIngredients(userId: String) {
+    private fun showIngredients(userId: String?) {
         RetrofitClient.instance.getIngredients(userId)
             .enqueue(object : Callback<ArrayList<IngredientResponse>> {
                 override fun onResponse(
