@@ -1,6 +1,6 @@
 package com.example.him
 
-data class LoginResponse (
+data class UserResponse (
     val _id: String,
     val name: String,
     val id: String,

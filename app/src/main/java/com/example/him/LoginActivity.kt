@@ -29,9 +29,9 @@ class LoginActivity : AppCompatActivity() {
         body["id"] = binding.idEdit.text.toString()
         body["password"] = binding.passwordEdit.text.toString()
 
-        RetrofitClient.instance.login(body).enqueue(object : Callback<LoginResponse> {
-            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                if(response.code() == 200) {
+        RetrofitClient.instance.login(body).enqueue(object : Callback<UserResponse> {
+            override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
+                if (response.code() == 200) {
                     Log.d("Response", response.toString())
                     Log.d("Response", "_id: " + response.body()?._id.toString())
                     Log.d("Response", "name: " + response.body()?.name.toString())
@@ -40,22 +40,25 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this@LoginActivity, "로그인 성공", Toast.LENGTH_SHORT).show()
                     moveMainPage()
                 } else {
-                    Toast.makeText(this@LoginActivity, "아이디 혹은 비밀번호가 올바르지 않습니다.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@LoginActivity,
+                        "아이디 혹은 비밀번호가 올바르지 않습니다.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
 
-            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+            override fun onFailure(call: Call<UserResponse>, t: Throwable) {
                 Log.d("Response", t.message.toString())
             }
         })
     }
 
-    private fun moveRegisterPage() {
+    fun moveRegisterPage() {
         startActivity(Intent(this, RegisterUserActivity::class.java))
-        finish()
     }
 
-    private fun moveMainPage() {
+    fun moveMainPage() {
         startActivity(Intent(this, MainActivity::class.java))
         finish()
     }
