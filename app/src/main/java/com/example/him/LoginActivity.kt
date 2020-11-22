@@ -38,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
                     Log.d("Response", "name: " + response.body()?.name.toString())
                     Log.d("Response", "id: " + response.body()?.id.toString())
                     Log.d("Response", "isProvider: " + response.body()?.isProvider.toString())
-
+                    Toast.makeText(this@LoginActivity, "로그인 성공", Toast.LENGTH_SHORT).show()
                     moveMainPage()
                 } else {
                     Toast.makeText(this@LoginActivity, "아이디 혹은 비밀번호가 올바르지 않습니다.", Toast.LENGTH_SHORT).show()
