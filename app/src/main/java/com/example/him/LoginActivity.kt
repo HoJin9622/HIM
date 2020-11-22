@@ -49,9 +49,11 @@ class LoginActivity : AppCompatActivity() {
 
     fun moveRegisterPage() {
         startActivity(Intent(this, RegisterUserActivity::class.java))
+        finish()
     }
 
     fun moveMainPage() {
         startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
 }
