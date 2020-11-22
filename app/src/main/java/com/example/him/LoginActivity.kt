@@ -33,10 +33,11 @@ class LoginActivity : AppCompatActivity() {
             override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
                 if (response.code() == 200) {
                     Log.d("Response", response.toString())
-                    Log.d("Response", "_id: " + response.body()?._id.toString())
-                    Log.d("Response", "name: " + response.body()?.name.toString())
-                    Log.d("Response", "id: " + response.body()?.id.toString())
-                    Log.d("Response", "isProvider: " + response.body()?.isProvider.toString())
+                    Log.d("Response", "_id: ${response.body()?._id}")
+                    Log.d("Response", "name: ${response.body()?.name}")
+                    Log.d("Response", "id: ${response.body()?.id}")
+                    Log.d("Response", "isProvider: ${response.body()?.isProvider}")
+
                     Toast.makeText(this@LoginActivity, "로그인 성공", Toast.LENGTH_SHORT).show()
                     moveMainPage(response.body()?._id.toString())
                 } else {
