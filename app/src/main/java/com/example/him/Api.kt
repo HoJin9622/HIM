@@ -4,9 +4,6 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface Api {
-    @GET("ingredients/{userId}")
-    fun getIngredients(@Path("userId") userId: String): Call<ArrayList<IngredientResponse>>
-
     @POST("users/login")
     fun login(
         @Body params: HashMap<String, String>
@@ -16,4 +13,12 @@ interface Api {
     fun register(
         @Body params: HashMap<String, Any>
     ): Call<UserResponse>
+
+    @GET("ingredients/{userId}")
+    fun getIngredients(@Path("userId") userId: String): Call<ArrayList<IngredientResponse>>
+
+    @POST("ingredients")
+    fun registerIngredient(
+        @Body params: HashMap<String, Any>
+    ): Call<IngredientResponse>
 }
