@@ -21,4 +21,6 @@
     <string name="register_order">주문 등록</string>
     <string name="consumer">소비자</string>
     <string name="provider">공급자</string>
+    <string name="edit">수정</string>
+    <string name="delete">삭제</string>
 </resources>

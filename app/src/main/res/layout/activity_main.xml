@@ -40,24 +40,21 @@
                     android:id="@+id/barcodeView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="170dp"
-                    android:layout_marginLeft="170dp"
-                    android:layout_marginEnd="110dp"
-                    android:layout_marginRight="110dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.17000002" />
+                    android:layout_marginBottom="20dp"
+                    app:layout_constraintBottom_toTopOf="@+id/nameView"
+                    app:layout_constraintEnd_toEndOf="@+id/nameView"
+                    app:layout_constraintStart_toStartOf="@+id/nameView" />
 
                 <TextView
                     android:id="@+id/nameView"
-                    android:layout_width="0dp"
+                    android:layout_width="130dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    app:layout_constraintEnd_toEndOf="@+id/barcodeView"
-                    app:layout_constraintStart_toStartOf="@+id/barcodeView"
-                    app:layout_constraintTop_toBottomOf="@+id/barcodeView" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.61"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.38" />
 
                 <TextView
                     android:id="@+id/shelfLifeView"
@@ -78,19 +75,27 @@
                     app:layout_constraintTop_toBottomOf="@+id/shelfLifeView" />
 
                 <Button
-                    android:id="@+id/cancelOrderButton"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/editButton"
+                    android:layout_width="70dp"
+                    android:layout_height="0dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginLeft="20dp"
-                    android:paddingLeft="0dp"
-                    android:paddingRight="0dp"
-                    android:text="@string/cancel"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    app:backgroundTint="@color/green_1"
+                    android:text="@string/edit"
+                    app:backgroundTint="@color/green_4"
+                    app:layout_constraintBottom_toBottomOf="@+id/nameView"
+                    app:layout_constraintStart_toEndOf="@+id/nameView"
+                    app:layout_constraintTop_toTopOf="@+id/barcodeView" />
+
+                <Button
+                    android:id="@+id/deleteButton"
+                    android:layout_width="70dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:text="@string/delete"
+                    app:backgroundTint="@color/green_4"
                     app:layout_constraintBottom_toBottomOf="@+id/priceView"
-                    app:layout_constraintStart_toEndOf="@+id/shelfLifeView"
+                    app:layout_constraintStart_toEndOf="@+id/priceView"
                     app:layout_constraintTop_toTopOf="@+id/shelfLifeView" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -103,7 +108,7 @@
             android:clickable="true"
             android:contentDescription="@string/register_order"
             android:focusable="true"
-            app:backgroundTint="@color/green_1"
+            app:backgroundTint="@color/green_4"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

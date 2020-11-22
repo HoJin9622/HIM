@@ -66,7 +66,7 @@
             android:ems="10"
             android:hint="@string/name"
             android:imeOptions="actionDone"
-            android:inputType="textPassword"
+            android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="@+id/passwordEdit"
             app:layout_constraintStart_toStartOf="@+id/passwordEdit"
             app:layout_constraintTop_toBottomOf="@+id/passwordEdit" />
@@ -96,18 +96,18 @@
             app:layout_constraintTop_toBottomOf="@+id/nameEdit">
 
             <RadioButton
-                android:id="@+id/providerButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/provider" />
-
-            <RadioButton
                 android:id="@+id/consumerButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/consumer" />
+
+            <RadioButton
+                android:id="@+id/providerButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/provider" />
 
         </RadioGroup>
 

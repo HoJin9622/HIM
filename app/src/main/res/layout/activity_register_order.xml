@@ -96,7 +96,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/shelfLifeView" />
 
             <Button
-                android:id="@+id/cancelOrderButton"
+                android:id="@+id/deleteButton"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"

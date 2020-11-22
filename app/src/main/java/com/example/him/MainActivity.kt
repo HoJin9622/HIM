@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
                     call: Call<ArrayList<IngredientResponse>>,
                     response: Response<ArrayList<IngredientResponse>>
                 ) {
-                    val responseCode = response.code().toString()
+                    // val responseCode = response.code().toString()
                     Log.d("Response", "식재료 목록: " + response.body().toString())
                 }
 
@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
             })
     }
 
-    fun moveRegisterIngredientPage() {
+    private fun moveRegisterIngredientPage() {
         startActivity(Intent(this, RegisterIngredientActivity::class.java))
     }
 }
