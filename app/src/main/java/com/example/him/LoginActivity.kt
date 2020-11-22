@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.example.him.databinding.ActivityLoginBinding
-import kotlinx.android.synthetic.main.activity_login.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -21,14 +20,14 @@ class LoginActivity : AppCompatActivity() {
         setContentView(view)
         // View Binding 완료. 아래부터 작성.
 
-        signInButton.setOnClickListener { moveRegisterPage() }
-        loginButton.setOnClickListener { loginHandler() }
+        binding.signInButton.setOnClickListener { moveRegisterPage() }
+        binding.loginButton.setOnClickListener { loginHandler() }
     }
 
     private fun loginHandler() {
         val body = HashMap<String, String>()
-        body["id"] = idEdit.text.toString()
-        body["password"] = passwordEdit.text.toString()
+        body["id"] = binding.idEdit.text.toString()
+        body["password"] = binding.passwordEdit.text.toString()
 
         RetrofitClient.instance.login(body).enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
