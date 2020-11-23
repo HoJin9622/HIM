@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.registerOrderButton.setOnClickListener { moveRegisterIngredientPage(intent.getStringExtra("userId")) }
         binding.navigateOrderButton.setOnClickListener { moveOrderListPage(intent.getStringExtra("userId")) }
+        binding.navigateEditUserButton.setOnClickListener { moveEditUserPage(intent.getStringExtra("userId")) }
 
         showIngredients(intent.getStringExtra("userId"))
     }
@@ -48,5 +49,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun moveOrderListPage(_id: String?) {
         startActivity(Intent(this, OrderListActivity::class.java).putExtra("userId", _id))
+    }
+
+    private fun moveEditUserPage(_id: String?) {
+        startActivity(Intent(this, EditUserActivity::class.java).putExtra("userId", _id))
     }
 }

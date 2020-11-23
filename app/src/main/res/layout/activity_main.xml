@@ -107,6 +107,12 @@
                 android:layout_height="40dp"
                 android:text="@string/navigate_order"
                 app:backgroundTint="@color/green_4" />
+            <Button
+                android:id="@+id/navigateEditUserButton"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:text="@string/edit_user"
+                app:backgroundTint="@color/green_4" />
         </LinearLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
