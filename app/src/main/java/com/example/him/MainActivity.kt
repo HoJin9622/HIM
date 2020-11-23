@@ -20,11 +20,14 @@ class MainActivity : AppCompatActivity() {
         // View Binding 완료. 아래부터 작성.
 
         binding.registerOrderButton.setOnClickListener { moveRegisterIngredientPage() }
+        binding.navigateOrderButton.setOnClickListener { moveOrderListPage(intent.getStringExtra("userId")) }
+
         showIngredients(intent.getStringExtra("userId"))
     }
 
     private fun showIngredients(userId: String?) {
-        RetrofitClient.instance.getIngredients(userId).enqueue(object : Callback<ArrayList<IngredientResponse>> {
+        RetrofitClient.instance.getIngredients(userId)
+            .enqueue(object : Callback<ArrayList<IngredientResponse>> {
                 override fun onResponse(
                     call: Call<ArrayList<IngredientResponse>>,
                     response: Response<ArrayList<IngredientResponse>>
@@ -41,5 +44,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun moveRegisterIngredientPage() {
         startActivity(Intent(this, RegisterIngredientActivity::class.java))
+    }
+
+    private fun moveOrderListPage(_id: String?) {
+        startActivity(Intent(this, OrderListActivity::class.java).putExtra("userId", _id))
     }
 }
