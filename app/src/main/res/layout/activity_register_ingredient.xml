@@ -61,7 +61,7 @@
             android:autofillHints=""
             android:ems="10"
             android:hint="@string/price"
-            android:inputType="text|numberDecimal"
+            android:inputType="phone"
             app:layout_constraintEnd_toEndOf="@+id/shelfLifeEdit"
             app:layout_constraintStart_toStartOf="@+id/shelfLifeEdit"
             app:layout_constraintTop_toBottomOf="@+id/shelfLifeEdit" />
@@ -135,7 +135,7 @@
             android:autofillHints=""
             android:ems="10"
             android:hint="@string/name"
-            android:inputType="text"
+            android:inputType="textPersonName"
             app:layout_constraintBottom_toTopOf="@+id/shelfLifeEdit"
             app:layout_constraintEnd_toEndOf="@+id/shelfLifeEdit"
             app:layout_constraintStart_toStartOf="@+id/shelfLifeEdit" />

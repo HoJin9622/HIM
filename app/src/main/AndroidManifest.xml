@@ -18,13 +18,13 @@
         <activity android:name=".RegisterOrderActivity" />
         <activity android:name=".EditUserActivity" />
         <activity android:name=".EditIngredientActivity" />
-        <activity android:name=".RegisterIngredientActivity">
+        <activity android:name=".RegisterIngredientActivity" />
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".OrderListActivity" />
         <activity android:name=".RegisterUserActivity" />
