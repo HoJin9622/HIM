@@ -19,7 +19,7 @@ interface Api {
 
     @POST("ingredients")
     fun registerIngredient(
-        @Body params: HashMap<String, Any>
+        @Body params: HashMap<String, Any?>
     ): Call<IngredientResponse>
 
     @GET("orders/myorders/{userId}")

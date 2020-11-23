@@ -20,12 +20,12 @@ class RegisterIngredientActivity : AppCompatActivity() {
         setContentView(view)
         // View Binding 완료. 아래부터 작성.
 
-        binding.confirmButton.setOnClickListener { registerIngredientHandler() }
+        binding.confirmButton.setOnClickListener { registerIngredientHandler(intent.getStringExtra("userId")) }
     }
 
-    private fun registerIngredientHandler() {
-        val body = HashMap<String, Any>()
-        body["user"] = "5fb9027a6225f61c95d73396"
+    private fun registerIngredientHandler(userId: String?) {
+        val body = HashMap<String, Any?>()
+        body["user"] = userId
         body["name"] = binding.nameEdit.text.toString()
         body["price"] = binding.priceEdit.text.toString().toInt()
         body["image"] = ""
