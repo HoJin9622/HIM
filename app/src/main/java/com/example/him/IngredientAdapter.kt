@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
 class IngredientAdapter : RecyclerView.Adapter<Holder>() {
-    var listIngredient = ArrayList<IngredientResponse>()
+    var listIngredient = mutableListOf<IngredientResponse>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         return Holder(
@@ -14,14 +14,13 @@ class IngredientAdapter : RecyclerView.Adapter<Holder>() {
         )
     }
 
-    override fun onBindViewHolder(holder: Holder, position: Int) {
-        TODO("Not yet implemented")
-    }
-
     override fun getItemCount(): Int {
         return listIngredient.size
     }
 
+    override fun onBindViewHolder(holder: Holder, position: Int) {
+        TODO("Not yet implemented")
+    }
 }
 
 class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {

@@ -20,13 +20,11 @@ class MainActivity : AppCompatActivity() {
         // View Binding 완료. 아래부터 작성.
 
         binding.registerOrderButton.setOnClickListener { moveRegisterIngredientPage() }
-
         showIngredients(intent.getStringExtra("userId"))
     }
 
     private fun showIngredients(userId: String?) {
-        RetrofitClient.instance.getIngredients(userId)
-            .enqueue(object : Callback<ArrayList<IngredientResponse>> {
+        RetrofitClient.instance.getIngredients(userId).enqueue(object : Callback<ArrayList<IngredientResponse>> {
                 override fun onResponse(
                     call: Call<ArrayList<IngredientResponse>>,
                     response: Response<ArrayList<IngredientResponse>>
