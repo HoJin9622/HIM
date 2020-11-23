@@ -1,5 +1,6 @@
 package com.example.him
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -19,6 +20,8 @@ class OrderListActivity : AppCompatActivity() {
         // View Binding 완료. 아래부터 작성.
 
         showOrders(intent.getStringExtra("userId"))
+
+        binding.registerOrderButton.setOnClickListener{ moveRegisterOrderPage(intent.getStringExtra("userId")) }
     }
 
     private fun showOrders(userId: String?) {
@@ -36,5 +39,9 @@ class OrderListActivity : AppCompatActivity() {
                     Log.d("Response", t.message.toString())
                 }
             })
+    }
+
+    private fun moveRegisterOrderPage(_id: String?) {
+        startActivity(Intent(this, RegisterOrderActivity::class.java).putExtra("userId", _id))
     }
 }
