@@ -19,7 +19,9 @@ class IngredientAdapter : RecyclerView.Adapter<Holder>() {
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        TODO("Not yet implemented")
+        val name: String
+        val price: Int
+        // val
     }
 }
 

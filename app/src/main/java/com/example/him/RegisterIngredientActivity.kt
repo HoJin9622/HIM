@@ -1,18 +1,23 @@
 package com.example.him
 
+import android.app.DatePickerDialog
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import com.example.him.databinding.ActivityEditIngredientBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.collections.HashMap
 
 class RegisterIngredientActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditIngredientBinding
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEditIngredientBinding.inflate(layoutInflater)
@@ -21,6 +26,16 @@ class RegisterIngredientActivity : AppCompatActivity() {
         // View Binding 완료. 아래부터 작성.
 
         binding.confirmButton.setOnClickListener { registerIngredientHandler() }
+
+        var dialog = DatePickerDialog(this)
+        binding.shelfLifeEdit.setOnFocusChangeListener { v, hasFocus ->
+            if (hasFocus) {
+                dialog.show()
+            }
+        }
+        dialog.setOnDateSetListener { view, year, month, dayOfMonth ->
+            binding.shelfLifeEdit.setText("${year}-${month}-${dayOfMonth}")
+        }
     }
 
     private fun registerIngredientHandler() {
