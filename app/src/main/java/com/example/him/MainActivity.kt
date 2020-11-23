@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
         // View Binding 완료. 아래부터 작성.
 
-        binding.registerOrderButton.setOnClickListener { moveRegisterIngredientPage() }
+        binding.registerOrderButton.setOnClickListener { moveRegisterIngredientPage(intent.getStringExtra("userId")) }
         binding.navigateOrderButton.setOnClickListener { moveOrderListPage(intent.getStringExtra("userId")) }
 
         showIngredients(intent.getStringExtra("userId"))
@@ -42,8 +42,8 @@ class MainActivity : AppCompatActivity() {
             })
     }
 
-    private fun moveRegisterIngredientPage() {
-        startActivity(Intent(this, RegisterIngredientActivity::class.java))
+    private fun moveRegisterIngredientPage(_id: String?) {
+        startActivity(Intent(this, RegisterIngredientActivity::class.java).putExtra("userId", _id))
     }
 
     private fun moveOrderListPage(_id: String?) {

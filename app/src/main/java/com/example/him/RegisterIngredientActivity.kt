@@ -2,12 +2,10 @@ package com.example.him
 
 import android.app.DatePickerDialog
 import android.content.Intent
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import com.example.him.databinding.ActivityEditIngredientBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -17,7 +15,6 @@ import kotlin.collections.HashMap
 class RegisterIngredientActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditIngredientBinding
 
-    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEditIngredientBinding.inflate(layoutInflater)
@@ -38,9 +35,9 @@ class RegisterIngredientActivity : AppCompatActivity() {
         }
     }
 
-    private fun registerIngredientHandler() {
-        val body = HashMap<String, Any>()
-        body["user"] = "5fb9027a6225f61c95d73396"
+    private fun registerIngredientHandler(userId: String?) {
+        val body = HashMap<String, Any?>()
+        body["user"] = userId
         body["name"] = binding.nameEdit.text.toString()
         body["price"] = binding.priceEdit.text.toString().toInt()
         body["image"] = ""
