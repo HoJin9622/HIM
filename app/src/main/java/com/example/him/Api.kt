@@ -21,4 +21,7 @@ interface Api {
     fun registerIngredient(
         @Body params: HashMap<String, Any>
     ): Call<IngredientResponse>
+
+    @GET("orders/myorders/{userId}")
+    fun getOrders(@Path("userId") userId: String?): Call<ArrayList<OrderResponse>>
 }
