@@ -1,14 +1,8 @@
 package com.example.him
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import com.example.him.databinding.ActivityEditUserBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class EditUserActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditUserBinding
