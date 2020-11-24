@@ -14,6 +14,9 @@ interface Api {
         @Body params: HashMap<String, Any>
     ): Call<UserResponse>
 
+    @DELETE("users/{id}")
+    fun deleteUser(@Path("id") id: String?): Call<MessageResponse>
+
     @GET("ingredients/{userId}")
     fun getIngredients(@Path("userId") userId: String?): Call<ArrayList<IngredientResponse>>
 
