@@ -55,11 +55,11 @@ class LoginActivity : AppCompatActivity() {
         })
     }
 
-    fun moveRegisterPage() {
+    private fun moveRegisterPage() {
         startActivity(Intent(this, RegisterUserActivity::class.java))
     }
 
-    fun moveMainPage(_id: String) {
+    private fun moveMainPage(_id: String) {
         startActivity(Intent(this, MainActivity::class.java).putExtra("userId", _id))
         finish()
     }
