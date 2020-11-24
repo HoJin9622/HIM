@@ -26,7 +26,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun loginHandler() {
         val body = HashMap<String, String>()
-        body["id"] = binding.idEdit.text.toString()
+        body["userId"] = binding.idEdit.text.toString()
         body["password"] = binding.passwordEdit.text.toString()
 
         RetrofitClient.instance.login(body).enqueue(object : Callback<UserResponse> {
@@ -35,7 +35,7 @@ class LoginActivity : AppCompatActivity() {
                     Log.d("Response", response.toString())
                     Log.d("Response", "_id: ${response.body()?._id}")
                     Log.d("Response", "name: ${response.body()?.name}")
-                    Log.d("Response", "id: ${response.body()?.id}")
+                    Log.d("Response", "userId: ${response.body()?.userId}")
                     Log.d("Response", "isProvider: ${response.body()?.isProvider}")
 
                     Toast.makeText(this@LoginActivity, "로그인 성공", Toast.LENGTH_SHORT).show()

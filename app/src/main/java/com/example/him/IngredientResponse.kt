@@ -8,7 +8,5 @@ data class IngredientResponse(
     var barcode: String?,
     var name: String,
     var expirationDate: Date,
-    var category: String,
-    var image: String?,
-    var memo: String?
+    var image: String?
 )
