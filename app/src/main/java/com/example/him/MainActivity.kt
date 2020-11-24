@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.him.databinding.ActivityMainBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -19,7 +20,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
         // View Binding 완료. 아래부터 작성.
 
-        binding.registerOrderButton.setOnClickListener { moveRegisterIngredientPage(intent.getStringExtra("userId")) }
+        binding.registerOrderButton.setOnClickListener {
+            moveRegisterIngredientPage(
+                intent.getStringExtra(
+                    "userId"
+                )
+            )
+        }
         binding.navigateOrderButton.setOnClickListener { moveOrderListPage(intent.getStringExtra("userId")) }
         binding.navigateEditUserButton.setOnClickListener { moveEditUserPage(intent.getStringExtra("userId")) }
 
@@ -35,6 +42,16 @@ class MainActivity : AppCompatActivity() {
                 ) {
                     // val responseCode = response.code().toString()
                     Log.d("Response", "식재료 목록: " + response.body().toString())
+
+                    val ingredientList: ArrayList<IngredientResponse>? = response.body()
+                    val adapter = IngredientAdapter()
+                    if (ingredientList != null) {
+                        adapter.listIngredient = ingredientList
+                        binding.recyclerView.adapter = adapter
+                        binding.recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
+                    } else {
+                        Log.d("Response", "ingredientList: null")
+                    }
                 }
 
                 override fun onFailure(call: Call<ArrayList<IngredientResponse>>, t: Throwable) {

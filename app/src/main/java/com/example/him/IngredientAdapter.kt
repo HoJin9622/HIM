@@ -1,17 +1,19 @@
 package com.example.him
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import java.util.*
+import com.example.him.databinding.IngredientRecyclerBinding
+import java.text.SimpleDateFormat
 
 class IngredientAdapter : RecyclerView.Adapter<Holder>() {
-    var listIngredient = mutableListOf<IngredientResponse>()
+    var listIngredient = listOf<IngredientResponse>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         return Holder(
-            LayoutInflater.from(parent.context).inflate(R.layout.activity_main, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.ingredient_recycler, parent, false)
         )
     }
 
@@ -22,17 +24,18 @@ class IngredientAdapter : RecyclerView.Adapter<Holder>() {
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val ingredient = listIngredient[position]
         holder.setIngredient(ingredient)
-        var name: String
-        var expirationDate: String
-        var barcode: String
-        var price: Int
-        var image: String
-        // val
     }
 }
 
 class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    fun setIngredient(ingredient: IngredientResponse) {
+    private lateinit var binding: IngredientRecyclerBinding
 
+    @SuppressLint("SimpleDateFormat")
+    fun setIngredient(ingredient: IngredientResponse) {
+        binding = IngredientRecyclerBinding.bind(itemView)
+        binding.nameView.text = ingredient.name
+        binding.shelfLifeView.text =
+            SimpleDateFormat("yyyy-MM-dd").format(ingredient.expirationDate)
+        binding.priceView.text = "${ingredient.price}"
     }
 }
