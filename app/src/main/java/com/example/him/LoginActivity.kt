@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.example.him.databinding.ActivityLoginBinding
-import kotlinx.android.synthetic.main.activity_edit_user.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
