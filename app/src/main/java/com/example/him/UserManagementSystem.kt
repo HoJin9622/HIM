@@ -83,4 +83,18 @@ class UserManagementSystem {
         })
     }
 
+    fun withdraw(activity: AppCompatActivity, userId: String) {
+        RetrofitClient.instance.deleteUser(userId).enqueue(object : Callback<MessageResponse> {
+                override fun onResponse(call: Call<MessageResponse>, response: Response<MessageResponse>) {
+                    Log.d("Response", "결과: ${response.toString()}")
+
+                    activity.startActivity(Intent(activity, LoginActivity::class.java))
+                    activity.finish()
+                }
+
+                override fun onFailure(call: Call<MessageResponse>, t: Throwable) {
+                    Log.d("Response", t.message.toString())
+                }
+            })
+    }
 }

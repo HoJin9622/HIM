@@ -23,24 +23,11 @@ class EditUserActivity : AppCompatActivity() {
     }
 
     private fun withdrawHandler(userId: String?) {
-        RetrofitClient.instance.deleteUser(userId)
-            .enqueue(object : Callback<MessageResponse> {
-                override fun onResponse(
-                    call: Call<MessageResponse>,
-                    response: Response<MessageResponse>
-                ) {
-                    Log.d("Response", "결과: ${response.toString()}")
-                    moveLoginPage()
-                }
+        val ums = UserManagementSystem()
 
-                override fun onFailure(call: Call<MessageResponse>, t: Throwable) {
-                    Log.d("Response", t.message.toString())
-                }
-            })
+        if (userId != null) {
+            ums.withdraw(this, userId)
+        }
     }
 
-    private fun moveLoginPage() {
-        startActivity(Intent(this, LoginActivity::class.java))
-        finish()
-    }
 }
