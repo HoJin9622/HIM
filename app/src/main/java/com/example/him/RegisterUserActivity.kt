@@ -26,7 +26,7 @@ class RegisterUserActivity : AppCompatActivity() {
     private fun registerHandler() {
         val id = binding.idEdit.text.toString()
         val password = binding.passwordEdit.text.toString()
-        val name = binding.passwordEdit.text.toString()
+        val name = binding.nameEdit.text.toString()
         var isProvider = false
 
         when (binding.radioGroup.checkedRadioButtonId) {
