@@ -30,15 +30,7 @@ class LoginActivity : AppCompatActivity() {
         val password = binding.passwordEdit.text.toString()
 
         val ums = UserManagementSystem()
-
-        val responseId = ums.login(this, id, password)
-
-        if(responseId != null) {
-            moveMainPage(responseId)
-        }
-        else {
-
-        }
+        ums.login(this, id, password)
     }
 
     private fun moveRegisterPage() {

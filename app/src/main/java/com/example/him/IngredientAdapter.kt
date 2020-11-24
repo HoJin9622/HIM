@@ -32,7 +32,7 @@ class IngredientAdapter : RecyclerView.Adapter<Holder>() {
 }
 
 class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    fun setIngredient() {
+    fun setIngredient(ingredient: IngredientResponse) {
 
     }
 }

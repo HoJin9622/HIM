@@ -1,15 +1,16 @@
 package com.example.him
 
+import android.content.Intent
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.startActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class UserManagementSystem {
-    fun login(activity: AppCompatActivity, id: String, password: String): String? {
-        var responseId: String? = null
+    fun login(activity: AppCompatActivity, id: String, password: String) {
         val body = HashMap<String, String>()
         body["userId"] = id
         body["password"] = password
@@ -23,7 +24,13 @@ class UserManagementSystem {
                     Log.d("Response", "isProvider: ${response.body()?.isProvider}")
 
                     Toast.makeText(activity, "로그인 성공", Toast.LENGTH_SHORT).show()
-                    responseId = response.body()?._id
+                    activity.startActivity(
+                        Intent(activity, MainActivity::class.java).putExtra(
+                            "userId",
+                            response.body()?._id
+                        )
+                    )
+                    activity.finish()
                 } else {
                     Toast.makeText(
                         activity,
@@ -37,6 +44,5 @@ class UserManagementSystem {
                 Log.d("Response", t.message.toString())
             }
         })
-        return responseId
     }
 }
