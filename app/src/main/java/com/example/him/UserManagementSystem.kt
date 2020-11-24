@@ -45,4 +45,41 @@ class UserManagementSystem {
             }
         })
     }
+
+    fun register(activity: AppCompatActivity, id: String, password: String, name: String, isProvider: Boolean) {
+        val body = HashMap<String, Any>()
+        body["userId"] = id
+        body["password"] = password
+        body["name"] = name
+        body["isProvider"] = isProvider
+
+        RetrofitClient.instance.register(body).enqueue(object : Callback<UserResponse> {
+            override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
+                Log.d("Response", response.toString())
+                if (response.code() == 201) {
+                    Log.d("Response", "_id: " + response.body()?._id.toString())
+                    Log.d("Response", "name: " + response.body()?.name.toString())
+                    Log.d("Response", "userId: " + response.body()?.userId.toString())
+                    Log.d("Response", "isProvider: " + response.body()?.isProvider.toString())
+
+                    Toast.makeText(activity, "회원가입 성공", Toast.LENGTH_SHORT).show()
+                    activity.startActivity(
+                        Intent(activity, MainActivity::class.java).putExtra(
+                            "userId",
+                            response.body()?._id
+                        )
+                    )
+                    activity.finish()
+                } else {
+                    Toast.makeText(
+                        activity, "이미 존재하는 아이디입니다.", Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+
+            override fun onFailure(call: Call<UserResponse>, t: Throwable) {
+                Log.d("Response", t.message.toString())
+            }
+        })
+    }
 }
