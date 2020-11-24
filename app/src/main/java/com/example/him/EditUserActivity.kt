@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import com.example.him.databinding.ActivityEditUserBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -20,6 +21,7 @@ class EditUserActivity : AppCompatActivity() {
         // View Binding 완료. 아래부터 작성.
 
         binding.withdrawButton.setOnClickListener { withdrawHandler(intent.getStringExtra("userId")) }
+        binding.modifyButton.setOnClickListener { userEditHandler() }
     }
 
     private fun withdrawHandler(userId: String?) {
@@ -39,8 +41,44 @@ class EditUserActivity : AppCompatActivity() {
             })
     }
 
+    private fun userEditHandler() {
+            val body = HashMap<String, String?>()
+            body["_id"] = intent.getStringExtra("userId")
+            body["password"] = binding.passwordEdit.text.toString()
+
+            RetrofitClient.instance.editUser(body)
+                .enqueue(object : Callback<UserResponse> {
+                    override fun onResponse(
+                        call: Call<UserResponse>,
+                        response: Response<UserResponse>
+                    ) {
+                        Log.d("Response", response.toString())
+                        if (response.code() == 201) {
+                            Log.d("Response", "_id: " + response.body()?._id.toString())
+                            Log.d("Response", "name: " + response.body()?.name.toString())
+                            Log.d("Response", "userId: " + response.body()?.userId.toString())
+                            Log.d("Response", "isProvider: " + response.body()?.isProvider.toString())
+                            Toast.makeText(
+                                this@EditUserActivity,
+                                "비밀번호가 성공적으로 변경되었습니다.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            moveMainPage()
+                        }
+                    }
+
+                    override fun onFailure(call: Call<UserResponse>, t: Throwable) {
+                        Log.d("Response", t.message.toString())
+                    }
+                })
+    }
+
     private fun moveLoginPage() {
         startActivity(Intent(this, LoginActivity::class.java))
         finish()
+    }
+
+    private fun moveMainPage() {
+        startActivity(Intent(this, MainActivity::class.java))
     }
 }

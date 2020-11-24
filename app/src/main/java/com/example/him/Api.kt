@@ -14,6 +14,11 @@ interface Api {
         @Body params: HashMap<String, Any>
     ): Call<UserResponse>
 
+    @PUT("users/profile")
+    fun editUser(
+        @Body params: HashMap<String, String?>
+    ): Call<UserResponse>
+
     @DELETE("users/{id}")
     fun deleteUser(@Path("id") id: String?): Call<MessageResponse>
 
