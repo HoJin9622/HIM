@@ -49,8 +49,6 @@ class RegisterIngredientActivity : AppCompatActivity() {
         body["expirationDate"] = binding.shelfLifeEdit.text.toString()
         body["price"] = binding.priceEdit.text.toString().toInt()
         body["image"] = ""
-        body["category"] = binding.categoryEdit.text.toString()
-        body["memo"] = binding.memoEdit.text.toString()
         body["barcode"] = ""
 
         RetrofitClient.instance.registerIngredient(body)
@@ -66,8 +64,6 @@ class RegisterIngredientActivity : AppCompatActivity() {
                         Log.d("Response", "name: " + response.body()?.name.toString())
                         Log.d("Response", "expirationDate: ${response.body()?.expirationDate}")
                         Log.d("Response", "image: " + response.body()?.image.toString())
-                        Log.d("Response", "category: " + response.body()?.category.toString())
-                        Log.d("Response", "memo: " + response.body()?.memo.toString())
                         Log.d("Response", "barcode: " + response.body()?.barcode.toString())
                         Toast.makeText(
                             this@RegisterIngredientActivity,

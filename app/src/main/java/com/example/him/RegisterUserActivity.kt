@@ -25,7 +25,7 @@ class RegisterUserActivity : AppCompatActivity() {
 
     private fun registerHandler() {
         val body = HashMap<String, Any>()
-        body["id"] = binding.idEdit.text.toString()
+        body["userId"] = binding.idEdit.text.toString()
         body["password"] = binding.passwordEdit.text.toString()
         body["name"] = binding.nameEdit.text.toString()
         when (binding.radioGroup.checkedRadioButtonId) {
@@ -39,7 +39,7 @@ class RegisterUserActivity : AppCompatActivity() {
                 if (response.code() == 201) {
                     Log.d("Response", "_id: " + response.body()?._id.toString())
                     Log.d("Response", "name: " + response.body()?.name.toString())
-                    Log.d("Response", "id: " + response.body()?.id.toString())
+                    Log.d("Response", "userId: " + response.body()?.userId.toString())
                     Log.d("Response", "isProvider: " + response.body()?.isProvider.toString())
                     Toast.makeText(this@RegisterUserActivity, "회원가입 성공", Toast.LENGTH_SHORT).show()
                     moveMainPage()

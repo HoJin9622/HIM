@@ -24,35 +24,21 @@ class LoginActivity : AppCompatActivity() {
         binding.loginButton.setOnClickListener { loginHandler() }
     }
 
+
     private fun loginHandler() {
-        val body = HashMap<String, String>()
-        body["id"] = binding.idEdit.text.toString()
-        body["password"] = binding.passwordEdit.text.toString()
+        val id = binding.idEdit.text.toString()
+        val password = binding.passwordEdit.text.toString()
 
-        RetrofitClient.instance.login(body).enqueue(object : Callback<UserResponse> {
-            override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
-                if (response.code() == 200) {
-                    Log.d("Response", response.toString())
-                    Log.d("Response", "_id: ${response.body()?._id}")
-                    Log.d("Response", "name: ${response.body()?.name}")
-                    Log.d("Response", "id: ${response.body()?.id}")
-                    Log.d("Response", "isProvider: ${response.body()?.isProvider}")
+        val ums = UserManagementSystem()
 
-                    Toast.makeText(this@LoginActivity, "로그인 성공", Toast.LENGTH_SHORT).show()
-                    moveMainPage(response.body()?._id.toString())
-                } else {
-                    Toast.makeText(
-                        this@LoginActivity,
-                        "아이디 혹은 비밀번호가 올바르지 않습니다.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
+        val responseId = ums.login(this, id, password)
 
-            override fun onFailure(call: Call<UserResponse>, t: Throwable) {
-                Log.d("Response", t.message.toString())
-            }
-        })
+        if(responseId != null) {
+            moveMainPage(responseId)
+        }
+        else {
+
+        }
     }
 
     private fun moveRegisterPage() {

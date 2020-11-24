@@ -1,11 +1,12 @@
 package com.example.him
 
+import java.util.*
+
 data class IngredientResponse(
     var _id: String,
-    var userId: String,
-    var name: String,
-    var expirationDate: String,
+    var user: String,
     var barcode: String?,
-    var price: Int,
+    var name: String,
+    var expirationDate: Date,
     var image: String?
 )
