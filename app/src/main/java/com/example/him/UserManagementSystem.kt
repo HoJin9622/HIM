@@ -97,4 +97,30 @@ class UserManagementSystem {
                 }
             })
     }
+
+    fun edit(activity: AppCompatActivity, id: String, password: String) {
+        val body = HashMap<String, String?>()
+        body["_id"] = id
+        body["password"] = password
+
+        RetrofitClient.instance.editUser(body).enqueue(object : Callback<UserResponse> {
+                override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
+                    Log.d("Response", response.toString())
+                    if (response.code() == 201) {
+                        Log.d("Response", "_id: " + response.body()?._id.toString())
+                        Log.d("Response", "name: " + response.body()?.name.toString())
+                        Log.d("Response", "userId: " + response.body()?.userId.toString())
+                        Log.d("Response", "isProvider: " + response.body()?.isProvider.toString())
+                        Toast.makeText(activity, "비밀번호가 성공적으로 변경되었습니다.", Toast.LENGTH_SHORT
+                        ).show()
+                        activity.startActivity(Intent(activity, MainActivity::class.java))
+                        activity.finish()
+                    }
+                }
+
+                override fun onFailure(call: Call<UserResponse>, t: Throwable) {
+                    Log.d("Response", t.message.toString())
+                }
+            })
+    }
 }
