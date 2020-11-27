@@ -35,4 +35,7 @@ interface Api {
 
     @GET("orders/myorders/{userId}")
     fun getOrders(@Path("userId") userId: String?): Call<ArrayList<OrderResponse>>
+
+    @DELETE("orders/{id}")
+    fun deleteOrder(@Path("id") id: String?): Call<MessageResponse>
 }
