@@ -14,8 +14,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.text.SimpleDateFormat
 
-class IngredientAdapter(act: AppCompatActivity) : RecyclerView.Adapter<Holder>() {
-    var activity: AppCompatActivity = act
+class IngredientAdapter(var activity: AppCompatActivity) : RecyclerView.Adapter<Holder>() {
     var listIngredient = listOf<IngredientResponse>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
