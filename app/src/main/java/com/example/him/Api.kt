@@ -30,6 +30,9 @@ interface Api {
         @Body params: HashMap<String, Any?>
     ): Call<IngredientResponse>
 
+    @DELETE("ingredients/{id}")
+    fun deleteIngredients(@Path("id") id: String?): Call<MessageResponse>
+
     @GET("orders/myorders/{userId}")
     fun getOrders(@Path("userId") userId: String?): Call<ArrayList<OrderResponse>>
 }
