@@ -39,6 +39,7 @@
             android:id="@+id/barcodeView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="@string/no_barcode"
             app:layout_constraintBottom_toTopOf="@+id/nameView"
             app:layout_constraintEnd_toStartOf="@+id/editButton"
@@ -79,6 +80,7 @@
             android:id="@+id/priceView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/wonView"
             app:layout_constraintStart_toStartOf="@+id/shelfLifeView"
@@ -97,8 +99,8 @@
 
         <Button
             android:id="@+id/editButton"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginEnd="10dp"
@@ -113,7 +115,7 @@
         <Button
             android:id="@+id/deleteButton"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:text="@string/delete"
             app:backgroundTint="@color/green_4"
             app:layout_constraintBottom_toBottomOf="@+id/wonView"
