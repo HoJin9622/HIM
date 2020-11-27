@@ -30,6 +30,11 @@ interface Api {
         @Body params: HashMap<String, Any?>
     ): Call<IngredientResponse>
 
+    @PUT("ingredients")
+    fun editIngredient(
+        @Body params: HashMap<String, Any?>
+    ): Call<IngredientResponse>
+
     @DELETE("ingredients/{id}")
     fun deleteIngredients(@Path("id") id: String?): Call<MessageResponse>
 
