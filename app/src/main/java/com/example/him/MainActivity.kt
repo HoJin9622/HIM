@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity() {
         }
         binding.navigateOrderButton.setOnClickListener { moveOrderListPage(intent.getStringExtra("userId")) }
         binding.navigateEditUserButton.setOnClickListener { moveEditUserPage(intent.getStringExtra("userId")) }
-
         showIngredients(intent.getStringExtra("userId"))
     }
 
@@ -45,7 +44,7 @@ class MainActivity : AppCompatActivity() {
                     Log.d("Response", "식재료 목록: " + response.body().toString())
 
                     val ingredientList: ArrayList<IngredientResponse>? = response.body()
-                    val adapter = IngredientAdapter()
+                    val adapter = IngredientAdapter(this@MainActivity)
                     if (ingredientList != null) {
                         adapter.listIngredient = ingredientList
                         binding.recyclerView.adapter = adapter

@@ -7,34 +7,54 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:minHeight="200dp">
+
+        <View
+            android:id="@+id/upperView"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/green_5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
             android:contentDescription="@string/picture"
             android:scaleType="fitCenter"
-            app:srcCompat="@android:drawable/ic_menu_gallery"
-            tools:layout_editor_absoluteX="33dp"
-            tools:layout_editor_absoluteY="148dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/barcodeView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@android:drawable/ic_menu_gallery" />
 
         <TextView
             android:id="@+id/barcodeView"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/no_barcode"
             app:layout_constraintBottom_toTopOf="@+id/nameView"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="120dp" />
+            app:layout_constraintEnd_toStartOf="@+id/editButton"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/nameView"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@+id/shelfLifeView"
+            app:layout_constraintEnd_toEndOf="@+id/barcodeView"
+            app:layout_constraintStart_toStartOf="@+id/barcodeView"
             app:layout_constraintTop_toBottomOf="@+id/barcodeView"
-            tools:layout_editor_absoluteX="120dp"
             tools:text="이름" />
 
         <TextView
@@ -42,45 +62,75 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@+id/priceView"
+            app:layout_constraintEnd_toStartOf="@+id/tillView"
+            app:layout_constraintStart_toStartOf="@+id/nameView"
             app:layout_constraintTop_toBottomOf="@+id/nameView"
-            tools:layout_editor_absoluteX="120dp"
             tools:text="유통기한" />
+
+        <TextView
+            android:id="@+id/tillView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/till"
+            app:layout_constraintBottom_toBottomOf="@+id/shelfLifeView"
+            app:layout_constraintEnd_toEndOf="@+id/nameView"
+            app:layout_constraintStart_toEndOf="@+id/shelfLifeView"
+            app:layout_constraintTop_toTopOf="@+id/shelfLifeView" />
 
         <TextView
             android:id="@+id/priceView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/wonView"
+            app:layout_constraintStart_toStartOf="@+id/shelfLifeView"
             app:layout_constraintTop_toBottomOf="@+id/shelfLifeView"
-            tools:layout_editor_absoluteX="120dp"
             tools:text="가격" />
+
+        <TextView
+            android:id="@+id/wonView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/won"
+            app:layout_constraintBottom_toBottomOf="@+id/priceView"
+            app:layout_constraintEnd_toEndOf="@+id/tillView"
+            app:layout_constraintStart_toEndOf="@+id/priceView"
+            app:layout_constraintTop_toTopOf="@+id/priceView" />
 
         <Button
             android:id="@+id/editButton"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
             android:text="@string/edit"
             app:backgroundTint="@color/green_4"
-            tools:layout_editor_absoluteX="297dp"
-            tools:layout_editor_absoluteY="69dp" />
+            app:layout_constraintBottom_toTopOf="@+id/deleteButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/barcodeView"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/deleteButton"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/delete"
             app:backgroundTint="@color/green_4"
-            tools:layout_editor_absoluteX="297dp"
-            tools:layout_editor_absoluteY="132dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/editButton"
+            app:layout_constraintStart_toStartOf="@+id/editButton"
+            app:layout_constraintTop_toBottomOf="@+id/editButton" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="@+id/shelfLifeView"
-            app:layout_constraintTop_toTopOf="@+id/shelfLifeView"
-            tools:layout_editor_absoluteX="204dp" />
+        <View
+            android:id="@+id/lowerView"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/green_5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

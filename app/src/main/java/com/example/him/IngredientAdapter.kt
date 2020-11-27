@@ -6,7 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.him.databinding.IngredientRecyclerBinding
 import retrofit2.Call
@@ -14,7 +14,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.text.SimpleDateFormat
 
-class IngredientAdapter : RecyclerView.Adapter<Holder>() {
+class IngredientAdapter(act: AppCompatActivity) : RecyclerView.Adapter<Holder>() {
+    var activity: AppCompatActivity = act
     var listIngredient = listOf<IngredientResponse>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
@@ -29,7 +30,7 @@ class IngredientAdapter : RecyclerView.Adapter<Holder>() {
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val ingredient = listIngredient[position]
-        holder.setIngredient(ingredient)
+        holder.setIngredient(activity, ingredient)
     }
 }
 
@@ -37,7 +38,7 @@ class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private lateinit var binding: IngredientRecyclerBinding
 
     @SuppressLint("SimpleDateFormat")
-    fun setIngredient(ingredient: IngredientResponse) {
+    fun setIngredient(activity: AppCompatActivity, ingredient: IngredientResponse) {
         binding = IngredientRecyclerBinding.bind(itemView)
         // binding.imageView 사진 처리
         binding.barcodeView.text = ingredient.barcode
@@ -53,6 +54,10 @@ class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                     response: Response<MessageResponse>
                 ) {
                     Log.d("Response", "결과: ${response.toString()}")
+
+                    val userId = activity.intent.getStringExtra("userId")
+                    activity.finish()
+                    activity.startActivity(Intent(activity, MainActivity::class.java).putExtra("userId", userId))
                 }
 
                 override fun onFailure(call: Call<MessageResponse>, t: Throwable) {
