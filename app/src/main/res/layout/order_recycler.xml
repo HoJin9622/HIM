@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="130dp">
+
+        <View
+            android:id="@+id/upperView"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/green_5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/ingredientKeyView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginLeft="40dp"
+            android:text="@string/ingredientKey"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toTopOf="@+id/consumerKeyView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/ingredientView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ingredientKeyView"
+            app:layout_constraintEnd_toStartOf="@+id/deleteButton"
+            app:layout_constraintStart_toEndOf="@+id/ingredientKeyView"
+            app:layout_constraintTop_toTopOf="@+id/ingredientKeyView" />
+
+        <TextView
+            android:id="@+id/consumerKeyView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/consumerKey"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toTopOf="@+id/providerKeyView"
+            app:layout_constraintStart_toStartOf="@+id/ingredientKeyView"
+            app:layout_constraintTop_toBottomOf="@+id/ingredientKeyView" />
+
+        <TextView
+            android:id="@+id/consumerView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="@+id/consumerKeyView"
+            app:layout_constraintEnd_toEndOf="@+id/ingredientView"
+            app:layout_constraintStart_toEndOf="@+id/consumerKeyView"
+            app:layout_constraintTop_toTopOf="@+id/consumerKeyView" />
+
+        <TextView
+            android:id="@+id/providerKeyView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/providerKey"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toTopOf="@+id/lowerView"
+            app:layout_constraintStart_toStartOf="@+id/consumerKeyView"
+            app:layout_constraintTop_toBottomOf="@+id/consumerKeyView" />
+
+        <TextView
+            android:id="@+id/providerView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="@+id/providerKeyView"
+            app:layout_constraintEnd_toEndOf="@+id/consumerView"
+            app:layout_constraintStart_toEndOf="@+id/providerKeyView"
+            app:layout_constraintTop_toTopOf="@+id/providerKeyView" />
+
+        <Button
+            android:id="@+id/deleteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginRight="40dp"
+            android:text="@string/cancel_order"
+            app:backgroundTint="@color/green_4"
+            app:layout_constraintBottom_toBottomOf="@+id/providerView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ingredientView"
+            app:layout_constraintTop_toTopOf="@+id/ingredientView" />
+
+        <View
+            android:id="@+id/lowerView"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/green_5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

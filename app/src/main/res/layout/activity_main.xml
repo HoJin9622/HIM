@@ -18,18 +18,6 @@
     </androidx.recyclerview.widget.RecyclerView>
 
     <Button
-        android:id="@+id/navigateOrderButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:text="@string/navigate_order"
-        app:backgroundTint="@color/green_4"
-        app:layout_constraintBottom_toBottomOf="@+id/navigateEditUserButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/navigateEditUserButton" />
-
-    <Button
         android:id="@+id/navigateEditUserButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,6 +30,19 @@
         app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/navigateOrderButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="@string/order_list"
+        app:backgroundTint="@color/green_4"
+        app:layout_constraintBottom_toBottomOf="@+id/navigateEditUserButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/navigateEditUserButton"
+        app:layout_constraintVertical_bias="0.0" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/registerOrderButton"
