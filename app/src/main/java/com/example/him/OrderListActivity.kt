@@ -33,6 +33,11 @@ class OrderListActivity : AppCompatActivity() {
     }
 
     private fun moveRegisterOrderPage(_id: String?) {
-        startActivity(Intent(this, RegisterOrderActivity::class.java).putExtra("userId", _id))
+        val move = OrderManagementSystem()
+        if (_id != null) {
+            move.page(this, _id)
+        }
+
+
     }
 }

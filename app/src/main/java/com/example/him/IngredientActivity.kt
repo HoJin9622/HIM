@@ -48,46 +48,17 @@ class IngredientActivity : AppCompatActivity() {
     }
 
     private fun registerIngredientHandler(userId: String?) {
-        val body = HashMap<String, Any?>()
-        body["user"] = userId
-        body["image"] = ""
-        body["barcode"] = binding.barcodeEdit.text.toString()
-        body["name"] = binding.nameEdit.text.toString()
-        body["expirationDate"] = binding.shelfLifeEdit.text.toString()
-        body["price"] = binding.priceEdit.text.toString().toInt()
+        val image = ""
+        val barcode = binding.barcodeEdit.text.toString()
+        val name = binding.nameEdit.text.toString()
+        val expirationDate = binding.shelfLifeEdit.text.toString()
+        val price = binding.priceEdit.text.toString().toInt()
 
-        RetrofitClient.instance.registerIngredient(body)
-            .enqueue(object : Callback<IngredientResponse> {
-                override fun onResponse(
-                    call: Call<IngredientResponse>,
-                    response: Response<IngredientResponse>
-                ) {
-                    Log.d("Response", response.toString())
-                    if (response.code() == 201) {
-                        Log.d("Response", "_id: ${response.body()?._id}")
-                        Log.d("Response", "user: ${response.body()?.user}")
-                        Log.d("Response", "name: ${response.body()?.name}")
-                        Log.d("Response", "expirationDate: ${response.body()?.expirationDate}")
-                        Log.d("Response", "image: ${response.body()?.image}")
-                        Log.d("Response", "barcode: ${response.body()?.barcode}")
-                        Toast.makeText(
-                            this@IngredientActivity,
-                            "식재료가 성공적으로 등록되었습니다.",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        moveMainPage(userId)
-                    }
-                }
+        val ims = IngredientManagementSystem()
 
-                override fun onFailure(call: Call<IngredientResponse>, t: Throwable) {
-                    Log.d("Response", t.message.toString())
-                }
-            })
-    }
-
-    fun moveMainPage(_id: String?) {
-        startActivity(Intent(this, MainActivity::class.java).putExtra("userId", _id))
-        finish()
+        if (userId != null) {
+            ims.register(this, userId, image, barcode, name, expirationDate, price)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

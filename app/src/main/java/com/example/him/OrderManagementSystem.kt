@@ -29,7 +29,7 @@ class OrderManagementSystem {
 
     }
 
-    fun moveRegisterOrderPage(_id: String?) {
+    fun page(activity: AppCompatActivity,_id: String?) {
 
     }
 
