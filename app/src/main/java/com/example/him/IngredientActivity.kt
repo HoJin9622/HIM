@@ -50,11 +50,11 @@ class IngredientActivity : AppCompatActivity() {
     private fun registerIngredientHandler(userId: String?) {
         val body = HashMap<String, Any?>()
         body["user"] = userId
+        body["image"] = ""
+        body["barcode"] = binding.barcodeEdit.text.toString()
         body["name"] = binding.nameEdit.text.toString()
         body["expirationDate"] = binding.shelfLifeEdit.text.toString()
         body["price"] = binding.priceEdit.text.toString().toInt()
-        body["image"] = ""
-        body["barcode"] = ""
 
         RetrofitClient.instance.registerIngredient(body)
             .enqueue(object : Callback<IngredientResponse> {
