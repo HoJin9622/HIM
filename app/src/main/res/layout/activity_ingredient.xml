@@ -29,7 +29,7 @@
             android:id="@+id/photoView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="40dp"
             android:text="@string/picture"
             android:textSize="14sp"
             app:layout_constraintBottom_toTopOf="@+id/photoButton"
@@ -58,23 +58,10 @@
             android:ems="10"
             android:hint="@string/price"
             android:inputType="numberDecimal"
-            app:layout_constraintBottom_toTopOf="@+id/memoEdit"
+            app:layout_constraintBottom_toTopOf="@+id/confirmButton"
             app:layout_constraintEnd_toStartOf="@+id/wonView"
             app:layout_constraintStart_toStartOf="@+id/nameEdit"
             app:layout_constraintTop_toBottomOf="@+id/shelfLifeEdit" />
-
-        <EditText
-            android:id="@+id/memoEdit"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/memo"
-            android:inputType="text"
-            app:layout_constraintBottom_toTopOf="@+id/confirmButton"
-            app:layout_constraintEnd_toEndOf="@+id/nameEdit"
-            app:layout_constraintStart_toStartOf="@+id/nameEdit"
-            app:layout_constraintTop_toBottomOf="@+id/priceEdit" />
 
         <Button
             android:id="@+id/confirmButton"
@@ -83,9 +70,9 @@
             android:text="@string/confirm"
             app:backgroundTint="@color/green_2"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/memoEdit"
-            app:layout_constraintStart_toStartOf="@+id/memoEdit"
-            app:layout_constraintTop_toBottomOf="@+id/memoEdit" />
+            app:layout_constraintEnd_toEndOf="@+id/wonView"
+            app:layout_constraintStart_toStartOf="@+id/priceEdit"
+            app:layout_constraintTop_toBottomOf="@+id/priceEdit" />
 
         <Button
             android:id="@+id/barcodeButton"
