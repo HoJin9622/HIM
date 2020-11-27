@@ -57,15 +57,14 @@ class UserManagementSystem {
         body["password"] = password
         body["name"] = name
         body["isProvider"] = isProvider
-
         RetrofitClient.instance.register(body).enqueue(object : Callback<UserResponse> {
             override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
                 Log.d("Response", response.toString())
                 if (response.code() == 201) {
-                    Log.d("Response", "_id: " + response.body()?._id.toString())
-                    Log.d("Response", "name: " + response.body()?.name.toString())
-                    Log.d("Response", "userId: " + response.body()?.userId.toString())
-                    Log.d("Response", "isProvider: " + response.body()?.isProvider.toString())
+                    Log.d("Response", "_id: ${response.body()?._id}")
+                    Log.d("Response", "name: ${response.body()?.name}")
+                    Log.d("Response", "userId: ${response.body()?.userId}")
+                    Log.d("Response", "isProvider: ${response.body()?.isProvider}")
 
                     Toast.makeText(activity, "회원가입 성공", Toast.LENGTH_SHORT).show()
                     activity.startActivity(
@@ -95,8 +94,8 @@ class UserManagementSystem {
                 call: Call<MessageResponse>,
                 response: Response<MessageResponse>
             ) {
-                Log.d("Response", "결과: ${response.toString()}")
-
+                Log.d("Response", "결과: $response")
+                Toast.makeText(activity, "회원이 탈퇴되었습니다.", Toast.LENGTH_SHORT).show()
                 activity.startActivity(Intent(activity, LoginActivity::class.java))
                 activity.finish()
             }
@@ -109,22 +108,23 @@ class UserManagementSystem {
     }
 
     fun edit(activity: AppCompatActivity, id: String, password: String) {
+        Log.d("Edit", "${id}, $password")
         val body = HashMap<String, String?>()
         body["_id"] = id
         body["password"] = password
-
         RetrofitClient.instance.editUser(body).enqueue(object : Callback<UserResponse> {
             override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
                 Log.d("Response", response.toString())
-                if (response.code() == 201) {
-                    Log.d("Response", "_id: " + response.body()?._id.toString())
-                    Log.d("Response", "name: " + response.body()?.name.toString())
-                    Log.d("Response", "userId: " + response.body()?.userId.toString())
-                    Log.d("Response", "isProvider: " + response.body()?.isProvider.toString())
-                    Toast.makeText(
-                        activity, "비밀번호가 성공적으로 변경되었습니다.", Toast.LENGTH_SHORT
-                    ).show()
-                    activity.startActivity(Intent(activity, MainActivity::class.java))
+                if (response.code() == 200) {
+                    Log.d("Response", "_id: ${response.body()?._id}")
+                    Log.d("Response", "name: ${response.body()?.name}")
+                    Log.d("Response", "userId: ${response.body()?.userId}")
+                    Log.d("Response", "isProvider: ${response.body()?.isProvider}")
+
+                    Toast.makeText(activity, "비밀번호가 성공적으로 변경되었습니다.", Toast.LENGTH_SHORT).show()
+                    activity.startActivity(
+                        Intent(activity, MainActivity::class.java).putExtra("userId", id)
+                    )
                     activity.finish()
                 }
             }

@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="800dp">
+        android:minHeight="700dp">
 
         <ImageView
             android:id="@+id/imageView"
@@ -29,32 +29,18 @@
             app:srcCompat="@drawable/logo_title" />
 
         <EditText
-            android:id="@+id/password"
+            android:id="@+id/passwordEdit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:autofillHints=""
             android:ems="10"
-            android:hint="@string/current_password"
+            android:hint="@string/new_password"
             android:imeOptions="actionNext"
             android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="@+id/imageView"
             app:layout_constraintStart_toStartOf="@+id/imageView"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-        <EditText
-            android:id="@+id/passwordEdit"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/new_password"
-            android:imeOptions="actionNext"
-            android:inputType="textPassword"
-            app:layout_constraintEnd_toEndOf="@+id/password"
-            app:layout_constraintStart_toStartOf="@+id/password"
-            app:layout_constraintTop_toBottomOf="@+id/password" />
 
         <EditText
             android:id="@+id/passwordCheck"
@@ -74,7 +60,7 @@
             android:id="@+id/modifyButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="70dp"
             android:text="@string/confirm"
             app:backgroundTint="@color/green_2"
             app:layout_constraintEnd_toEndOf="@+id/passwordCheck"
@@ -85,7 +71,7 @@
             android:id="@+id/withdrawButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="90dp"
             android:text="@string/withdraw"
             android:textColor="@color/black"
             app:backgroundTint="@color/green_5"
