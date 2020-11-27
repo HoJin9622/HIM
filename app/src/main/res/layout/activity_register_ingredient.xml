@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="900dp">
+        android:minHeight="700dp">
 
         <ImageButton
             android:id="@+id/photoButton"
@@ -41,17 +41,15 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="60dp"
             android:layout_marginLeft="60dp"
-            android:layout_marginEnd="60dp"
-            android:layout_marginRight="60dp"
             android:autofillHints=""
             android:ems="10"
             android:hint="@string/shelf_life"
             android:inputType="date"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tillView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.41000003" />
+            app:layout_constraintVertical_bias="0.5" />
 
         <EditText
             android:id="@+id/priceEdit"
@@ -62,22 +60,9 @@
             android:ems="10"
             android:hint="@string/price"
             android:inputType="phone"
-            app:layout_constraintEnd_toEndOf="@+id/shelfLifeEdit"
+            app:layout_constraintEnd_toStartOf="@+id/wonView"
             app:layout_constraintStart_toStartOf="@+id/shelfLifeEdit"
             app:layout_constraintTop_toBottomOf="@+id/shelfLifeEdit" />
-
-        <EditText
-            android:id="@+id/categoryEdit"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/category"
-            android:inputType="text"
-            app:layout_constraintEnd_toEndOf="@+id/priceEdit"
-            app:layout_constraintStart_toStartOf="@+id/priceEdit"
-            app:layout_constraintTop_toBottomOf="@+id/priceEdit" />
 
         <EditText
             android:id="@+id/memoEdit"
@@ -88,9 +73,9 @@
             android:ems="10"
             android:hint="@string/memo"
             android:inputType="text"
-            app:layout_constraintEnd_toEndOf="@+id/categoryEdit"
-            app:layout_constraintStart_toStartOf="@+id/categoryEdit"
-            app:layout_constraintTop_toBottomOf="@+id/categoryEdit" />
+            app:layout_constraintEnd_toEndOf="@+id/wonView"
+            app:layout_constraintStart_toStartOf="@+id/priceEdit"
+            app:layout_constraintTop_toBottomOf="@+id/priceEdit" />
 
         <Button
             android:id="@+id/confirmButton"
@@ -137,8 +122,31 @@
             android:hint="@string/name"
             android:inputType="textPersonName"
             app:layout_constraintBottom_toTopOf="@+id/shelfLifeEdit"
-            app:layout_constraintEnd_toEndOf="@+id/shelfLifeEdit"
+            app:layout_constraintEnd_toEndOf="@+id/tillView"
             app:layout_constraintStart_toStartOf="@+id/shelfLifeEdit" />
+
+        <TextView
+            android:id="@+id/tillView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="60dp"
+            android:layout_marginRight="60dp"
+            android:text="@string/till"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="@+id/shelfLifeEdit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/shelfLifeEdit"
+            app:layout_constraintTop_toTopOf="@+id/shelfLifeEdit" />
+
+        <TextView
+            android:id="@+id/wonView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/won"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="@+id/priceEdit"
+            app:layout_constraintEnd_toEndOf="@+id/tillView"
+            app:layout_constraintTop_toTopOf="@+id/priceEdit" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
