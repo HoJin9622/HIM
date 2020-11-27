@@ -1,11 +1,17 @@
 package com.example.him
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.him.databinding.IngredientRecyclerBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.text.SimpleDateFormat
 
 class IngredientAdapter : RecyclerView.Adapter<Holder>() {
@@ -39,5 +45,20 @@ class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         binding.shelfLifeView.text =
             SimpleDateFormat("yyyy-MM-dd").format(ingredient.expirationDate)
         binding.priceView.text = "${ingredient.price}"
+        binding.editButton.setOnClickListener { }
+        binding.deleteButton.setOnClickListener {
+            RetrofitClient.instance.deleteIngredients(ingredient._id).enqueue(object : Callback<MessageResponse> {
+                override fun onResponse(
+                    call: Call<MessageResponse>,
+                    response: Response<MessageResponse>
+                ) {
+                    Log.d("Response", "결과: ${response.toString()}")
+                }
+
+                override fun onFailure(call: Call<MessageResponse>, t: Throwable) {
+                    Log.d("Response", t.message.toString())
+                }
+            })
+        }
     }
 }
