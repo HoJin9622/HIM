@@ -99,20 +99,21 @@ class IngredientActivity : AppCompatActivity() {
                 Toast.makeText(this, "스캔완료: " + result.contents, Toast.LENGTH_LONG).show()
                 binding.barcodeEdit.setText(result.contents)
 
-                RetrofitClient.instance.getIngredient(result.contents).enqueue(object : Callback<IngredientResponse> {
-                    override fun onResponse(
-                        call: Call<IngredientResponse>,
-                        response: Response<IngredientResponse>
-                    ) {
-                        Log.d("Response", "결과: ${response.toString()}")
-                        binding.nameEdit.setText(response.body()?.name)
-                        binding.priceEdit.setText(response.body()?.price.toString())
-                    }
+                RetrofitClient.instance.getIngredient(result.contents)
+                    .enqueue(object : Callback<IngredientResponse> {
+                        override fun onResponse(
+                            call: Call<IngredientResponse>,
+                            response: Response<IngredientResponse>
+                        ) {
+                            Log.d("Response", "결과: ${response.toString()}")
+                            binding.nameEdit.setText(response.body()?.name)
+                            binding.priceEdit.setText(response.body()?.price.toString())
+                        }
 
-                    override fun onFailure(call: Call<IngredientResponse>, t: Throwable) {
-                        Log.d("Response", t.message.toString())
-                    }
-                })
+                        override fun onFailure(call: Call<IngredientResponse>, t: Throwable) {
+                            Log.d("Response", t.message.toString())
+                        }
+                    })
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data)

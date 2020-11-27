@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HIM"
         android:usesCleartextTraffic="true"
-        tools:targetApi="m">
+        tools:targetApi="m"
+        android:hardwareAccelerated="true">
         <activity android:name=".RegisterOrderActivity" />
         <activity android:name=".EditUserActivity" />
         <activity android:name=".IngredientActivity" />
