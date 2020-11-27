@@ -26,22 +26,10 @@ class OrderListActivity : AppCompatActivity() {
     }
 
     private fun showOrders(userId: String?) {
-        RetrofitClient.instance.getOrders(userId)
-            .enqueue(object : Callback<ArrayList<OrderResponse>> {
-                override fun onResponse(
-                    call: Call<ArrayList<OrderResponse>>,
-                    response: Response<ArrayList<OrderResponse>>
-                ) {
-                    // val responseCode = response.code().toString()
-                    Log.d("Response", "주문 목록: ${response.body().toString()}")
-                    Toast.makeText(this@OrderListActivity, "서버와의 접속이 원활하지 않습니다.", Toast.LENGTH_SHORT).show()
-                }
-
-                override fun onFailure(call: Call<ArrayList<OrderResponse>>, t: Throwable) {
-                    Log.d("Response", t.message.toString())
-                    Toast.makeText(this@OrderListActivity, "서버와의 접속이 원활하지 않습니다.", Toast.LENGTH_SHORT).show()
-                }
-            })
+        val show = OrderManagementSystem()
+        if (userId != null) {
+            show.list(this, userId)
+        }
     }
 
     private fun moveRegisterOrderPage(_id: String?) {
