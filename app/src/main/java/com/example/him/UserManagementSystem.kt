@@ -16,26 +16,23 @@ class UserManagementSystem {
         RetrofitClient.instance.login(body).enqueue(object : Callback<UserResponse> {
             override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
                 if (response.code() == 200) {
-                    Log.d("Response", response.toString())
-                    Log.d("Response", "_id: ${response.body()?._id}")
-                    Log.d("Response", "name: ${response.body()?.name}")
-                    Log.d("Response", "id: ${response.body()?.userId}")
-                    Log.d("Response", "isProvider: ${response.body()?.isProvider}")
-
-                    Toast.makeText(activity, "로그인 성공", Toast.LENGTH_SHORT).show()
-                    activity.startActivity(
-                        Intent(activity, MainActivity::class.java).putExtra(
-                            "userId",
-                            response.body()?._id
+                    val user = response.body()
+                    Log.d("Response", "user: $user")
+                    if (user != null) {
+                        Log.d("Response", "_id: ${user._id}")
+                        Log.d("Response", "id: ${user.userId}")
+                        Log.d("Response", "isProvider: ${user.isProvider}")
+                        Log.d("Response", "name: ${user.name}")
+                        activity.startActivity(
+                            Intent(activity, MainActivity::class.java).putExtra("userId", user._id)
                         )
-                    )
-                    activity.finish()
+                        activity.finish()
+                    } else {
+                        Toast.makeText(activity, "서버와의 접속이 원활하지 않습니다.", Toast.LENGTH_SHORT).show()
+                    }
                 } else {
-                    Toast.makeText(
-                        activity,
-                        "아이디 혹은 비밀번호가 올바르지 않습니다.",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Log.d("Response", "response.code(): ${response.code()}")
+                    Toast.makeText(activity, "입력된 정보가 존재하지 않습니다.", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -45,7 +42,13 @@ class UserManagementSystem {
         })
     }
 
-    fun register(activity: AppCompatActivity, id: String, password: String, name: String, isProvider: Boolean) {
+    fun register(
+        activity: AppCompatActivity,
+        id: String,
+        password: String,
+        name: String,
+        isProvider: Boolean
+    ) {
         val body = HashMap<String, Any>()
         body["userId"] = id
         body["password"] = password
@@ -84,17 +87,20 @@ class UserManagementSystem {
 
     fun withdraw(activity: AppCompatActivity, userId: String) {
         RetrofitClient.instance.deleteUser(userId).enqueue(object : Callback<MessageResponse> {
-                override fun onResponse(call: Call<MessageResponse>, response: Response<MessageResponse>) {
-                    Log.d("Response", "결과: ${response.toString()}")
+            override fun onResponse(
+                call: Call<MessageResponse>,
+                response: Response<MessageResponse>
+            ) {
+                Log.d("Response", "결과: ${response.toString()}")
 
-                    activity.startActivity(Intent(activity, LoginActivity::class.java))
-                    activity.finish()
-                }
+                activity.startActivity(Intent(activity, LoginActivity::class.java))
+                activity.finish()
+            }
 
-                override fun onFailure(call: Call<MessageResponse>, t: Throwable) {
-                    Log.d("Response", t.message.toString())
-                }
-            })
+            override fun onFailure(call: Call<MessageResponse>, t: Throwable) {
+                Log.d("Response", t.message.toString())
+            }
+        })
     }
 
     fun edit(activity: AppCompatActivity, id: String, password: String) {
@@ -103,23 +109,24 @@ class UserManagementSystem {
         body["password"] = password
 
         RetrofitClient.instance.editUser(body).enqueue(object : Callback<UserResponse> {
-                override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
-                    Log.d("Response", response.toString())
-                    if (response.code() == 201) {
-                        Log.d("Response", "_id: " + response.body()?._id.toString())
-                        Log.d("Response", "name: " + response.body()?.name.toString())
-                        Log.d("Response", "userId: " + response.body()?.userId.toString())
-                        Log.d("Response", "isProvider: " + response.body()?.isProvider.toString())
-                        Toast.makeText(activity, "비밀번호가 성공적으로 변경되었습니다.", Toast.LENGTH_SHORT
-                        ).show()
-                        activity.startActivity(Intent(activity, MainActivity::class.java))
-                        activity.finish()
-                    }
+            override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
+                Log.d("Response", response.toString())
+                if (response.code() == 201) {
+                    Log.d("Response", "_id: " + response.body()?._id.toString())
+                    Log.d("Response", "name: " + response.body()?.name.toString())
+                    Log.d("Response", "userId: " + response.body()?.userId.toString())
+                    Log.d("Response", "isProvider: " + response.body()?.isProvider.toString())
+                    Toast.makeText(
+                        activity, "비밀번호가 성공적으로 변경되었습니다.", Toast.LENGTH_SHORT
+                    ).show()
+                    activity.startActivity(Intent(activity, MainActivity::class.java))
+                    activity.finish()
                 }
+            }
 
-                override fun onFailure(call: Call<UserResponse>, t: Throwable) {
-                    Log.d("Response", t.message.toString())
-                }
-            })
+            override fun onFailure(call: Call<UserResponse>, t: Throwable) {
+                Log.d("Response", t.message.toString())
+            }
+        })
     }
 }

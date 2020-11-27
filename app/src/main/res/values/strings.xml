@@ -27,4 +27,6 @@
     <string name="edit_user">회원 변경</string>
     <string name="till">까지</string>
     <string name="won">원</string>
+    <string name="barcode">바코드</string>
+    <string name="no_barcode">바코드가 없습니다.</string>
 </resources>

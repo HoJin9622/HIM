@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterIngredientActivity">
+    tools:context=".IngredientActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -13,128 +13,109 @@
 
         <ImageButton
             android:id="@+id/photoButton"
-            android:layout_width="0dp"
+            android:layout_width="130dp"
             android:layout_height="130dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginLeft="60dp"
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginBottom="50dp"
-            android:background="@color/gray"
             android:contentDescription="@string/picture"
-            app:layout_constraintBottom_toTopOf="@+id/nameEdit"
-            app:layout_constraintEnd_toStartOf="@+id/barcodeButton"
-            app:layout_constraintStart_toStartOf="@+id/nameEdit"
+            app:layout_constraintEnd_toStartOf="@+id/barcodeEdit"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/photoView"
             app:srcCompat="@android:drawable/ic_input_add" />
 
         <TextView
             android:id="@+id/photoView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
             android:text="@string/picture"
             android:textSize="14sp"
             app:layout_constraintBottom_toTopOf="@+id/photoButton"
             app:layout_constraintEnd_toEndOf="@+id/photoButton"
-            app:layout_constraintStart_toStartOf="@+id/photoButton" />
+            app:layout_constraintStart_toStartOf="@+id/photoButton"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/shelfLifeEdit"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginLeft="60dp"
             android:autofillHints=""
             android:ems="10"
             android:hint="@string/shelf_life"
             android:inputType="date"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tillView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5" />
+            app:layout_constraintBottom_toTopOf="@+id/priceEdit"
+            app:layout_constraintStart_toStartOf="@+id/nameEdit"
+            app:layout_constraintTop_toBottomOf="@+id/nameEdit" />
 
         <EditText
             android:id="@+id/priceEdit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
             android:autofillHints=""
             android:ems="10"
             android:hint="@string/price"
-            android:inputType="phone"
-            app:layout_constraintEnd_toStartOf="@+id/wonView"
-            app:layout_constraintStart_toStartOf="@+id/shelfLifeEdit"
+            android:inputType="numberDecimal"
+            app:layout_constraintBottom_toTopOf="@+id/memoEdit"
+            app:layout_constraintStart_toStartOf="@+id/nameEdit"
             app:layout_constraintTop_toBottomOf="@+id/shelfLifeEdit" />
 
         <EditText
             android:id="@+id/memoEdit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
             android:autofillHints=""
             android:ems="10"
             android:hint="@string/memo"
             android:inputType="text"
-            app:layout_constraintEnd_toEndOf="@+id/wonView"
-            app:layout_constraintStart_toStartOf="@+id/priceEdit"
+            app:layout_constraintBottom_toTopOf="@+id/confirmButton"
+            app:layout_constraintEnd_toEndOf="@+id/nameEdit"
+            app:layout_constraintStart_toStartOf="@+id/nameEdit"
             app:layout_constraintTop_toBottomOf="@+id/priceEdit" />
 
         <Button
             android:id="@+id/confirmButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
             android:text="@string/confirm"
             app:backgroundTint="@color/green_2"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/memoEdit"
             app:layout_constraintStart_toStartOf="@+id/memoEdit"
             app:layout_constraintTop_toBottomOf="@+id/memoEdit" />
-
-        <TextView
-            android:id="@+id/barcodeView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@+id/barcodeButton"
-            app:layout_constraintEnd_toEndOf="@+id/barcodeButton"
-            app:layout_constraintStart_toStartOf="@+id/barcodeButton" />
 
         <Button
             android:id="@+id/barcodeButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginBottom="50dp"
             android:text="@string/scan_barcode"
             android:textSize="14sp"
             app:backgroundTint="@color/green_2"
-            app:layout_constraintBottom_toTopOf="@+id/nameEdit"
-            app:layout_constraintEnd_toEndOf="@+id/nameEdit"
-            app:layout_constraintStart_toEndOf="@+id/photoButton" />
+            app:layout_constraintBottom_toBottomOf="@+id/photoButton"
+            app:layout_constraintEnd_toEndOf="@+id/barcodeEdit"
+            app:layout_constraintStart_toStartOf="@+id/barcodeEdit" />
 
         <EditText
             android:id="@+id/nameEdit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
             android:autofillHints=""
             android:ems="10"
             android:hint="@string/name"
             android:inputType="textPersonName"
             app:layout_constraintBottom_toTopOf="@+id/shelfLifeEdit"
-            app:layout_constraintEnd_toEndOf="@+id/tillView"
-            app:layout_constraintStart_toStartOf="@+id/shelfLifeEdit" />
+            app:layout_constraintEnd_toEndOf="@+id/barcodeButton"
+            app:layout_constraintStart_toStartOf="@+id/photoButton"
+            app:layout_constraintTop_toBottomOf="@+id/photoButton" />
 
         <TextView
             android:id="@+id/tillView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="60dp"
-            android:layout_marginRight="60dp"
             android:text="@string/till"
             android:textSize="17sp"
             app:layout_constraintBottom_toBottomOf="@+id/shelfLifeEdit"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/shelfLifeEdit"
             app:layout_constraintTop_toTopOf="@+id/shelfLifeEdit" />
 
@@ -145,8 +126,22 @@
             android:text="@string/won"
             android:textSize="17sp"
             app:layout_constraintBottom_toBottomOf="@+id/priceEdit"
-            app:layout_constraintEnd_toEndOf="@+id/tillView"
+            app:layout_constraintStart_toEndOf="@+id/priceEdit"
             app:layout_constraintTop_toTopOf="@+id/priceEdit" />
+
+        <EditText
+            android:id="@+id/barcodeEdit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="60dp"
+            android:layout_marginRight="60dp"
+            android:autofillHints=""
+            android:ems="10"
+            android:hint="@string/barcode"
+            android:inputType="numberDecimal"
+            app:layout_constraintBottom_toTopOf="@+id/barcodeButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/photoButton" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

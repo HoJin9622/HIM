@@ -33,6 +33,8 @@ class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     @SuppressLint("SimpleDateFormat")
     fun setIngredient(ingredient: IngredientResponse) {
         binding = IngredientRecyclerBinding.bind(itemView)
+        // binding.imageView 사진 처리
+        binding.barcodeView.text = ingredient.barcode
         binding.nameView.text = ingredient.name
         binding.shelfLifeView.text =
             SimpleDateFormat("yyyy-MM-dd").format(ingredient.expirationDate)

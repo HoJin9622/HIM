@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun moveRegisterIngredientPage(_id: String?) {
-        startActivity(Intent(this, RegisterIngredientActivity::class.java).putExtra("userId", _id))
+        startActivity(Intent(this, IngredientActivity::class.java).putExtra("userId", _id))
     }
 
     private fun moveOrderListPage(_id: String?) {

@@ -10,20 +10,20 @@ import android.text.Editable
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import com.example.him.databinding.ActivityEditIngredientBinding
+import com.example.him.databinding.ActivityIngredientBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import kotlin.collections.HashMap
 
-class RegisterIngredientActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityEditIngredientBinding
+class IngredientActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityIngredientBinding
 
     @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityEditIngredientBinding.inflate(layoutInflater)
+        binding = ActivityIngredientBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
         // View Binding 완료. 아래부터 작성.
@@ -66,7 +66,7 @@ class RegisterIngredientActivity : AppCompatActivity() {
                         Log.d("Response", "image: ${response.body()?.image}")
                         Log.d("Response", "barcode: ${response.body()?.barcode}")
                         Toast.makeText(
-                            this@RegisterIngredientActivity,
+                            this@IngredientActivity,
                             "식재료가 성공적으로 등록되었습니다.",
                             Toast.LENGTH_SHORT
                         ).show()
