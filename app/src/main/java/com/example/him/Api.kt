@@ -25,6 +25,9 @@ interface Api {
     @GET("ingredients/{userId}")
     fun getIngredients(@Path("userId") userId: String?): Call<ArrayList<IngredientResponse>>
 
+    @GET("ingredients/barcode/{id}")
+    fun getIngredient(@Path("id") id: String?): Call<IngredientResponse>
+
     @POST("ingredients")
     fun registerIngredient(
         @Body params: HashMap<String, Any?>
