@@ -59,18 +59,18 @@ class RegisterIngredientActivity : AppCompatActivity() {
                 ) {
                     Log.d("Response", response.toString())
                     if (response.code() == 201) {
-                        Log.d("Response", "_id: " + response.body()?._id.toString())
-                        Log.d("Response", "user: " + response.body()?.user.toString())
-                        Log.d("Response", "name: " + response.body()?.name.toString())
+                        Log.d("Response", "_id: ${response.body()?._id}")
+                        Log.d("Response", "user: ${response.body()?.user}")
+                        Log.d("Response", "name: ${response.body()?.name}")
                         Log.d("Response", "expirationDate: ${response.body()?.expirationDate}")
-                        Log.d("Response", "image: " + response.body()?.image.toString())
-                        Log.d("Response", "barcode: " + response.body()?.barcode.toString())
+                        Log.d("Response", "image: ${response.body()?.image}")
+                        Log.d("Response", "barcode: ${response.body()?.barcode}")
                         Toast.makeText(
                             this@RegisterIngredientActivity,
                             "식재료가 성공적으로 등록되었습니다.",
                             Toast.LENGTH_SHORT
                         ).show()
-                        moveMainPage()
+                        moveMainPage(userId)
                     }
                 }
 
@@ -80,8 +80,8 @@ class RegisterIngredientActivity : AppCompatActivity() {
             })
     }
 
-    fun moveMainPage() {
-        startActivity(Intent(this, MainActivity::class.java))
+    fun moveMainPage(_id: String?) {
+        startActivity(Intent(this, MainActivity::class.java).putExtra("userId", _id))
         finish()
     }
 }
