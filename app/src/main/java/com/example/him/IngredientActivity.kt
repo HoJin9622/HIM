@@ -4,17 +4,18 @@ import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import com.example.him.databinding.ActivityIngredientBinding
+import com.google.zxing.integration.android.IntentIntegrator
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import kotlin.collections.HashMap
+
 
 class IngredientActivity : AppCompatActivity() {
     private lateinit var binding: ActivityIngredientBinding
@@ -39,6 +40,10 @@ class IngredientActivity : AppCompatActivity() {
         dialog.setOnDateSetListener { _, year, month, dayOfMonth ->
             binding.shelfLifeEdit.text =
                 Editable.Factory.getInstance().newEditable("${year}-${month + 1}-${dayOfMonth}")
+        }
+
+        binding.barcodeButton.setOnClickListener {
+            IntentIntegrator(this).initiateScan()
         }
     }
 
@@ -83,5 +88,19 @@ class IngredientActivity : AppCompatActivity() {
     fun moveMainPage(_id: String?) {
         startActivity(Intent(this, MainActivity::class.java).putExtra("userId", _id))
         finish()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+        if (result != null) {
+            if (result.contents == null) {
+                Toast.makeText(this, "오류 - 다시 시도해주세요.", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(this, "스캔완료: " + result.contents, Toast.LENGTH_LONG).show()
+                binding.barcodeEdit.setText(result.contents)
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data)
+        }
     }
 }
