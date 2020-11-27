@@ -38,6 +38,7 @@ class UserManagementSystem {
 
             override fun onFailure(call: Call<UserResponse>, t: Throwable) {
                 Log.d("Response", t.message.toString())
+                Toast.makeText(activity, "서버와의 접속이 원활하지 않습니다.", Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -81,6 +82,7 @@ class UserManagementSystem {
 
             override fun onFailure(call: Call<UserResponse>, t: Throwable) {
                 Log.d("Response", t.message.toString())
+                Toast.makeText(activity, "서버와의 접속이 원활하지 않습니다.", Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -99,6 +101,7 @@ class UserManagementSystem {
 
             override fun onFailure(call: Call<MessageResponse>, t: Throwable) {
                 Log.d("Response", t.message.toString())
+                Toast.makeText(activity, "서버와의 접속이 원활하지 않습니다.", Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -126,6 +129,7 @@ class UserManagementSystem {
 
             override fun onFailure(call: Call<UserResponse>, t: Throwable) {
                 Log.d("Response", t.message.toString())
+                Toast.makeText(activity, "서버와의 접속이 원활하지 않습니다.", Toast.LENGTH_SHORT).show()
             }
         })
     }

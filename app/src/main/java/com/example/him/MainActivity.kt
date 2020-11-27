@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.him.databinding.ActivityMainBinding
 import retrofit2.Call
@@ -56,6 +57,7 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onFailure(call: Call<ArrayList<IngredientResponse>>, t: Throwable) {
                     Log.d("Response", t.message.toString())
+                    Toast.makeText(this@MainActivity, "서버와의 접속이 원활하지 않습니다.", Toast.LENGTH_SHORT).show()
                 }
             })
     }

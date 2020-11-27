@@ -20,22 +20,17 @@ class EditUserActivity : AppCompatActivity() {
 
     private fun withdrawHandler(userId: String?) {
         val ums = UserManagementSystem()
-
         if (userId != null) {
             ums.withdraw(this, userId)
         }
     }
 
     private fun userEditHandler() {
-
         val id = intent.getStringExtra("userId")
         val password = binding.passwordEdit.text.toString()
-
         val ums = UserManagementSystem()
-
         if (id != null) {
             ums.edit(this, id, password)
-
         }
     }
 }

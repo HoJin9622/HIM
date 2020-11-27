@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import com.example.him.databinding.ActivityOrderListBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -33,10 +34,12 @@ class OrderListActivity : AppCompatActivity() {
                 ) {
                     // val responseCode = response.code().toString()
                     Log.d("Response", "주문 목록: ${response.body().toString()}")
+                    Toast.makeText(this@OrderListActivity, "서버와의 접속이 원활하지 않습니다.", Toast.LENGTH_SHORT).show()
                 }
 
                 override fun onFailure(call: Call<ArrayList<OrderResponse>>, t: Throwable) {
                     Log.d("Response", t.message.toString())
+                    Toast.makeText(this@OrderListActivity, "서버와의 접속이 원활하지 않습니다.", Toast.LENGTH_SHORT).show()
                 }
             })
     }
