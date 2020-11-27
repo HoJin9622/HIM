@@ -41,29 +41,19 @@ class IngredientManagementSystem {
                         Log.d("Response", "expirationDate: ${response.body()?.expirationDate}")
                         Log.d("Response", "image: ${response.body()?.image}")
                         Log.d("Response", "barcode: ${response.body()?.barcode}")
-                        Toast.makeText(
-                            activity,
-                            "식재료가 성공적으로 등록되었습니다.",
-                            Toast.LENGTH_SHORT
-                        ).show()
                         activity.startActivity(
-                            Intent(
-                                activity,
-                                MainActivity::class.java
-                            ).putExtra("userId", userId)
+                            Intent(activity, MainActivity::class.java).putExtra("userId", userId)
                         )
                         activity.finish()
                     } else {
-                        Toast.makeText(
-                            activity,
-                            "전송 중 오류가 발생했습니다. (code: ${response.code()})",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Log.d("Response", "response.code(): ${response.code()}")
+                        Toast.makeText(activity, "통신 중 오류가 발생했습니다.", Toast.LENGTH_SHORT).show()
                     }
                 }
 
                 override fun onFailure(call: Call<IngredientResponse>, t: Throwable) {
                     Log.d("Response", t.message.toString())
+                    Toast.makeText(activity, "서버와의 접속이 원활하지 않습니다.", Toast.LENGTH_SHORT).show()
                 }
             })
     }
