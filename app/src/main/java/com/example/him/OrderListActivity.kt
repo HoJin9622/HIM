@@ -1,5 +1,6 @@
 package com.example.him
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.him.databinding.ActivityOrderListBinding
@@ -14,18 +15,21 @@ class OrderListActivity : AppCompatActivity() {
         setContentView(view)
         // View Binding 완료. 아래부터 작성.
 
-        showOrders(intent.getStringExtra("userId"))
-        binding.registerOrderButton.setOnClickListener{ moveRegisterOrderPage(intent.getStringExtra("userId")) }
+        val userId = intent.getStringExtra("userId") ?: return
+        showOrders(userId)
+        binding.navigateMainButton.setOnClickListener { moveMainPage(userId) }
+        binding.registerOrderButton.setOnClickListener { moveRegisterOrderPage(userId) }
     }
 
-    private fun showOrders(userId: String?) {
-        val show = OrderManagementSystem()
-        if (userId != null) {
-            show.list(this, userId)
-        }
+    private fun showOrders(userId: String) {
+        OrderManagementSystem().list(this, userId)
     }
 
-    private fun moveRegisterOrderPage(_id: String?) {
+    private fun moveMainPage(userId: String) {
+        startActivity(Intent(this, MainActivity::class.java).putExtra("userId", userId))
+    }
+
+    private fun moveRegisterOrderPage(userId: String) {
         // startActivity -> RegisterOrderActivity, don't finish
     }
 }

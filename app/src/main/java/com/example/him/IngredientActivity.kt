@@ -36,11 +36,7 @@ class IngredientActivity : AppCompatActivity() {
         } else {
             Log.d("Response", "등록 실행")
             binding.confirmButton.setOnClickListener {
-                registerIngredientHandler(
-                    intent.getStringExtra(
-                        "userId"
-                    )
-                )
+                registerIngredientHandler(intent.getStringExtra("userId"))
             }
         }
 
@@ -51,8 +47,7 @@ class IngredientActivity : AppCompatActivity() {
             }
         }
         dialog.setOnDateSetListener { _, year, month, dayOfMonth ->
-            binding.shelfLifeEdit.text =
-                Editable.Factory.getInstance().newEditable("${year}-${month + 1}-${dayOfMonth}")
+            binding.shelfLifeEdit.setText("${year}-${month + 1}-${dayOfMonth}")
         }
 
         binding.barcodeButton.setOnClickListener {

@@ -19,7 +19,6 @@ class LoginActivity : AppCompatActivity() {
         binding.loginButton.setOnClickListener { loginHandler() }
     }
 
-
     private fun loginHandler() {
         val id = binding.idEdit.text.toString()
         val password = binding.passwordEdit.text.toString()
