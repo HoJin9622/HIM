@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         val userId = intent.getStringExtra("userId")
         if (userId != null) {
             showIngredients(userId)
+            binding.logoutButton.setOnClickListener { moveLoginPage() }
             binding.navigateEditUserButton.setOnClickListener { moveEditUserPage(userId) }
             binding.registerOrderButton.setOnClickListener { moveRegisterIngredientPage(userId) }
             binding.navigateOrderButton.setOnClickListener { moveOrderListPage(userId) }

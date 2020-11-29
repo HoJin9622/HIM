@@ -34,4 +34,5 @@
     <string name="consumerKey">소비자: </string>
     <string name="providerKey">공급자: </string>
     <string name="cancel_order">주문 취소</string>
+    <string name="logout">로그아웃</string>
 </resources>
