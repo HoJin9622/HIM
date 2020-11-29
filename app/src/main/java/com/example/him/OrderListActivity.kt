@@ -29,7 +29,10 @@ class OrderListActivity : AppCompatActivity() {
         startActivity(Intent(this, MainActivity::class.java).putExtra("userId", userId))
     }
 
-    private fun moveRegisterOrderPage(userId: String) {
-        // startActivity -> RegisterOrderActivity, don't finish
+    private fun moveRegisterOrderPage(_id: String?) {
+        val show = OrderManagementSystem()
+        if (_id != null) {
+            show.page(this, _id)
+        }
     }
 }
