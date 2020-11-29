@@ -21,55 +21,63 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
         // View Binding 완료. 아래부터 작성.
 
-        binding.registerOrderButton.setOnClickListener {
-            moveRegisterIngredientPage(
-                intent.getStringExtra(
-                    "userId"
-                )
-            )
+        val userId = intent.getStringExtra("userId")
+        if (userId == null) {
+            Log.d("Response", "userId: null")
+            Toast.makeText(this, "로그인 정보를 확인할 수 없습니다.", Toast.LENGTH_SHORT).show()
+            moveLoginPage()
+            return
         }
-        binding.navigateOrderButton.setOnClickListener { moveOrderListPage(intent.getStringExtra("userId")) }
-        binding.navigateEditUserButton.setOnClickListener { moveEditUserPage(intent.getStringExtra("userId")) }
-        showIngredients(intent.getStringExtra("userId"))
+
+        showIngredients(userId)
+        binding.navigateEditUserButton.setOnClickListener { moveEditUserPage(userId) }
+        binding.registerOrderButton.setOnClickListener { moveRegisterIngredientPage(userId) }
+        binding.navigateOrderButton.setOnClickListener { moveOrderListPage(userId) }
     }
 
-    private fun showIngredients(userId: String?) {
+    private fun showIngredients(userId: String) {
         RetrofitClient.instance.getIngredients(userId)
             .enqueue(object : Callback<ArrayList<IngredientResponse>> {
                 override fun onResponse(
                     call: Call<ArrayList<IngredientResponse>>,
                     response: Response<ArrayList<IngredientResponse>>
                 ) {
-                    // val responseCode = response.code().toString()
-                    Log.d("Response", "식재료 목록: " + response.body().toString())
-
+                    Log.d("Response", "식재료 목록: ${response.body()}")
                     val ingredientList: ArrayList<IngredientResponse>? = response.body()
                     val adapter = IngredientAdapter(this@MainActivity)
                     if (ingredientList != null) {
-                        adapter.listIngredient = ingredientList
+                        adapter.listIngredient = ArrayList<IngredientResponse>(ingredientList)
                         binding.recyclerView.adapter = adapter
                         binding.recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
                     } else {
                         Log.d("Response", "ingredientList: null")
+                        Toast.makeText(this@MainActivity, "서버와의 접속이 원활하지 않습니다.", Toast.LENGTH_SHORT)
+                            .show()
                     }
                 }
 
                 override fun onFailure(call: Call<ArrayList<IngredientResponse>>, t: Throwable) {
                     Log.d("Response", t.message.toString())
-                    Toast.makeText(this@MainActivity, "서버와의 접속이 원활하지 않습니다.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity, "서버와의 접속이 원활하지 않습니다.", Toast.LENGTH_SHORT)
+                        .show()
                 }
             })
     }
 
-    private fun moveRegisterIngredientPage(_id: String?) {
-        startActivity(Intent(this, IngredientActivity::class.java).putExtra("userId", _id))
+    private fun moveLoginPage() {
+        startActivity(Intent(this, LoginActivity::class.java))
+        finish()
     }
 
-    private fun moveOrderListPage(_id: String?) {
-        startActivity(Intent(this, OrderListActivity::class.java).putExtra("userId", _id))
+    private fun moveEditUserPage(userId: String) {
+        startActivity(Intent(this, EditUserActivity::class.java).putExtra("userId", userId))
     }
 
-    private fun moveEditUserPage(_id: String?) {
-        startActivity(Intent(this, EditUserActivity::class.java).putExtra("userId", _id))
+    private fun moveRegisterIngredientPage(userId: String) {
+        startActivity(Intent(this, IngredientActivity::class.java).putExtra("userId", userId))
+    }
+
+    private fun moveOrderListPage(userId: String) {
+        startActivity(Intent(this, OrderListActivity::class.java).putExtra("userId", userId))
     }
 }
