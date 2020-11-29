@@ -29,7 +29,20 @@ class IngredientActivity : AppCompatActivity() {
         setContentView(view)
         // View Binding 완료. 아래부터 작성.
 
-        binding.confirmButton.setOnClickListener { registerIngredientHandler(intent.getStringExtra("userId")) }
+        Log.d("Response", "ingredientId: ${intent.getStringExtra("ingredientId")}")
+        if (intent.hasExtra("ingredientId")) {
+            Log.d("Response", "수정 실행")
+            binding.confirmButton.setOnClickListener { editIngredientHandler(intent.getStringExtra("ingredientId")) }
+        } else {
+            Log.d("Response", "등록 실행")
+            binding.confirmButton.setOnClickListener {
+                registerIngredientHandler(
+                    intent.getStringExtra(
+                        "userId"
+                    )
+                )
+            }
+        }
 
         val dialog = DatePickerDialog(this)
         binding.shelfLifeEdit.setOnFocusChangeListener { _, hasFocus ->
@@ -59,6 +72,59 @@ class IngredientActivity : AppCompatActivity() {
             body["price"] = binding.priceEdit.text.toString().toInt()
             ims.register(this, body)
         }
+    }
+
+    private fun editIngredientHandler(ingredientId: String?) {
+        val body = HashMap<String, Any?>()
+        body["_id"] = ingredientId
+        body["name"] = binding.nameEdit.text.toString()
+        body["barcode"] = binding.barcodeEdit.text.toString()
+        body["expirationDate"] = binding.shelfLifeEdit.text.toString()
+        body["price"] = binding.priceEdit.text.toString().toInt()
+        RetrofitClient.instance.editIngredient(body)
+            .enqueue(object : Callback<IngredientResponse> {
+                override fun onResponse(
+                    call: Call<IngredientResponse>,
+                    response: Response<IngredientResponse>
+                ) {
+                    Log.d("Response", response.toString())
+                    if (response.code() == 200) {
+                        Log.d("Response", "_id: ${response.body()?._id}")
+                        Log.d("Response", "user: ${response.body()?.user}")
+                        Log.d("Response", "name: ${response.body()?.name}")
+                        Log.d("Response", "expirationDate: ${response.body()?.expirationDate}")
+                        Log.d("Response", "image: ${response.body()?.image}")
+                        Log.d("Response", "barcode: ${response.body()?.barcode}")
+                        startActivity(
+                            Intent(
+                                this@IngredientActivity,
+                                MainActivity::class.java
+                            ).putExtra(
+                                "userId", intent.getStringExtra(
+                                    "userId"
+                                )
+                            )
+                        )
+                        finish()
+                    } else {
+                        Log.d("Response", "response.code(): ${response.code()}")
+                        Toast.makeText(
+                            this@IngredientActivity,
+                            "통신 중 오류가 발생했습니다.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<IngredientResponse>, t: Throwable) {
+                    Log.d("Response", t.message.toString())
+                    Toast.makeText(
+                        this@IngredientActivity,
+                        "서버와의 접속이 원활하지 않습니다.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            })
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
