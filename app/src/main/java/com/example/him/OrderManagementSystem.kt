@@ -1,5 +1,6 @@
 package com.example.him
 
+import android.content.Intent
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -56,6 +57,28 @@ class OrderManagementSystem {
                 }
 
                 override fun onFailure(call: Call<ArrayList<OrderResponse>>, t: Throwable) {
+                    Log.d("Response", t.message.toString())
+                    Toast.makeText(activity, "서버와의 접속이 원활하지 않습니다.", Toast.LENGTH_SHORT).show()
+                }
+            })
+    }
+
+    fun delete(activity: AppCompatActivity, orderId: String) {
+        RetrofitClient.instance.deleteOrder(orderId)
+            .enqueue(object : Callback<MessageResponse> {
+                override fun onResponse(
+                    call: Call<MessageResponse>, response: Response<MessageResponse>
+                ) {
+                    Log.d("Response", "결과: $response")
+                    val userId = activity.intent.getStringExtra("userId")
+                    activity.finish()
+                    activity.startActivity(
+                        Intent(activity, OrderListActivity::class.java).putExtra("userId", userId)
+                    )
+                    Toast.makeText(activity, "해당 주문이 취소되었습니다.", Toast.LENGTH_SHORT).show()
+                }
+
+                override fun onFailure(call: Call<MessageResponse>, t: Throwable) {
                     Log.d("Response", t.message.toString())
                     Toast.makeText(activity, "서버와의 접속이 원활하지 않습니다.", Toast.LENGTH_SHORT).show()
                 }

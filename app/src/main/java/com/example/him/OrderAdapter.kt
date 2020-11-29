@@ -1,17 +1,11 @@
 package com.example.him
 
-import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.him.databinding.OrderRecyclerBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class OrderAdapter(var activity: AppCompatActivity) : RecyclerView.Adapter<OrderHolder>() {
     var listOrder = listOf<OrderResponse>()
@@ -42,30 +36,7 @@ class OrderHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         binding.providerView.text = order.seller.name
 
         binding.deleteButton.setOnClickListener {
-            RetrofitClient.instance.deleteOrder(order._id)
-                .enqueue(object : Callback<MessageResponse> {
-                    override fun onResponse(
-                        call: Call<MessageResponse>,
-                        response: Response<MessageResponse>
-                    ) {
-                        Log.d("Response", "결과: $response")
-
-                        val userId = activity.intent.getStringExtra("userId")
-                        activity.finish()
-                        activity.startActivity(
-                            Intent(
-                                activity,
-                                OrderListActivity::class.java
-                            ).putExtra("userId", userId)
-                        )
-                        Toast.makeText(activity, "해당 주문이 취소되었습니다.", Toast.LENGTH_SHORT).show()
-                    }
-
-                    override fun onFailure(call: Call<MessageResponse>, t: Throwable) {
-                        Log.d("Response", t.message.toString())
-                        Toast.makeText(activity, "서버와의 접속이 원활하지 않습니다.", Toast.LENGTH_SHORT).show()
-                    }
-                })
+            OrderManagementSystem().delete(activity, order._id)
         }
     }
 }
