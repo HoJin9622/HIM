@@ -5,7 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.him.databinding.ActivityMainBinding
 import com.example.him.databinding.ActivityOrderListBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.util.ArrayList
 
 class OrderListActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOrderListBinding
@@ -28,6 +34,30 @@ class OrderListActivity : AppCompatActivity() {
         OrderManagementSystem().show(this, binding, userId)
         binding.navigateMainButton.setOnClickListener { moveMainPage(userId) }
         binding.registerOrderButton.setOnClickListener { moveRegisterOrderPage(userId) }
+
+        isProvider()
+    }
+
+    private fun isProvider() {
+        RetrofitClient.instance.isProvider(intent.getStringExtra("userId"))
+            .enqueue(object : Callback<IsProviderResponse> {
+                override fun onResponse(
+                    call: Call<IsProviderResponse>,
+                    response: Response<IsProviderResponse>
+                ) {
+                    // val responseCode = response.code().toString()
+                    Log.d("Response", "유저가 공급자인지: ${response.body().toString()}")
+                }
+
+                override fun onFailure(call: Call<IsProviderResponse>, t: Throwable) {
+                    Log.d("Response", t.message.toString())
+                    Toast.makeText(
+                        this@OrderListActivity,
+                        "서버와의 접속이 원활하지 않습니다.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            })
     }
 
     private fun moveLoginPage() {
