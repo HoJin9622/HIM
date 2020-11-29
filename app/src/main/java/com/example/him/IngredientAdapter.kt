@@ -45,7 +45,10 @@ class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         binding.shelfLifeView.text =
             SimpleDateFormat("yyyy-MM-dd").format(ingredient.expirationDate)
         binding.priceView.text = "${ingredient.price}"
-        binding.editButton.setOnClickListener { }
+        binding.editButton.setOnClickListener {
+            val userId = activity.intent.getStringExtra("userId")
+            activity.startActivity(Intent(activity, IngredientActivity::class.java).putExtra("userId", userId))
+        }
         binding.deleteButton.setOnClickListener {
             RetrofitClient.instance.deleteIngredients(ingredient._id).enqueue(object : Callback<MessageResponse> {
                 override fun onResponse(
