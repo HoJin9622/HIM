@@ -21,31 +21,38 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
         // View Binding 완료. 아래부터 작성.
 
-        binding.registerOrderButton.setOnClickListener {
-            moveRegisterIngredientPage(
-                intent.getStringExtra(
-                    "userId"
-                )
-            )
+        val userId = intent.getStringExtra("userId")
+        if (userId == null) {
+            Log.d("Response", "userId: null")
+            Toast.makeText(this, "로그인 정보를 확인할 수 없습니다.", Toast.LENGTH_SHORT).show()
+            moveLoginPage()
+            return
         }
-        binding.navigateOrderButton.setOnClickListener { moveOrderListPage(intent.getStringExtra("userId")) }
-        binding.navigateEditUserButton.setOnClickListener { moveEditUserPage(intent.getStringExtra("userId")) }
-        showIngredients(intent.getStringExtra("userId"))
+
+        showIngredients(userId)
+        binding.navigateEditUserButton.setOnClickListener { moveEditUserPage(userId) }
+        binding.registerOrderButton.setOnClickListener { moveRegisterIngredientPage(userId) }
+        binding.navigateOrderButton.setOnClickListener { moveOrderListPage(userId) }
     }
 
     private fun showIngredients(userId: String?) {
         IngredientManagementSystem().show(this, userId)
     }
 
-    private fun moveRegisterIngredientPage(_id: String?) {
-        startActivity(Intent(this, IngredientActivity::class.java).putExtra("userId", _id))
+    private fun moveLoginPage() {
+        startActivity(Intent(this, LoginActivity::class.java))
+        finish()
     }
 
-    private fun moveOrderListPage(_id: String?) {
-        startActivity(Intent(this, OrderListActivity::class.java).putExtra("userId", _id))
+    private fun moveEditUserPage(userId: String) {
+        startActivity(Intent(this, EditUserActivity::class.java).putExtra("userId", userId))
     }
 
-    private fun moveEditUserPage(_id: String?) {
-        startActivity(Intent(this, EditUserActivity::class.java).putExtra("userId", _id))
+    private fun moveRegisterIngredientPage(userId: String) {
+        startActivity(Intent(this, IngredientActivity::class.java).putExtra("userId", userId))
+    }
+
+    private fun moveOrderListPage(userId: String) {
+        startActivity(Intent(this, OrderListActivity::class.java).putExtra("userId", userId))
     }
 }

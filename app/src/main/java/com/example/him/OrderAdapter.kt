@@ -1,6 +1,5 @@
 package com.example.him
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
@@ -35,17 +34,15 @@ class OrderAdapter(var activity: AppCompatActivity) : RecyclerView.Adapter<Order
 class OrderHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private lateinit var binding: OrderRecyclerBinding
 
-    @SuppressLint("SimpleDateFormat")
     fun setOrder(activity: AppCompatActivity, order: OrderResponse) {
         binding = OrderRecyclerBinding.bind(itemView)
 
-        // binding.imageView 사진 처리
         binding.ingredientView.text = order.orderIngredient.name
         binding.consumerView.text = order.buyer.name
         binding.providerView.text = order.seller.name
 
         binding.deleteButton.setOnClickListener {
-            RetrofitClient.instance.deleteIngredients(order._id)
+            RetrofitClient.instance.deleteOrder(order._id)
                 .enqueue(object : Callback<MessageResponse> {
                     override fun onResponse(
                         call: Call<MessageResponse>,
@@ -58,7 +55,7 @@ class OrderHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                         activity.startActivity(
                             Intent(
                                 activity,
-                                MainActivity::class.java
+                                OrderListActivity::class.java
                             ).putExtra("userId", userId)
                         )
                         Toast.makeText(activity, "해당 주문이 취소되었습니다.", Toast.LENGTH_SHORT).show()
