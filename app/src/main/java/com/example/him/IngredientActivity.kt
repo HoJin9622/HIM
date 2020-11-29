@@ -76,13 +76,18 @@ class IngredientActivity : AppCompatActivity() {
                             call: Call<IngredientResponse>,
                             response: Response<IngredientResponse>
                         ) {
-                            Log.d("Response", "결과: ${response.toString()}")
+                            Log.d("Response", "결과: $response")
                             binding.nameEdit.setText(response.body()?.name)
                             binding.priceEdit.setText(response.body()?.price.toString())
                         }
 
                         override fun onFailure(call: Call<IngredientResponse>, t: Throwable) {
                             Log.d("Response", t.message.toString())
+                            Toast.makeText(
+                                this@IngredientActivity,
+                                "서버와의 접속이 원활하지 않습니다.",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     })
             }
