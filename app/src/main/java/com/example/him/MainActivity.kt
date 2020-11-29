@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showIngredients(userId: String?) {
-        IngredientManagementSystem().show(this, userId)
+        IngredientManagementSystem().show(this, binding, userId)
     }
 
     private fun moveLoginPage() {

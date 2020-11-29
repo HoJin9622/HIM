@@ -13,8 +13,6 @@ import java.util.*
 import kotlin.collections.HashMap
 
 class IngredientManagementSystem {
-    private lateinit var binding: ActivityMainBinding
-
     fun register(activity: AppCompatActivity, body: HashMap<String, Any?>) {
         RetrofitClient.instance.registerIngredient(body)
             .enqueue(object : Callback<IngredientResponse> {
@@ -94,9 +92,7 @@ class IngredientManagementSystem {
             })
     }
 
-    fun show(activity: AppCompatActivity, userId: String?) {
-        binding = ActivityMainBinding.inflate(activity.layoutInflater)
-
+    fun show(activity: AppCompatActivity, binding: ActivityMainBinding, userId: String?) {
         RetrofitClient.instance.getIngredients(userId)
             .enqueue(object : Callback<ArrayList<IngredientResponse>> {
                 override fun onResponse(
@@ -109,11 +105,9 @@ class IngredientManagementSystem {
                     val ingredientList: ArrayList<IngredientResponse>? = response.body()
                     val adapter = IngredientAdapter(activity)
                     if (ingredientList != null) {
-                        adapter.listIngredient = ingredientList
+                        adapter.listIngredient = ArrayList(ingredientList)
                         binding.recyclerView.adapter = adapter
                         binding.recyclerView.layoutManager = LinearLayoutManager(activity)
-
-
                     } else {
                         Log.d("Response", "ingredientList: null")
                     }
