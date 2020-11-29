@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
+import kotlin.collections.HashMap
 
 class IngredientManagementSystem {
     fun register(activity: AppCompatActivity, body: HashMap<String, Any?>) {
@@ -44,11 +46,20 @@ class IngredientManagementSystem {
             })
     }
 
-    fun edit(activity: AppCompatActivity, ingredientId: String) {
+    fun edit(
+        activity: AppCompatActivity,
+        ingredientId: String,
+        name: String,
+        price: String,
+        barcode: String?,
+        expirationDate: Date
+    ) {
         val userId = activity.intent.getStringExtra("userId")
         activity.startActivity(
             Intent(activity, IngredientActivity::class.java).putExtra("userId", userId)
-                .putExtra("ingredientId", ingredientId)
+                .putExtra("ingredientId", ingredientId).putExtra("name", name)
+                .putExtra("price", price).putExtra("barcode", barcode)
+                .putExtra("expirationDate", expirationDate.toString())
         )
     }
 
