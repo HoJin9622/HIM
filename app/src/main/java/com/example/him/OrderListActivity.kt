@@ -26,6 +26,9 @@ class OrderListActivity : AppCompatActivity() {
     }
 
     private fun moveRegisterOrderPage(_id: String?) {
-        // startActivity -> RegisterOrderActivity, don't finish
+        val show = OrderManagementSystem()
+        if (_id != null) {
+            show.page(this, _id)
+        }
     }
 }
