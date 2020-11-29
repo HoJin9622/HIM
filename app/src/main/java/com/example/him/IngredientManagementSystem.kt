@@ -95,6 +95,8 @@ class IngredientManagementSystem {
     }
 
     fun show(activity: AppCompatActivity, userId: String?) {
+        binding = ActivityMainBinding.inflate(activity.layoutInflater)
+
         RetrofitClient.instance.getIngredients(userId)
             .enqueue(object : Callback<ArrayList<IngredientResponse>> {
                 override fun onResponse(
@@ -110,6 +112,8 @@ class IngredientManagementSystem {
                         adapter.listIngredient = ingredientList
                         binding.recyclerView.adapter = adapter
                         binding.recyclerView.layoutManager = LinearLayoutManager(activity)
+
+
                     } else {
                         Log.d("Response", "ingredientList: null")
                     }
