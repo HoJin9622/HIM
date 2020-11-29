@@ -9,24 +9,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class IngredientManagementSystem {
-
-    fun register(
-        activity: AppCompatActivity,
-        userId: String,
-        image: String?,
-        barcode: String?,
-        name: String,
-        expirationDate: String,
-        price: Int
-    ) {
-        val body = HashMap<String, Any?>()
-        body["user"] = userId
-        body["image"] = image
-        body["barcode"] = barcode
-        body["name"] = name
-        body["expirationDate"] = expirationDate
-        body["price"] = price
-
+    fun register(activity: AppCompatActivity, body: HashMap<String, Any?>) {
         RetrofitClient.instance.registerIngredient(body)
             .enqueue(object : Callback<IngredientResponse> {
                 override fun onResponse(
@@ -42,7 +25,10 @@ class IngredientManagementSystem {
                         Log.d("Response", "image: ${response.body()?.image}")
                         Log.d("Response", "barcode: ${response.body()?.barcode}")
                         activity.startActivity(
-                            Intent(activity, MainActivity::class.java).putExtra("userId", userId)
+                            Intent(
+                                activity,
+                                MainActivity::class.java
+                            ).putExtra("userId", body["user"].toString())
                         )
                         activity.finish()
                     } else {
