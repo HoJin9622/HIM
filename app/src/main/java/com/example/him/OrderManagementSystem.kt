@@ -10,9 +10,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class OrderManagementSystem {
-    private lateinit var binding: ActivityOrderListBinding
-
-    fun show(activity: AppCompatActivity, userId: String) {
+    fun show(activity: AppCompatActivity, binding: ActivityOrderListBinding, userId: String) {
         RetrofitClient.instance.getOrders(userId)
             .enqueue(object : Callback<ArrayList<OrderResponse>> {
                 override fun onResponse(

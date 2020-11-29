@@ -25,7 +25,7 @@ class OrderListActivity : AppCompatActivity() {
             return
         }
 
-        OrderManagementSystem().show(this, userId)
+        OrderManagementSystem().show(this, binding, userId)
         binding.navigateMainButton.setOnClickListener { moveMainPage(userId) }
         binding.registerOrderButton.setOnClickListener { moveRegisterOrderPage(userId) }
     }
