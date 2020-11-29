@@ -14,6 +14,9 @@ interface Api {
         @Body params: HashMap<String, Any>
     ): Call<UserResponse>
 
+    @GET("users/provider")
+    fun getProvider(): Call<ArrayList<UserResponse>>
+
     @PUT("users/profile")
     fun editUser(
         @Body params: HashMap<String, String?>
