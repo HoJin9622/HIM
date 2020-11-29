@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.him.databinding.IngredientRecyclerBinding
@@ -14,11 +15,12 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.text.SimpleDateFormat
 
-class IngredientAdapter(var activity: AppCompatActivity) : RecyclerView.Adapter<Holder>() {
+class IngredientAdapter(var activity: AppCompatActivity) :
+    RecyclerView.Adapter<IngredientHolder>() {
     var listIngredient = listOf<IngredientResponse>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        return Holder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IngredientHolder {
+        return IngredientHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.ingredient_recycler, parent, false)
         )
     }
@@ -27,18 +29,18 @@ class IngredientAdapter(var activity: AppCompatActivity) : RecyclerView.Adapter<
         return listIngredient.size
     }
 
-    override fun onBindViewHolder(holder: Holder, position: Int) {
-        val ingredient = listIngredient[position]
-        holder.setIngredient(activity, ingredient)
+    override fun onBindViewHolder(holder: IngredientHolder, position: Int) {
+        holder.setIngredient(activity, listIngredient[position])
     }
 }
 
-class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class IngredientHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private lateinit var binding: IngredientRecyclerBinding
 
     @SuppressLint("SimpleDateFormat")
     fun setIngredient(activity: AppCompatActivity, ingredient: IngredientResponse) {
         binding = IngredientRecyclerBinding.bind(itemView)
+
         // binding.imageView 사진 처리
         binding.barcodeView.text = ingredient.barcode
         binding.nameView.text = ingredient.name
@@ -50,7 +52,6 @@ class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val ims = IngredientManagementSystem()
             ims.edit(activity, ingredient._id)
         }
-
         binding.deleteButton.setOnClickListener {
             val ims = IngredientManagementSystem()
             ims.delete(activity, ingredient._id)
