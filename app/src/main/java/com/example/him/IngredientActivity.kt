@@ -48,16 +48,16 @@ class IngredientActivity : AppCompatActivity() {
     }
 
     private fun registerIngredientHandler(userId: String?) {
+        val image = ""
+        val barcode = binding.barcodeEdit.text.toString()
+        val name = binding.nameEdit.text.toString()
+        val expirationDate = binding.shelfLifeEdit.text.toString()
+        val price = binding.priceEdit.text.toString().toInt()
+
         val ims = IngredientManagementSystem()
+
         if (userId != null) {
-            val body = HashMap<String, Any?>()
-            body["user"] = userId
-            body["image"] = ""
-            body["barcode"] = binding.barcodeEdit.text.toString()
-            body["name"] = binding.nameEdit.text.toString()
-            body["expirationDate"] = binding.shelfLifeEdit.text.toString()
-            body["price"] = binding.priceEdit.text.toString().toInt()
-            ims.register(this, body)
+            ims.register(this, userId, image, barcode, name, expirationDate, price)
         }
     }
 
