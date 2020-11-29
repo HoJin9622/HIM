@@ -1,14 +1,8 @@
 package com.example.him
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import com.example.him.databinding.ActivityOrderListBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class OrderListActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOrderListBinding
@@ -21,7 +15,6 @@ class OrderListActivity : AppCompatActivity() {
         // View Binding 완료. 아래부터 작성.
 
         showOrders(intent.getStringExtra("userId"))
-
         binding.registerOrderButton.setOnClickListener{ moveRegisterOrderPage(intent.getStringExtra("userId")) }
     }
 
@@ -37,7 +30,5 @@ class OrderListActivity : AppCompatActivity() {
         if (_id != null) {
             move.page(this, _id)
         }
-
-
     }
 }
