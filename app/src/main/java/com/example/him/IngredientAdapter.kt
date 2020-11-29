@@ -2,17 +2,13 @@ package com.example.him
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.him.databinding.IngredientRecyclerBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import java.io.Serializable
 import java.text.SimpleDateFormat
 
 class IngredientAdapter(var activity: AppCompatActivity) :
@@ -49,19 +45,12 @@ class IngredientHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         binding.priceView.text = "${ingredient.price}"
 
         binding.editButton.setOnClickListener {
-            val ims = IngredientManagementSystem()
-            ims.edit(
-                activity,
-                ingredient._id,
-                ingredient.name,
-                ingredient.price.toString(),
-                ingredient.barcode,
-                ingredient.expirationDate
+            activity.startActivity(
+                Intent(activity, IngredientActivity::class.java).putExtra("ingredient", ingredient)
             )
         }
         binding.deleteButton.setOnClickListener {
-            val ims = IngredientManagementSystem()
-            ims.delete(activity, ingredient._id)
+            IngredientManagementSystem().delete(activity, ingredient._id)
         }
     }
 }

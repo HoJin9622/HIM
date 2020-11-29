@@ -1,5 +1,6 @@
 package com.example.him
 
+import java.io.Serializable
 import java.util.*
 
 data class IngredientResponse(
@@ -10,4 +11,4 @@ data class IngredientResponse(
     var expirationDate: Date,
     var image: String?,
     var price: Int
-)
+) : Serializable

@@ -22,20 +22,20 @@ class MainActivity : AppCompatActivity() {
         // View Binding 완료. 아래부터 작성.
 
         val userId = intent.getStringExtra("userId")
-        if (userId == null) {
+        if (userId != null) {
+            showIngredients(userId)
+            binding.navigateEditUserButton.setOnClickListener { moveEditUserPage(userId) }
+            binding.registerOrderButton.setOnClickListener { moveRegisterIngredientPage(userId) }
+            binding.navigateOrderButton.setOnClickListener { moveOrderListPage(userId) }
+        } else {
             Log.d("Response", "userId: null")
             Toast.makeText(this, "로그인 정보를 확인할 수 없습니다.", Toast.LENGTH_SHORT).show()
             moveLoginPage()
-            return
+            finish()
         }
-
-        showIngredients(userId)
-        binding.navigateEditUserButton.setOnClickListener { moveEditUserPage(userId) }
-        binding.registerOrderButton.setOnClickListener { moveRegisterIngredientPage(userId) }
-        binding.navigateOrderButton.setOnClickListener { moveOrderListPage(userId) }
     }
 
-    private fun showIngredients(userId: String?) {
+    private fun showIngredients(userId: String) {
         IngredientManagementSystem().show(this, binding, userId)
     }
 

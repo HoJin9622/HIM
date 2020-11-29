@@ -14,31 +14,38 @@ import com.google.zxing.integration.android.IntentIntegrator
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
 
 
 class IngredientActivity : AppCompatActivity() {
     private lateinit var binding: ActivityIngredientBinding
 
-    @SuppressLint("SetTextI18n")
-    @RequiresApi(Build.VERSION_CODES.N)
+    @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityIngredientBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
         // View Binding 완료. 아래부터 작성.
-        if (intent.hasExtra("ingredientId")) {
-            binding.nameEdit.setText(intent.getStringExtra("name"))
-            binding.priceEdit.setText(intent.getStringExtra("price"))
-            binding.barcodeEdit.setText(intent.getStringExtra("barcode"))
-            binding.shelfLifeEdit.setText(
-                intent.getStringExtra("expirationDate").toString()
-            )
-            binding.confirmButton.setOnClickListener { editIngredientHandler(intent.getStringExtra("ingredientId")) }
-        } else {
-            Log.d("Response", "등록 실행")
-            binding.confirmButton.setOnClickListener {
-                registerIngredientHandler(intent.getStringExtra("userId"))
+
+        val userId = intent.getStringExtra("userId")
+        val ingredient = intent.getSerializableExtra("ingredient") as IngredientResponse?
+        when {
+            userId != null -> {
+                binding.confirmButton.setOnClickListener { registerIngredientHandler(userId) }
+            }
+            ingredient != null -> {
+                binding.nameEdit.setText(ingredient.name)
+                binding.priceEdit.setText(ingredient.price.toString())
+                binding.barcodeEdit.setText(ingredient.barcode)
+                binding.shelfLifeEdit.setText(SimpleDateFormat("yyyy-MM-dd").format(ingredient.expirationDate))
+                binding.confirmButton.setOnClickListener { editIngredientHandler(ingredient._id) }
+            }
+            else -> {
+                Log.d("Response", "userId: null, ingredient: null")
+                Toast.makeText(this, "로그인 정보를 확인할 수 없습니다.", Toast.LENGTH_SHORT).show()
+                moveLoginPage()
+                finish()
             }
         }
 
@@ -49,79 +56,34 @@ class IngredientActivity : AppCompatActivity() {
             }
         }
         dialog.setOnDateSetListener { _, year, month, dayOfMonth ->
-            binding.shelfLifeEdit.setText("${year}-${month + 1}-${dayOfMonth}")
+            val date = "${year}-${month + 1}-${dayOfMonth}"
+            binding.shelfLifeEdit.setText(date)
         }
-
         binding.barcodeButton.setOnClickListener {
             IntentIntegrator(this).initiateScan()
         }
     }
 
-    private fun registerIngredientHandler(userId: String?) {
-        val ims = IngredientManagementSystem()
-        if (userId != null) {
-            val body = HashMap<String, Any?>()
-            body["user"] = userId
-            body["image"] = ""
-            body["barcode"] = binding.barcodeEdit.text.toString()
-            body["name"] = binding.nameEdit.text.toString()
-            body["expirationDate"] = binding.shelfLifeEdit.text.toString()
-            body["price"] = binding.priceEdit.text.toString().toInt()
-            ims.register(this, body)
-        }
-    }
-
-    private fun editIngredientHandler(ingredientId: String?) {
+    private fun registerIngredientHandler(userId: String) {
         val body = HashMap<String, Any?>()
-        body["_id"] = ingredientId
-        body["name"] = binding.nameEdit.text.toString()
+        body["user"] = userId
+        body["image"] = ""
         body["barcode"] = binding.barcodeEdit.text.toString()
+        body["name"] = binding.nameEdit.text.toString()
         body["expirationDate"] = binding.shelfLifeEdit.text.toString()
         body["price"] = binding.priceEdit.text.toString().toInt()
-        RetrofitClient.instance.editIngredient(body)
-            .enqueue(object : Callback<IngredientResponse> {
-                override fun onResponse(
-                    call: Call<IngredientResponse>,
-                    response: Response<IngredientResponse>
-                ) {
-                    Log.d("Response", response.toString())
-                    if (response.code() == 200) {
-                        Log.d("Response", "_id: ${response.body()?._id}")
-                        Log.d("Response", "user: ${response.body()?.user}")
-                        Log.d("Response", "name: ${response.body()?.name}")
-                        Log.d("Response", "expirationDate: ${response.body()?.expirationDate}")
-                        Log.d("Response", "image: ${response.body()?.image}")
-                        Log.d("Response", "barcode: ${response.body()?.barcode}")
-                        startActivity(
-                            Intent(
-                                this@IngredientActivity,
-                                MainActivity::class.java
-                            ).putExtra(
-                                "userId", intent.getStringExtra(
-                                    "userId"
-                                )
-                            )
-                        )
-                        finish()
-                    } else {
-                        Log.d("Response", "response.code(): ${response.code()}")
-                        Toast.makeText(
-                            this@IngredientActivity,
-                            "통신 중 오류가 발생했습니다.",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
+        IngredientManagementSystem().register(this, body)
+    }
 
-                override fun onFailure(call: Call<IngredientResponse>, t: Throwable) {
-                    Log.d("Response", t.message.toString())
-                    Toast.makeText(
-                        this@IngredientActivity,
-                        "서버와의 접속이 원활하지 않습니다.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            })
+    private fun editIngredientHandler(ingredientId: String) {
+        val body = HashMap<String, Any?>()
+        body["_id"] = ingredientId
+        body["barcode"] = binding.barcodeEdit.text.toString()
+        body["name"] = binding.nameEdit.text.toString()
+        body["expirationDate"] = binding.shelfLifeEdit.text.toString()
+        body["image"] = ""
+        body["price"] = binding.priceEdit.text.toString().toInt()
+        IngredientManagementSystem().edit(this, body)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -147,9 +109,7 @@ class IngredientActivity : AppCompatActivity() {
                         override fun onFailure(call: Call<IngredientResponse>, t: Throwable) {
                             Log.d("Response", t.message.toString())
                             Toast.makeText(
-                                this@IngredientActivity,
-                                "서버와의 접속이 원활하지 않습니다.",
-                                Toast.LENGTH_SHORT
+                                this@IngredientActivity, "서버와의 접속이 원활하지 않습니다.", Toast.LENGTH_SHORT
                             ).show()
                         }
                     })
@@ -157,5 +117,10 @@ class IngredientActivity : AppCompatActivity() {
         } else {
             super.onActivityResult(requestCode, resultCode, data)
         }
+    }
+
+    private fun moveLoginPage() {
+        startActivity(Intent(this, LoginActivity::class.java))
+        finish()
     }
 }
