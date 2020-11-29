@@ -34,31 +34,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showIngredients(userId: String?) {
-        RetrofitClient.instance.getIngredients(userId)
-            .enqueue(object : Callback<ArrayList<IngredientResponse>> {
-                override fun onResponse(
-                    call: Call<ArrayList<IngredientResponse>>,
-                    response: Response<ArrayList<IngredientResponse>>
-                ) {
-                    // val responseCode = response.code().toString()
-                    Log.d("Response", "식재료 목록: " + response.body().toString())
-
-                    val ingredientList: ArrayList<IngredientResponse>? = response.body()
-                    val adapter = IngredientAdapter(this@MainActivity)
-                    if (ingredientList != null) {
-                        adapter.listIngredient = ingredientList
-                        binding.recyclerView.adapter = adapter
-                        binding.recyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
-                    } else {
-                        Log.d("Response", "ingredientList: null")
-                    }
-                }
-
-                override fun onFailure(call: Call<ArrayList<IngredientResponse>>, t: Throwable) {
-                    Log.d("Response", t.message.toString())
-                    Toast.makeText(this@MainActivity, "서버와의 접속이 원활하지 않습니다.", Toast.LENGTH_SHORT).show()
-                }
-            })
+        IngredientManagementSystem().show(this, userId)
     }
 
     private fun moveRegisterIngredientPage(_id: String?) {

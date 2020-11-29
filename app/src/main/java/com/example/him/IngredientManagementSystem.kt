@@ -4,11 +4,15 @@ import android.content.Intent
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.him.databinding.ActivityMainBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class IngredientManagementSystem {
+    private lateinit var binding: ActivityMainBinding
+
     fun register(activity: AppCompatActivity, body: HashMap<String, Any?>) {
         RetrofitClient.instance.registerIngredient(body)
             .enqueue(object : Callback<IngredientResponse> {
@@ -73,6 +77,34 @@ class IngredientManagementSystem {
                 }
 
                 override fun onFailure(call: Call<MessageResponse>, t: Throwable) {
+                    Log.d("Response", t.message.toString())
+                    Toast.makeText(activity, "서버와의 접속이 원활하지 않습니다.", Toast.LENGTH_SHORT).show()
+                }
+            })
+    }
+
+    fun show(activity: AppCompatActivity, userId: String?) {
+        RetrofitClient.instance.getIngredients(userId)
+            .enqueue(object : Callback<ArrayList<IngredientResponse>> {
+                override fun onResponse(
+                    call: Call<ArrayList<IngredientResponse>>,
+                    response: Response<ArrayList<IngredientResponse>>
+                ) {
+                    // val responseCode = response.code().toString()
+                    Log.d("Response", "식재료 목록: " + response.body().toString())
+
+                    val ingredientList: ArrayList<IngredientResponse>? = response.body()
+                    val adapter = IngredientAdapter(activity)
+                    if (ingredientList != null) {
+                        adapter.listIngredient = ingredientList
+                        binding.recyclerView.adapter = adapter
+                        binding.recyclerView.layoutManager = LinearLayoutManager(activity)
+                    } else {
+                        Log.d("Response", "ingredientList: null")
+                    }
+                }
+
+                override fun onFailure(call: Call<ArrayList<IngredientResponse>>, t: Throwable) {
                     Log.d("Response", t.message.toString())
                     Toast.makeText(activity, "서버와의 접속이 원활하지 않습니다.", Toast.LENGTH_SHORT).show()
                 }
