@@ -50,7 +50,14 @@ class IngredientHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         binding.editButton.setOnClickListener {
             val ims = IngredientManagementSystem()
-            ims.edit(activity, ingredient._id)
+            ims.edit(
+                activity,
+                ingredient._id,
+                ingredient.name,
+                ingredient.price.toString(),
+                ingredient.barcode,
+                ingredient.expirationDate
+            )
         }
         binding.deleteButton.setOnClickListener {
             val ims = IngredientManagementSystem()

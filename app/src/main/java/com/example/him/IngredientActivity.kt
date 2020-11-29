@@ -5,7 +5,6 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.text.Editable
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -28,10 +27,13 @@ class IngredientActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         // View Binding 완료. 아래부터 작성.
-
-        Log.d("Response", "ingredientId: ${intent.getStringExtra("ingredientId")}")
         if (intent.hasExtra("ingredientId")) {
-            Log.d("Response", "수정 실행")
+            binding.nameEdit.setText(intent.getStringExtra("name"))
+            binding.priceEdit.setText(intent.getStringExtra("price"))
+            binding.barcodeEdit.setText(intent.getStringExtra("barcode"))
+            binding.shelfLifeEdit.setText(
+                intent.getStringExtra("expirationDate").toString()
+            )
             binding.confirmButton.setOnClickListener { editIngredientHandler(intent.getStringExtra("ingredientId")) }
         } else {
             Log.d("Response", "등록 실행")
