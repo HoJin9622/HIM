@@ -1,6 +1,5 @@
 package com.example.him
 
-import android.content.Intent
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -26,15 +25,4 @@ class OrderManagementSystem {
                 }
             })
     }
-
-    fun page(activity: AppCompatActivity, _id: String?) {
-        activity.startActivity(
-            Intent(
-                activity,
-                RegisterOrderActivity::class.java
-            ).putExtra("_Id", _id)
-        )
-        activity.finish()
-    }
-
 }

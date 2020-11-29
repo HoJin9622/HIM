@@ -30,6 +30,6 @@ class OrderListActivity : AppCompatActivity() {
     }
 
     private fun moveRegisterOrderPage(userId: String) {
-        OrderManagementSystem().page(this, userId)
+        startActivity(Intent(this, RegisterOrderActivity::class.java).putExtra("userId", userId))
     }
 }
