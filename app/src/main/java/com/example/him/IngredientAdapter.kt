@@ -47,38 +47,13 @@ class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         binding.priceView.text = "${ingredient.price}"
 
         binding.editButton.setOnClickListener {
-            val userId = activity.intent.getStringExtra("userId")
-            activity.startActivity(
-                Intent(
-                    activity,
-                    IngredientActivity::class.java
-                ).putExtra("userId", userId).putExtra("ingredientId", ingredient._id)
-            )
+            val ims = IngredientManagementSystem()
+            ims.edit(activity, ingredient._id)
         }
 
         binding.deleteButton.setOnClickListener {
-            RetrofitClient.instance.deleteIngredients(ingredient._id)
-                .enqueue(object : Callback<MessageResponse> {
-                    override fun onResponse(
-                        call: Call<MessageResponse>,
-                        response: Response<MessageResponse>
-                    ) {
-                        Log.d("Response", "결과: ${response.toString()}")
-
-                        val userId = activity.intent.getStringExtra("userId")
-                        activity.finish()
-                        activity.startActivity(
-                            Intent(
-                                activity,
-                                MainActivity::class.java
-                            ).putExtra("userId", userId)
-                        )
-                    }
-
-                    override fun onFailure(call: Call<MessageResponse>, t: Throwable) {
-                        Log.d("Response", t.message.toString())
-                    }
-                })
+            val ims = IngredientManagementSystem()
+            ims.delete(activity, ingredient._id)
         }
     }
 }
