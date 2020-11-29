@@ -21,7 +21,7 @@ class OrderManagementSystem {
                     val orderList = response.body()
                     val adapter = OrderAdapter(activity)
                     if (orderList != null) {
-                        adapter.listOrder = ArrayList<OrderResponse>(orderList)
+                        adapter.listOrder = ArrayList(orderList)
                         binding.recyclerView.adapter = adapter
                         binding.recyclerView.layoutManager = LinearLayoutManager(activity)
                     } else {
