@@ -43,4 +43,39 @@ class IngredientManagementSystem {
                 }
             })
     }
+
+    fun edit(activity: AppCompatActivity, ingredientId: String) {
+        val userId = activity.intent.getStringExtra("userId")
+        activity.startActivity(
+            Intent(
+                activity,
+                IngredientActivity::class.java
+            ).putExtra("userId", userId).putExtra("ingredientId", ingredientId)
+        )
+    }
+
+    fun delete(activity: AppCompatActivity, ingredientId: String) {
+        RetrofitClient.instance.deleteIngredients(ingredientId)
+            .enqueue(object : Callback<MessageResponse> {
+                override fun onResponse(
+                    call: Call<MessageResponse>,
+                    response: Response<MessageResponse>
+                ) {
+                    Log.d("Response", "결과: ${response.toString()}")
+
+                    val userId = activity.intent.getStringExtra("userId")
+                    activity.finish()
+                    activity.startActivity(
+                        Intent(
+                            activity,
+                            MainActivity::class.java
+                        ).putExtra("userId", userId)
+                    )
+                }
+
+                override fun onFailure(call: Call<MessageResponse>, t: Throwable) {
+                    Log.d("Response", t.message.toString())
+                }
+            })
+    }
 }
