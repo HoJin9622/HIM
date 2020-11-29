@@ -22,7 +22,7 @@ class OrderListActivity : AppCompatActivity() {
     }
 
     private fun showOrders(userId: String) {
-        OrderManagementSystem().list(this, userId)
+        OrderManagementSystem().show(this, userId)
     }
 
     private fun moveMainPage(userId: String) {
