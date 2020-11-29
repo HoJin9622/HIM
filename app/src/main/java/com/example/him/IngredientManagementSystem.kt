@@ -47,10 +47,8 @@ class IngredientManagementSystem {
     fun edit(activity: AppCompatActivity, ingredientId: String) {
         val userId = activity.intent.getStringExtra("userId")
         activity.startActivity(
-            Intent(
-                activity,
-                IngredientActivity::class.java
-            ).putExtra("userId", userId).putExtra("ingredientId", ingredientId)
+            Intent(activity, IngredientActivity::class.java).putExtra("userId", userId)
+                .putExtra("ingredientId", ingredientId)
         )
     }
 
@@ -61,7 +59,7 @@ class IngredientManagementSystem {
                     call: Call<MessageResponse>,
                     response: Response<MessageResponse>
                 ) {
-                    Log.d("Response", "결과: ${response.toString()}")
+                    Log.d("Response", "결과: $response")
 
                     val userId = activity.intent.getStringExtra("userId")
                     activity.finish()
@@ -71,10 +69,12 @@ class IngredientManagementSystem {
                             MainActivity::class.java
                         ).putExtra("userId", userId)
                     )
+                    Toast.makeText(activity, "해당 식재료가 삭제되었습니다.", Toast.LENGTH_SHORT).show()
                 }
 
                 override fun onFailure(call: Call<MessageResponse>, t: Throwable) {
                     Log.d("Response", t.message.toString())
+                    Toast.makeText(activity, "서버와의 접속이 원활하지 않습니다.", Toast.LENGTH_SHORT).show()
                 }
             })
     }
