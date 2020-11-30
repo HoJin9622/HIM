@@ -60,6 +60,6 @@ interface Api {
     fun deleteOrder(@Path("id") id: String?): Call<MessageResponse>
 
     @Multipart
-    @POST
-    fun uploadImage(@Part image : MultipartBody.Part): Call<String>
+    @POST("upload")
+    fun uploadImage(@Part imageFile : MultipartBody.Part): Call<String>
 }

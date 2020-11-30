@@ -6,15 +6,24 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.FileUtils
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.him.databinding.ActivityIngredientBinding
 import com.google.zxing.integration.android.IntentIntegrator
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
 import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.HashMap
 
 
 class IngredientActivity : AppCompatActivity() {
@@ -150,11 +159,38 @@ class IngredientActivity : AppCompatActivity() {
                 if (resultCode == Activity.RESULT_OK) {
                     photoUri = data?.data
                     Log.d("Response", photoUri.toString())
+                    contentUpload(photoUri.toString())
                 } else {
                     finish()
                 }
             }
         }
+    }
+
+    private fun contentUpload(path: String) {
+        val file = File(path)
+
+        var fileName = "image.png"
+
+        var requestBody : RequestBody = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+        var body : MultipartBody.Part = MultipartBody.Part.createFormData("image", fileName, requestBody)
+
+        RetrofitClient.instance.uploadImage(body)
+            .enqueue(object : Callback<String> {
+                override fun onResponse(
+                    call: Call<String>,
+                    response: Response<String>
+                ) {
+                    Log.d("Response", "결과: $response")
+                }
+
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    Log.d("Response", "오류: ${t.message.toString()}")
+                    Toast.makeText(
+                        this@IngredientActivity, "서버와의 접속이 원활하지 않습니다.", Toast.LENGTH_SHORT
+                    ).show()
+                }
+            })
     }
 
 
