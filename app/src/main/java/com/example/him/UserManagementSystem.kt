@@ -64,7 +64,7 @@ class UserManagementSystem {
                     Log.d("Response", "userId: ${response.body()?.userId}")
                     Log.d("Response", "isProvider: ${response.body()?.isProvider}")
 
-                    Toast.makeText(activity, "회원가입 성공", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, "가입해주셔서 감사합니다.", Toast.LENGTH_SHORT).show()
                     activity.startActivity(
                         Intent(activity, MainActivity::class.java).putExtra(
                             "userId",
@@ -106,7 +106,6 @@ class UserManagementSystem {
     }
 
     fun edit(activity: AppCompatActivity, id: String, password: String) {
-        Log.d("Edit", "${id}, $password")
         val body = HashMap<String, String?>()
         body["_id"] = id
         body["password"] = password

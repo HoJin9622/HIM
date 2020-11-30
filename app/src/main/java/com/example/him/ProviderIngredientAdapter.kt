@@ -1,16 +1,15 @@
 package com.example.him
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.him.databinding.IngredientRecyclerBinding
+import com.example.him.databinding.ProviderIngredientRecyclerBinding
 import java.text.SimpleDateFormat
 
-class IngredientAdapter(var activity: AppCompatActivity) :
+class ProviderIngredientAdapter(var activity: AppCompatActivity) :
     RecyclerView.Adapter<IngredientHolder>() {
     var listIngredient = listOf<IngredientResponse>()
 
@@ -29,27 +28,20 @@ class IngredientAdapter(var activity: AppCompatActivity) :
     }
 }
 
-class IngredientHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    private lateinit var binding: IngredientRecyclerBinding
+class ProviderIngredientHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    private lateinit var binding: ProviderIngredientRecyclerBinding
 
     @SuppressLint("SimpleDateFormat")
     fun setIngredient(activity: AppCompatActivity, ingredient: IngredientResponse) {
-        binding = IngredientRecyclerBinding.bind(itemView)
+        binding = ProviderIngredientRecyclerBinding.bind(itemView)
 
-        // binding.imageView 사진 처리
+        // binding.imageView. = ingredient.image
         binding.barcodeView.text = ingredient.barcode
         binding.nameView.text = ingredient.name
         binding.shelfLifeView.text =
             SimpleDateFormat("yyyy-MM-dd").format(ingredient.expirationDate)
         binding.priceView.text = "${ingredient.price}"
 
-        binding.editButton.setOnClickListener {
-            activity.startActivity(
-                Intent(activity, IngredientActivity::class.java).putExtra("ingredient", ingredient)
-            )
-        }
-        binding.deleteButton.setOnClickListener {
-            IngredientManagementSystem().delete(activity, ingredient._id)
-        }
+        binding.orderButton.setOnClickListener { }
     }
 }

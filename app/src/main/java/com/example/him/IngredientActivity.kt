@@ -64,7 +64,26 @@ class IngredientActivity : AppCompatActivity() {
         }
     }
 
+    private fun inputCheck(): Boolean {
+        when {
+            binding.nameEdit.text.isEmpty() -> {
+                Toast.makeText(this, "이름을 입력해주세요.", Toast.LENGTH_SHORT).show()
+            }
+            binding.shelfLifeEdit.text.isEmpty() -> {
+                Toast.makeText(this, "유통기한을 입력해주세요.", Toast.LENGTH_SHORT).show()
+            }
+            binding.priceEdit.text.isEmpty() -> {
+                Toast.makeText(this, "가격을 입력해주세요.", Toast.LENGTH_SHORT).show()
+            }
+            else -> {
+                return true
+            }
+        }
+        return false
+    }
+
     private fun registerIngredientHandler(userId: String) {
+        if (!inputCheck()) return
         val body = HashMap<String, Any?>()
         body["user"] = userId
         body["image"] = ""
@@ -76,6 +95,7 @@ class IngredientActivity : AppCompatActivity() {
     }
 
     private fun editIngredientHandler(ingredientId: String) {
+        if (!inputCheck()) return
         val body = HashMap<String, Any?>()
         body["_id"] = ingredientId
         body["barcode"] = binding.barcodeEdit.text.toString()

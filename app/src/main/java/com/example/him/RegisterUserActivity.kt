@@ -3,6 +3,7 @@ package com.example.him
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.example.him.databinding.ActivityRegisterUserBinding
 
 class RegisterUserActivity : AppCompatActivity() {
@@ -22,20 +23,31 @@ class RegisterUserActivity : AppCompatActivity() {
         val id = binding.idEdit.text.toString()
         val password = binding.passwordEdit.text.toString()
         val name = binding.nameEdit.text.toString()
-        var isProvider = false
-
+        var isProvider: Boolean? = null
         when (binding.radioGroup.checkedRadioButtonId) {
             R.id.providerButton -> isProvider = true
             R.id.consumerButton -> isProvider = false
         }
 
-        val ums = UserManagementSystem()
+        when {
+            id.isEmpty() -> {
+                Toast.makeText(this, "아이디를 입력해주세요.", Toast.LENGTH_SHORT).show()
+                return
+            }
+            password.isEmpty() -> {
+                Toast.makeText(this, "비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show()
+                return
+            }
+            name.isEmpty() -> {
+                Toast.makeText(this, "이름을 입력해주세요.", Toast.LENGTH_SHORT).show()
+                return
+            }
+            isProvider == null -> {
+                Toast.makeText(this, "가입 유형을 선택해주세요.", Toast.LENGTH_SHORT).show()
+                return
+            }
+        }
 
-        ums.register(this, id, password, name, isProvider )
-    }
-
-    fun moveMainPage() {
-        startActivity(Intent(this, MainActivity::class.java))
-        finish()
+        UserManagementSystem().register(this, id, password, name, isProvider!! )
     }
 }

@@ -27,15 +27,19 @@ class EditUserActivity : AppCompatActivity() {
     }
 
     private fun editHandler(userId: String?) {
-        if (binding.passwordEdit.text.toString() == binding.passwordCheck.text.toString()) {
-            val password = binding.passwordEdit.text.toString()
-            if (userId != null) {
+        val password = binding.passwordEdit.text.toString()
+        val passwordCheck = binding.passwordCheck.text.toString()
+        when {
+            password.isEmpty() -> {
+                Toast.makeText(this, "비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show()
+                return
+            }
+            password != passwordCheck -> {
+                Toast.makeText(this, "비밀번호가 서로 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
+            }
+            userId != null -> {
                 UserManagementSystem().edit(this, userId, password)
             }
-        } else {
-            Toast.makeText(this, "비밀번호가 서로 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
-            binding.passwordEdit.setText("")
-            binding.passwordCheck.setText("")
         }
     }
 }
