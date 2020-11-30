@@ -54,7 +54,7 @@ interface Api {
     @POST("orders")
     fun registerOrder(
         @Body params: HashMap<String, String?>
-    ): Call<OrderResponse>
+    ): Call<MessageResponse>
 
     @DELETE("orders/{id}")
     fun deleteOrder(@Path("id") id: String?): Call<MessageResponse>

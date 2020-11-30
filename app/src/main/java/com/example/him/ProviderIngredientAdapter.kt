@@ -46,7 +46,12 @@ class ProviderIngredientHolder(itemView: View) : RecyclerView.ViewHolder(itemVie
         binding.priceView.text = "${ingredient.price}"
 
         binding.orderButton.setOnClickListener {
-            Log.d("Ingredient", "$ingredient")
+            val body = HashMap<String, String?>()
+            body["orderIngredient"] = ingredient._id
+            body["buyer"] = activity.intent.getStringExtra("userId")
+            body["seller"] = ingredient.user
+            Log.d("Ingredient", "$body")
+            OrderManagementSystem().orderIngredient(activity, body)
         }
     }
 }
