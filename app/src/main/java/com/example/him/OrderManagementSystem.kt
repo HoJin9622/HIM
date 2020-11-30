@@ -2,10 +2,14 @@ package com.example.him
 
 import android.content.Intent
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.him.databinding.ActivityOrderListBinding
+import com.example.him.databinding.ActivityRegisterOrderBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -79,6 +83,58 @@ class OrderManagementSystem {
                 }
 
                 override fun onFailure(call: Call<MessageResponse>, t: Throwable) {
+                    Log.d("Response", t.message.toString())
+                    Toast.makeText(activity, "서버와의 접속이 원활하지 않습니다.", Toast.LENGTH_SHORT).show()
+                }
+            })
+    }
+
+    fun bringProvider(activity: AppCompatActivity, binding: ActivityRegisterOrderBinding) {
+        RetrofitClient.instance.getProvider()
+            .enqueue(object : Callback<java.util.ArrayList<UserResponse>> {
+                override fun onResponse(
+                    call: Call<java.util.ArrayList<UserResponse>>,
+                    response: Response<java.util.ArrayList<UserResponse>>
+                ) {
+                    Log.d("Response", "공급자 목록: ${response.body()}")
+                    if (response.body() == null) {
+                        Toast.makeText(activity, "서버와의 접속이 원활하지 않습니다.", Toast.LENGTH_SHORT).show()
+                        return
+                    }
+
+                    val providerList = response.body()!!
+                    val providerNameList = mutableListOf("공급자를 선택하세요.")
+                    providerNameList.addAll(providerList.map { it.name })
+
+                    val adapter = ArrayAdapter(
+                        activity, android.R.layout.simple_list_item_1, providerNameList
+                    )
+                    binding.providerSpinner.adapter = adapter
+                    binding.providerSpinner.onItemSelectedListener =
+                        object : AdapterView.OnItemSelectedListener {
+                            override fun onItemSelected(
+                                parent: AdapterView<*>?, view: View?, position: Int, id: Long
+                            ) {
+                                if (position < 1) {
+                                    Toast.makeText(activity, "공급자를 먼저 선택해주세요.", Toast.LENGTH_SHORT)
+                                        .show()
+                                    return
+                                }
+                                Toast.makeText(
+                                    activity, providerList[position - 1].name, Toast.LENGTH_SHORT
+                                ).show()
+                            }
+
+                            override fun onNothingSelected(parent: AdapterView<*>?) {
+                                Toast.makeText(activity, "공급자를 먼저 선택해주세요.", Toast.LENGTH_SHORT)
+                                    .show()
+                            }
+                        }
+                }
+
+                override fun onFailure(
+                    call: Call<java.util.ArrayList<UserResponse>>, t: Throwable
+                ) {
                     Log.d("Response", t.message.toString())
                     Toast.makeText(activity, "서버와의 접속이 원활하지 않습니다.", Toast.LENGTH_SHORT).show()
                 }

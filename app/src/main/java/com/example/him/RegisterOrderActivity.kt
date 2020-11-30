@@ -18,32 +18,10 @@ class RegisterOrderActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterOrderBinding.inflate(layoutInflater)
-        var view = binding.root
-        setContentView(R.layout.activity_register_order)
+        val view = binding.root
+        setContentView(view)
         // View Binding 완료. 아래부터 작성.
 
-        fetchProvider()
-    }
-
-    private fun fetchProvider() {
-        RetrofitClient.instance.getProvider()
-            .enqueue(object : Callback<ArrayList<UserResponse>> {
-                override fun onResponse(
-                    call: Call<ArrayList<UserResponse>>,
-                    response: Response<ArrayList<UserResponse>>
-                ) {
-                    // val responseCode = response.code().toString()
-                    Log.d("Response", "공급자 목록: " + response.body().toString())
-                }
-
-                override fun onFailure(call: Call<ArrayList<UserResponse>>, t: Throwable) {
-                    Log.d("Response", t.message.toString())
-                    Toast.makeText(
-                        this@RegisterOrderActivity,
-                        "서버와의 접속이 원활하지 않습니다.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            })
+        OrderManagementSystem().bringProvider(this, binding)
     }
 }
