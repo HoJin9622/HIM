@@ -1,5 +1,6 @@
 package com.example.him
 
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -57,4 +58,8 @@ interface Api {
 
     @DELETE("orders/{id}")
     fun deleteOrder(@Path("id") id: String?): Call<MessageResponse>
+
+    @Multipart
+    @POST
+    fun uploadImage(@Part image : MultipartBody.Part): Call<String>
 }
