@@ -1,13 +1,13 @@
 package com.example.him
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
-import android.os.Build
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.him.databinding.ActivityIngredientBinding
 import com.google.zxing.integration.android.IntentIntegrator
@@ -20,6 +20,9 @@ import java.text.SimpleDateFormat
 class IngredientActivity : AppCompatActivity() {
     private lateinit var binding: ActivityIngredientBinding
 
+    var PICK_IMAGE_FROM_ALBUM = 0
+    var photoUri: Uri? = null
+
     @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +30,13 @@ class IngredientActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         // View Binding 완료. 아래부터 작성.
+
+        var photoPickerIntent = Intent(Intent.ACTION_PICK)
+        photoPickerIntent.type = "image/*"
+        binding.photoButton.setOnClickListener {
+            startActivityForResult(photoPickerIntent, PICK_IMAGE_FROM_ALBUM)
+        }
+
 
         val userId = intent.getStringExtra("userId")
         val ingredient = intent.getSerializableExtra("ingredient") as IngredientResponse?
@@ -136,8 +146,17 @@ class IngredientActivity : AppCompatActivity() {
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data)
+            if (requestCode == PICK_IMAGE_FROM_ALBUM) {
+                if (resultCode == Activity.RESULT_OK) {
+                    photoUri = data?.data
+                    Log.d("Response", photoUri.toString())
+                } else {
+                    finish()
+                }
+            }
         }
     }
+
 
     private fun moveLoginPage() {
         startActivity(Intent(this, LoginActivity::class.java))
