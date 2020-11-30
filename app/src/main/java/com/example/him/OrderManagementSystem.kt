@@ -14,7 +14,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class OrderManagementSystem {
-    fun isProvider(activity: AppCompatActivity, binding: ActivityOrderListBinding, userId: String) {
+    fun isProvider(activity: OrderListActivity, binding: ActivityOrderListBinding, userId: String) {
         RetrofitClient.instance.isProvider(userId).enqueue(object : Callback<IsProviderResponse> {
             override fun onResponse(
                 call: Call<IsProviderResponse>,
@@ -39,7 +39,7 @@ class OrderManagementSystem {
         })
     }
 
-    fun show(activity: AppCompatActivity, binding: ActivityOrderListBinding, userId: String) {
+    fun show(activity: OrderListActivity, binding: ActivityOrderListBinding, userId: String) {
         RetrofitClient.instance.getOrders(userId)
             .enqueue(object : Callback<ArrayList<OrderResponse>> {
                 override fun onResponse(
@@ -66,14 +66,14 @@ class OrderManagementSystem {
             })
     }
 
-    fun delete(activity: AppCompatActivity, orderId: String) {
+    fun delete(activity: OrderListActivity, orderId: String) {
         RetrofitClient.instance.deleteOrder(orderId)
             .enqueue(object : Callback<MessageResponse> {
                 override fun onResponse(
                     call: Call<MessageResponse>, response: Response<MessageResponse>
                 ) {
                     Log.d("Response", "결과: $response")
-                    activity.recreate()
+                    activity.showOrders()
                     Toast.makeText(activity, "해당 주문이 취소되었습니다.", Toast.LENGTH_SHORT).show()
                 }
 
@@ -84,7 +84,7 @@ class OrderManagementSystem {
             })
     }
 
-    fun bringProvider(activity: AppCompatActivity, binding: ActivityRegisterOrderBinding) {
+    fun bringProvider(activity: RegisterOrderActivity, binding: ActivityRegisterOrderBinding) {
         RetrofitClient.instance.getProvider()
             .enqueue(object : Callback<java.util.ArrayList<UserResponse>> {
                 override fun onResponse(
@@ -135,7 +135,7 @@ class OrderManagementSystem {
     }
 
     fun showProviderIngredient(
-        activity: AppCompatActivity,
+        activity: RegisterOrderActivity,
         binding: ActivityRegisterOrderBinding,
         userId: String?
     ) {
@@ -175,7 +175,7 @@ class OrderManagementSystem {
             })
     }
 
-    fun orderIngredient(activity: AppCompatActivity, body: HashMap<String, String?>) {
+    fun orderIngredient(activity: RegisterOrderActivity, body: HashMap<String, String?>) {
         RetrofitClient.instance.registerOrder(body)
             .enqueue(object : Callback<MessageResponse> {
                 override fun onResponse(

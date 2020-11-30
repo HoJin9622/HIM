@@ -20,9 +20,8 @@ class EditUserActivity : AppCompatActivity() {
     }
 
     private fun withdrawHandler(userId: String?) {
-        val ums = UserManagementSystem()
         if (userId != null) {
-            ums.withdraw(this, userId)
+            UserManagementSystem().withdraw(this, userId)
         }
     }
 

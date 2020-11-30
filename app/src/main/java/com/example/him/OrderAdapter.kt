@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.him.databinding.OrderRecyclerBinding
 
-class OrderAdapter(var activity: AppCompatActivity) : RecyclerView.Adapter<OrderHolder>() {
+class OrderAdapter(var activity: OrderListActivity) : RecyclerView.Adapter<OrderHolder>() {
     var listOrder = listOf<OrderResponse>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderHolder {
@@ -28,7 +28,7 @@ class OrderAdapter(var activity: AppCompatActivity) : RecyclerView.Adapter<Order
 class OrderHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private lateinit var binding: OrderRecyclerBinding
 
-    fun setOrder(activity: AppCompatActivity, order: OrderResponse) {
+    fun setOrder(activity: OrderListActivity, order: OrderResponse) {
         binding = OrderRecyclerBinding.bind(itemView)
 
         binding.ingredientView.text = order.orderIngredient.name

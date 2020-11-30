@@ -24,6 +24,7 @@ class OrderListActivity : AppCompatActivity() {
         val userId = intent.getStringExtra("userId")
         if (userId != null) {
             OrderManagementSystem().isProvider(this, binding, userId)
+            showOrders()
             OrderManagementSystem().show(this, binding, userId)
             binding.navigateMainButton.setOnClickListener { moveMainPage() }
             binding.registerOrderButton.setOnClickListener { moveRegisterOrderPage(userId) }
@@ -34,13 +35,16 @@ class OrderListActivity : AppCompatActivity() {
         }
     }
 
+    fun showOrders() {
+        OrderManagementSystem().show(this, binding, intent.getStringExtra("userId")!!)
+    }
+
     private fun moveLoginPage() {
         startActivity(Intent(this, LoginActivity::class.java))
         finishAffinity()
     }
 
     private fun moveMainPage() {
-        startActivity(Intent(this, MainActivity::class.java))
         finish()
     }
 

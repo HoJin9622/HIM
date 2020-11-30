@@ -9,7 +9,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class UserManagementSystem {
-    fun login(activity: AppCompatActivity, id: String, password: String) {
+    fun login(activity: LoginActivity, id: String, password: String) {
         val body = HashMap<String, String>()
         body["userId"] = id
         body["password"] = password
@@ -44,7 +44,7 @@ class UserManagementSystem {
     }
 
     fun register(
-        activity: AppCompatActivity,
+        activity: RegisterUserActivity,
         id: String,
         password: String,
         name: String,
@@ -86,7 +86,7 @@ class UserManagementSystem {
         })
     }
 
-    fun withdraw(activity: AppCompatActivity, userId: String) {
+    fun withdraw(activity: EditUserActivity, userId: String) {
         RetrofitClient.instance.deleteUser(userId).enqueue(object : Callback<MessageResponse> {
             override fun onResponse(
                 call: Call<MessageResponse>,
@@ -95,7 +95,7 @@ class UserManagementSystem {
                 Log.d("Response", "결과: $response")
                 Toast.makeText(activity, "회원이 탈퇴되었습니다.", Toast.LENGTH_SHORT).show()
                 activity.startActivity(Intent(activity, LoginActivity::class.java))
-                activity.finish()
+                activity.finishAffinity()
             }
 
             override fun onFailure(call: Call<MessageResponse>, t: Throwable) {
@@ -105,7 +105,7 @@ class UserManagementSystem {
         })
     }
 
-    fun edit(activity: AppCompatActivity, id: String, password: String) {
+    fun edit(activity: EditUserActivity, id: String, password: String) {
         val body = HashMap<String, String?>()
         body["_id"] = id
         body["password"] = password
@@ -117,7 +117,7 @@ class UserManagementSystem {
                     Log.d("Response", "name: ${response.body()?.name}")
                     Log.d("Response", "userId: ${response.body()?.userId}")
                     Log.d("Response", "isProvider: ${response.body()?.isProvider}")
-                    Toast.makeText(activity, "비밀번호가 성공적으로 변경되었습니다.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, "비밀번호가 변경되었습니다.", Toast.LENGTH_SHORT).show()
                     activity.finish()
                 }
             }

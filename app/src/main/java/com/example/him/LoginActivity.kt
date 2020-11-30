@@ -22,8 +22,7 @@ class LoginActivity : AppCompatActivity() {
     private fun loginHandler() {
         val id = binding.idEdit.text.toString()
         val password = binding.passwordEdit.text.toString()
-        val ums = UserManagementSystem()
-        ums.login(this, id, password)
+        UserManagementSystem().login(this, id, password)
     }
 
     private fun moveRegisterPage() {

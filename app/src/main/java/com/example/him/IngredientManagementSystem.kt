@@ -1,6 +1,5 @@
 package com.example.him
 
-import android.content.Intent
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -13,7 +12,7 @@ import java.util.*
 import kotlin.collections.HashMap
 
 class IngredientManagementSystem {
-    fun show(activity: AppCompatActivity, binding: ActivityMainBinding, userId: String?) {
+    fun show(activity: MainActivity, binding: ActivityMainBinding, userId: String?) {
         RetrofitClient.instance.getIngredients(userId)
             .enqueue(object : Callback<ArrayList<IngredientResponse>> {
                 override fun onResponse(
@@ -39,7 +38,7 @@ class IngredientManagementSystem {
             })
     }
 
-    fun register(activity: AppCompatActivity, body: HashMap<String, Any?>) {
+    fun register(activity: IngredientActivity, body: HashMap<String, Any?>) {
         RetrofitClient.instance.registerIngredient(body)
             .enqueue(object : Callback<IngredientResponse> {
                 override fun onResponse(
@@ -67,7 +66,7 @@ class IngredientManagementSystem {
             })
     }
 
-    fun edit(activity: AppCompatActivity, body: HashMap<String, Any?>) {
+    fun edit(activity: IngredientActivity, body: HashMap<String, Any?>) {
         RetrofitClient.instance.editIngredient(body).enqueue(object : Callback<IngredientResponse> {
             override fun onResponse(
                 call: Call<IngredientResponse>, response: Response<IngredientResponse>
@@ -94,7 +93,7 @@ class IngredientManagementSystem {
         })
     }
 
-    fun delete(activity: AppCompatActivity, ingredientId: String) {
+    fun delete(activity: MainActivity, ingredientId: String) {
         RetrofitClient.instance.deleteIngredients(ingredientId)
             .enqueue(object : Callback<MessageResponse> {
                 override fun onResponse(
@@ -109,15 +108,7 @@ class IngredientManagementSystem {
                             Toast.LENGTH_SHORT
                         ).show()
                     } else {
-                        val userId = activity.intent.getStringExtra("userId")
-                        activity.finish()
-                        activity.startActivity(
-                            Intent(
-                                activity,
-                                MainActivity::class.java
-                            ).putExtra("userId", userId)
-                        )
-                        activity.recreate()
+                        activity.showIngredients()
                         Toast.makeText(activity, "해당 식재료가 삭제되었습니다.", Toast.LENGTH_SHORT).show()
                     }
                 }

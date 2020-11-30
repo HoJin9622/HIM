@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.him.databinding.IngredientRecyclerBinding
 import java.text.SimpleDateFormat
 
-class IngredientAdapter(var activity: AppCompatActivity) :
+class IngredientAdapter(var activity: MainActivity) :
     RecyclerView.Adapter<IngredientHolder>() {
     var listIngredient = listOf<IngredientResponse>()
 
@@ -33,7 +33,7 @@ class IngredientHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private lateinit var binding: IngredientRecyclerBinding
 
     @SuppressLint("SimpleDateFormat")
-    fun setIngredient(activity: AppCompatActivity, ingredient: IngredientResponse) {
+    fun setIngredient(activity: MainActivity, ingredient: IngredientResponse) {
         binding = IngredientRecyclerBinding.bind(itemView)
 
         // binding.imageView 사진 처리
