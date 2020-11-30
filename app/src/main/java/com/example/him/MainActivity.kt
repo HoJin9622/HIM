@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity() {
             Log.d("Response", "userId: null")
             Toast.makeText(this, "로그인 정보를 확인할 수 없습니다.", Toast.LENGTH_SHORT).show()
             moveLoginPage()
-            finish()
         }
     }
 
@@ -42,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun moveLoginPage() {
         startActivity(Intent(this, LoginActivity::class.java))
-        finish()
+        finishAffinity()
     }
 
     private fun moveEditUserPage(userId: String) {
