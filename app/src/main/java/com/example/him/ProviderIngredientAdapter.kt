@@ -1,21 +1,24 @@
 package com.example.him
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.him.databinding.ProviderIngredientRecyclerBinding
 import java.text.SimpleDateFormat
 
 class ProviderIngredientAdapter(var activity: AppCompatActivity) :
-    RecyclerView.Adapter<IngredientHolder>() {
+    RecyclerView.Adapter<ProviderIngredientHolder>() {
     var listIngredient = listOf<IngredientResponse>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IngredientHolder {
-        return IngredientHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.ingredient_recycler, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProviderIngredientHolder {
+        return ProviderIngredientHolder(
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.provider_ingredient_recycler, parent, false)
         )
     }
 
@@ -23,7 +26,7 @@ class ProviderIngredientAdapter(var activity: AppCompatActivity) :
         return listIngredient.size
     }
 
-    override fun onBindViewHolder(holder: IngredientHolder, position: Int) {
+    override fun onBindViewHolder(holder: ProviderIngredientHolder, position: Int) {
         holder.setIngredient(activity, listIngredient[position])
     }
 }
@@ -42,6 +45,8 @@ class ProviderIngredientHolder(itemView: View) : RecyclerView.ViewHolder(itemVie
             SimpleDateFormat("yyyy-MM-dd").format(ingredient.expirationDate)
         binding.priceView.text = "${ingredient.price}"
 
-        binding.orderButton.setOnClickListener { }
+        binding.orderButton.setOnClickListener {
+            Log.d("Ingredient", "$ingredient")
+        }
     }
 }
