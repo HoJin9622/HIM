@@ -1,6 +1,5 @@
 package com.example.him
 
-import android.content.Intent
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
@@ -74,11 +73,7 @@ class OrderManagementSystem {
                     call: Call<MessageResponse>, response: Response<MessageResponse>
                 ) {
                     Log.d("Response", "결과: $response")
-                    val userId = activity.intent.getStringExtra("userId")
-                    activity.finish()
-                    activity.startActivity(
-                        Intent(activity, OrderListActivity::class.java).putExtra("userId", userId)
-                    )
+                    activity.recreate()
                     Toast.makeText(activity, "해당 주문이 취소되었습니다.", Toast.LENGTH_SHORT).show()
                 }
 

@@ -71,7 +71,7 @@ class UserManagementSystem {
                             response.body()?._id
                         )
                     )
-                    activity.finish()
+                    activity.finishAffinity()
                 } else {
                     Toast.makeText(
                         activity, "이미 존재하는 아이디입니다.", Toast.LENGTH_SHORT
@@ -117,11 +117,7 @@ class UserManagementSystem {
                     Log.d("Response", "name: ${response.body()?.name}")
                     Log.d("Response", "userId: ${response.body()?.userId}")
                     Log.d("Response", "isProvider: ${response.body()?.isProvider}")
-
                     Toast.makeText(activity, "비밀번호가 성공적으로 변경되었습니다.", Toast.LENGTH_SHORT).show()
-                    activity.startActivity(
-                        Intent(activity, MainActivity::class.java).putExtra("userId", id)
-                    )
                     activity.finish()
                 }
             }

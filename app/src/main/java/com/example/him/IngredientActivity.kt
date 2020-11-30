@@ -64,7 +64,6 @@ class IngredientActivity : AppCompatActivity() {
                 Log.d("Response", "userId: null, ingredient: null")
                 Toast.makeText(this, "로그인 정보를 확인할 수 없습니다.", Toast.LENGTH_SHORT).show()
                 moveLoginPage()
-                finish()
             }
         }
 
@@ -172,8 +171,9 @@ class IngredientActivity : AppCompatActivity() {
 
         var fileName = "image.png"
 
-        var requestBody : RequestBody = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
-        var body : MultipartBody.Part = MultipartBody.Part.createFormData("image", fileName, requestBody)
+        var requestBody: RequestBody = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+        var body: MultipartBody.Part =
+            MultipartBody.Part.createFormData("image", fileName, requestBody)
 
         RetrofitClient.instance.uploadImage(body)
             .enqueue(object : Callback<String> {
@@ -193,9 +193,8 @@ class IngredientActivity : AppCompatActivity() {
             })
     }
 
-
     private fun moveLoginPage() {
         startActivity(Intent(this, LoginActivity::class.java))
-        finish()
+        finishAffinity()
     }
 }

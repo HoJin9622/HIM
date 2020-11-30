@@ -53,11 +53,6 @@ class IngredientManagementSystem {
                         Log.d("Response", "expirationDate: ${response.body()?.expirationDate}")
                         Log.d("Response", "image: ${response.body()?.image}")
                         Log.d("Response", "barcode: ${response.body()?.barcode}")
-                        activity.startActivity(
-                            Intent(activity, MainActivity::class.java).putExtra(
-                                "userId", body["user"].toString()
-                            )
-                        )
                         activity.finish()
                     } else {
                         Log.d("Response", "response.code(): ${response.code()}")
@@ -85,11 +80,6 @@ class IngredientManagementSystem {
                     Log.d("Response", "expirationDate: ${response.body()?.expirationDate}")
                     Log.d("Response", "image: ${response.body()?.image}")
                     Log.d("Response", "barcode: ${response.body()?.barcode}")
-                    activity.startActivity(
-                        Intent(activity, MainActivity::class.java).putExtra(
-                            "userId", response.body()?.user
-                        )
-                    )
                     activity.finish()
                 } else {
                     Log.d("Response", "response.code(): ${response.code()}")
@@ -115,7 +105,7 @@ class IngredientManagementSystem {
                     if (response.code() == 400) {
                         Toast.makeText(
                             activity,
-                            "주문 신청된 식재료입니다. 주문 취소를 먼저 수행하십시오.",
+                            "주문 신청된 식재료입니다.\n먼저 주문 취소를 해주세요.",
                             Toast.LENGTH_SHORT
                         ).show()
                     } else {
@@ -127,6 +117,7 @@ class IngredientManagementSystem {
                                 MainActivity::class.java
                             ).putExtra("userId", userId)
                         )
+                        activity.recreate()
                         Toast.makeText(activity, "해당 식재료가 삭제되었습니다.", Toast.LENGTH_SHORT).show()
                     }
                 }

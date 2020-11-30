@@ -46,7 +46,6 @@ class RegisterUserActivity : AppCompatActivity() {
                 return
             }
         }
-
-        UserManagementSystem().register(this, id, password, name, isProvider!! )
+        UserManagementSystem().register(this, id, password, name, isProvider!!)
     }
 }
