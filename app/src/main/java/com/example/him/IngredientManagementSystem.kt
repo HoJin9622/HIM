@@ -4,7 +4,9 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.him.databinding.ActivityIngredientBinding
 import com.example.him.databinding.ActivityMainBinding
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -118,5 +120,41 @@ class IngredientManagementSystem {
                     Toast.makeText(activity, "서버와의 접속이 원활하지 않습니다.", Toast.LENGTH_SHORT).show()
                 }
             })
+    }
+
+    fun searchByBarcode(
+        activity: IngredientActivity, binding: ActivityIngredientBinding, barcode: String
+    ) {
+        RetrofitClient.instance.getIngredient(barcode)
+            .enqueue(object : Callback<IngredientResponse> {
+                override fun onResponse(
+                    call: Call<IngredientResponse>, response: Response<IngredientResponse>
+                ) {
+                    Log.d("Response", "결과: ${response.body()}")
+                    if (response.body() != null) {
+                        binding.nameEdit.setText(response.body()!!.name)
+                        binding.priceEdit.setText(response.body()!!.price.toString())
+                    }
+                }
+
+                override fun onFailure(call: Call<IngredientResponse>, t: Throwable) {
+                    Log.d("Response", t.message.toString())
+                    Toast.makeText(activity, "서버와의 접속이 원활하지 않습니다.", Toast.LENGTH_SHORT).show()
+                }
+            })
+    }
+
+    fun uploadPicture(activity: IngredientActivity, picture: MultipartBody.Part) {
+        RetrofitClient.instance.uploadImage(picture).enqueue(object : Callback<String> {
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                Log.d("Response", "결과: $response")
+                Toast.makeText(activity, "사진이 업로드되었습니다.", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                Log.d("Response", "오류: ${t.message.toString()}")
+                Toast.makeText(activity, "서버와의 접속이 원활하지 않습니다.", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 }
