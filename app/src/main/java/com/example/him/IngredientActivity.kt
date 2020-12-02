@@ -137,7 +137,10 @@ class IngredientActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "스캔 완료.\n$barcode", Toast.LENGTH_LONG).show()
                 binding.barcodeEdit.setText(barcode)
-                IngredientManagementSystem().searchByBarcode(this, binding, barcode)
+                val body = HashMap<String, String?>()
+                body["barcode"] = barcode
+                body["user"] =intent.getStringExtra("userId")
+                IngredientManagementSystem().searchByBarcode(this, binding, body)
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data)

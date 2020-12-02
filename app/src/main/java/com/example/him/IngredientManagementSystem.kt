@@ -32,6 +32,7 @@ class IngredientManagementSystem {
                     }
                 }
 
+
                 override fun onFailure(call: Call<ArrayList<IngredientResponse>>, t: Throwable) {
                     Log.d("Response", t.message.toString())
                     Toast.makeText(activity, "서버와의 접속이 원활하지 않습니다.", Toast.LENGTH_SHORT).show()
@@ -122,9 +123,10 @@ class IngredientManagementSystem {
     }
 
     fun searchByBarcode(
-        activity: IngredientActivity, binding: ActivityIngredientBinding, barcode: String
+        activity: IngredientActivity, binding: ActivityIngredientBinding, body: HashMap<String, String?>
     ) {
-        RetrofitClient.instance.getIngredient(barcode)
+
+        RetrofitClient.instance.getIngredient(body)
             .enqueue(object : Callback<IngredientResponse> {
                 override fun onResponse(
                     call: Call<IngredientResponse>, response: Response<IngredientResponse>
