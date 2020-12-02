@@ -8,6 +8,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -144,6 +145,7 @@ class IngredientActivity : AppCompatActivity() {
                 if(resultCode == Activity.RESULT_OK) {
                     photoUri = data?.data
                     binding.photoButton.setImageURI(photoUri)
+                    binding.photoButton.scaleType = ImageView.ScaleType.FIT_CENTER
                     contentUpload()
                 }
             }
