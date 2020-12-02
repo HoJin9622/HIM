@@ -3,6 +3,7 @@ package com.example.him
 import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.him.databinding.ActivityIngredientBinding
 import com.example.him.databinding.ActivityMainBinding
 import retrofit2.Call
@@ -132,6 +133,7 @@ class IngredientManagementSystem {
                     if (response.body() != null) {
                         binding.nameEdit.setText(response.body()!!.name)
                         binding.priceEdit.setText(response.body()!!.price.toString())
+                        Glide.with(binding.photoButton.context).load(response.body()?.image).into(binding.photoButton)
                     }
                 }
 
