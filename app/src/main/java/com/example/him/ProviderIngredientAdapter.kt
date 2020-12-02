@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.him.databinding.ProviderIngredientRecyclerBinding
 import java.text.SimpleDateFormat
 
@@ -42,6 +43,7 @@ class ProviderIngredientHolder(itemView: View) : RecyclerView.ViewHolder(itemVie
         binding.shelfLifeView.text =
             SimpleDateFormat("yyyy-MM-dd").format(ingredient.expirationDate)
         binding.priceView.text = "${ingredient.price}"
+        Glide.with(binding.imageView.context).load(ingredient.image).into(binding.imageView)
 
         binding.orderButton.setOnClickListener {
             val body = HashMap<String, String?>()
