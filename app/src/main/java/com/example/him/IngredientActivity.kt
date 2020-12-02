@@ -17,6 +17,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.bumptech.glide.Glide
 import com.example.him.databinding.ActivityIngredientBinding
 import com.google.firebase.storage.FirebaseStorage
 import com.google.zxing.integration.android.IntentIntegrator
@@ -69,6 +70,7 @@ class IngredientActivity : AppCompatActivity() {
                 binding.barcodeEdit.setText(ingredient.barcode)
                 binding.shelfLifeEdit.setText(SimpleDateFormat("yyyy-MM-dd").format(ingredient.expirationDate))
                 binding.confirmButton.setOnClickListener { editIngredientHandler(ingredient._id) }
+                Glide.with(binding.photoButton.context).load(ingredient.image).into(binding.photoButton)
             }
             else -> {
                 Log.d("Response", "userId: null, ingredient: null")
