@@ -1,26 +1,33 @@
 package com.example.him
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
+import android.content.ContentResolver
 import android.content.Intent
+import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
-import android.os.FileUtils
+import android.os.Handler
+import android.os.Looper
+import android.provider.MediaStore
+import android.provider.OpenableColumns
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import com.example.him.databinding.ActivityIngredientBinding
+import com.google.firebase.storage.FirebaseStorage
 import com.google.zxing.integration.android.IntentIntegrator
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import okio.BufferedSink
 import java.io.File
+import java.io.FileInputStream
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.HashMap
@@ -30,7 +37,9 @@ class IngredientActivity : AppCompatActivity() {
     private lateinit var binding: ActivityIngredientBinding
 
     private var PICK_IMAGE_FROM_ALBUM = 0
-    private var photoUri: Uri? = null
+    private var storage: FirebaseStorage? = null
+    private var photoUri : Uri? = null
+    private var cloudUri : String? = null
 
     @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,8 +48,10 @@ class IngredientActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         // View Binding 완료. 아래부터 작성.
+        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1)
+        storage = FirebaseStorage.getInstance()
 
-        val photoPickerIntent = Intent(Intent.ACTION_PICK)
+        var photoPickerIntent = Intent(Intent.ACTION_PICK)
         photoPickerIntent.type = "image/*"
         binding.photoButton.setOnClickListener {
             startActivityForResult(photoPickerIntent, PICK_IMAGE_FROM_ALBUM)
@@ -90,7 +101,7 @@ class IngredientActivity : AppCompatActivity() {
         if (!inputCheck()) return
         val body = HashMap<String, Any?>()
         body["user"] = userId
-        body["image"] = ""
+        body["image"] = cloudUri
         body["barcode"] = binding.barcodeEdit.text.toString()
         body["name"] = binding.nameEdit.text.toString()
         body["expirationDate"] = binding.shelfLifeEdit.text.toString()
@@ -105,7 +116,7 @@ class IngredientActivity : AppCompatActivity() {
         body["barcode"] = binding.barcodeEdit.text.toString()
         body["name"] = binding.nameEdit.text.toString()
         body["expirationDate"] = binding.shelfLifeEdit.text.toString()
-        body["image"] = ""
+        body["image"] = cloudUri
         body["price"] = binding.priceEdit.text.toString().toInt()
         IngredientManagementSystem().edit(this, body)
     }
@@ -141,23 +152,29 @@ class IngredientActivity : AppCompatActivity() {
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data)
-            if (requestCode == PICK_IMAGE_FROM_ALBUM) {
-                if (resultCode == Activity.RESULT_OK) {
+            if(requestCode == PICK_IMAGE_FROM_ALBUM) {
+                if(resultCode == Activity.RESULT_OK) {
                     photoUri = data?.data
-                    Log.d("Response", photoUri.toString())
-                    contentUpload(photoUri.toString())
+                    binding.photoButton.setImageURI(photoUri)
+                    contentUpload()
                 } else {
-                    finish()
+
                 }
             }
         }
     }
 
-    private fun contentUpload(path: String) {
-        val file = File(path)
-        val fileName = "image.png"
-        val requestBody: RequestBody = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
-        val body = MultipartBody.Part.createFormData("image", fileName, requestBody)
-        IngredientManagementSystem().uploadPicture(this, body)
+    private fun contentUpload() {
+        var timestamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        var imageFileName = "IMAGE_" + timestamp + "_.png"
+
+        var storageRef = storage?.reference?.child("images")?.child(imageFileName)
+
+        storageRef?.putFile(photoUri!!)?.addOnSuccessListener {
+            Toast.makeText(this, "업로드 성공", Toast.LENGTH_LONG).show()
+            storageRef.downloadUrl.addOnSuccessListener { uri ->
+                cloudUri = uri.toString()
+            }
+        }
     }
 }

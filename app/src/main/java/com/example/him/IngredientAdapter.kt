@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.him.databinding.IngredientRecyclerBinding
 import java.text.SimpleDateFormat
 
@@ -42,6 +43,7 @@ class IngredientHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         binding.shelfLifeView.text =
             SimpleDateFormat("yyyy-MM-dd").format(ingredient.expirationDate)
         binding.priceView.text = "${ingredient.price}"
+        Glide.with(binding.imageView.context).load(ingredient.image).into(binding.imageView)
 
         binding.editButton.setOnClickListener {
             activity.startActivity(

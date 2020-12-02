@@ -58,8 +58,4 @@ interface Api {
 
     @DELETE("orders/{id}")
     fun deleteOrder(@Path("id") id: String?): Call<MessageResponse>
-
-    @Multipart
-    @POST("upload")
-    fun uploadImage(@Part imageFile : MultipartBody.Part): Call<String>
 }
