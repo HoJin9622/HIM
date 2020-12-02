@@ -1,13 +1,10 @@
 package com.example.him
 
-import android.os.Message
 import android.util.Log
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.him.databinding.ActivityIngredientBinding
 import com.example.him.databinding.ActivityMainBinding
-import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

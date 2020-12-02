@@ -1,6 +1,5 @@
 package com.example.him
 
-import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
 

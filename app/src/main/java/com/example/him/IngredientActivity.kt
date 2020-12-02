@@ -4,15 +4,9 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
-import android.content.ContentResolver
 import android.content.Intent
-import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.provider.MediaStore
-import android.provider.OpenableColumns
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -21,14 +15,6 @@ import com.bumptech.glide.Glide
 import com.example.him.databinding.ActivityIngredientBinding
 import com.google.firebase.storage.FirebaseStorage
 import com.google.zxing.integration.android.IntentIntegrator
-import okhttp3.MediaType
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.asRequestBody
-import okio.BufferedSink
-import java.io.File
-import java.io.FileInputStream
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.HashMap
@@ -52,7 +38,7 @@ class IngredientActivity : AppCompatActivity() {
         ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1)
         storage = FirebaseStorage.getInstance()
 
-        var photoPickerIntent = Intent(Intent.ACTION_PICK)
+        val photoPickerIntent = Intent(Intent.ACTION_PICK)
         photoPickerIntent.type = "image/*"
         binding.photoButton.setOnClickListener {
             startActivityForResult(photoPickerIntent, PICK_IMAGE_FROM_ALBUM)
@@ -159,18 +145,17 @@ class IngredientActivity : AppCompatActivity() {
                     photoUri = data?.data
                     binding.photoButton.setImageURI(photoUri)
                     contentUpload()
-                } else {
-
                 }
             }
         }
     }
 
+    @SuppressLint("SimpleDateFormat")
     private fun contentUpload() {
-        var timestamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-        var imageFileName = "IMAGE_" + timestamp + "_.png"
+        val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val imageFileName = "IMAGE_" + timestamp + "_.png"
 
-        var storageRef = storage?.reference?.child("images")?.child(imageFileName)
+        val storageRef = storage?.reference?.child("images")?.child(imageFileName)
 
         storageRef?.putFile(photoUri!!)?.addOnSuccessListener {
             Toast.makeText(this, "업로드 성공", Toast.LENGTH_LONG).show()
