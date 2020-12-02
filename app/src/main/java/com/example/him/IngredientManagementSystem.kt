@@ -12,7 +12,9 @@ import retrofit2.Response
 import java.util.*
 import kotlin.collections.HashMap
 
+// 식재료 관리 시스템 클래스. 식재료 정보에 접근하는 기능들을 갖는다.
 class IngredientManagementSystem {
+    // 식재료 목록을 보여주는 함수.
     fun show(activity: MainActivity, binding: ActivityMainBinding, userId: String?) {
         RetrofitClient.instance.getIngredients(userId)
             .enqueue(object : Callback<ArrayList<IngredientResponse>> {
@@ -40,6 +42,7 @@ class IngredientManagementSystem {
             })
     }
 
+    // 식재료를 등록하는 함수.
     fun register(activity: IngredientActivity, body: HashMap<String, Any?>) {
         RetrofitClient.instance.registerIngredient(body)
             .enqueue(object : Callback<IngredientResponse> {
@@ -68,6 +71,7 @@ class IngredientManagementSystem {
             })
     }
 
+    // 식재료를 수정하는 함수.
     fun edit(activity: IngredientActivity, body: HashMap<String, Any?>) {
         RetrofitClient.instance.editIngredient(body).enqueue(object : Callback<IngredientResponse> {
             override fun onResponse(
@@ -95,6 +99,7 @@ class IngredientManagementSystem {
         })
     }
 
+    // 식재료를 삭제하는 함수.
     fun delete(activity: MainActivity, ingredientId: String) {
         RetrofitClient.instance.deleteIngredients(ingredientId)
             .enqueue(object : Callback<MessageResponse> {
@@ -122,8 +127,11 @@ class IngredientManagementSystem {
             })
     }
 
+    // 바코드에 해당하는 식재료를 검색하는 함수.
     fun searchByBarcode(
-        activity: IngredientActivity, binding: ActivityIngredientBinding, body: HashMap<String, String?>
+        activity: IngredientActivity,
+        binding: ActivityIngredientBinding,
+        body: HashMap<String, String?>
     ) {
 
         RetrofitClient.instance.getIngredient(body)
@@ -135,7 +143,8 @@ class IngredientManagementSystem {
                     if (response.body() != null) {
                         binding.nameEdit.setText(response.body()!!.name)
                         binding.priceEdit.setText(response.body()!!.price.toString())
-                        Glide.with(binding.photoButton.context).load(response.body()?.image).into(binding.photoButton)
+                        Glide.with(binding.photoButton.context).load(response.body()?.image)
+                            .into(binding.photoButton)
                     }
                 }
 

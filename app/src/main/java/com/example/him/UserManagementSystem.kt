@@ -8,11 +8,14 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+// 사용자 관리 시스템 클래스. 사용자 회원 정보에 접근하는 기능들을 갖는다.
 class UserManagementSystem {
+    // 로그인 함수.
     fun login(activity: LoginActivity, id: String, password: String) {
         val body = HashMap<String, String>()
         body["userId"] = id
         body["password"] = password
+        // HTTP 통신 중 POST 명령을 수행하여 로그인 정보를 검증한다.
         RetrofitClient.instance.login(body).enqueue(object : Callback<UserResponse> {
             override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
                 if (response.code() == 200) {
@@ -43,6 +46,7 @@ class UserManagementSystem {
         })
     }
 
+    // 회원가입 함수.
     fun register(
         activity: RegisterUserActivity,
         id: String,
@@ -86,6 +90,7 @@ class UserManagementSystem {
         })
     }
 
+    // 회원 탈퇴 함수.
     fun withdraw(activity: EditUserActivity, userId: String) {
         RetrofitClient.instance.deleteUser(userId).enqueue(object : Callback<MessageResponse> {
             override fun onResponse(
@@ -105,6 +110,7 @@ class UserManagementSystem {
         })
     }
 
+    // 회원 변경 함수.
     fun edit(activity: EditUserActivity, id: String, password: String) {
         val body = HashMap<String, String?>()
         body["_id"] = id

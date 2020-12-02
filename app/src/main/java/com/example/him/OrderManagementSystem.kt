@@ -13,7 +13,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+// 주문 관리 시스템 클래스. 소비자와 공급자 간 주문 정보에 접근하는 기능을 갖는다.
 class OrderManagementSystem {
+    // 현재 접속한 사용자가 공급자인지 소비자인지 검사하는 함수.
     fun isProvider(activity: OrderListActivity, binding: ActivityOrderListBinding, userId: String) {
         RetrofitClient.instance.isProvider(userId).enqueue(object : Callback<IsProviderResponse> {
             override fun onResponse(
@@ -39,6 +41,7 @@ class OrderManagementSystem {
         })
     }
 
+    // 현재 접속한 사용자의 식재료 주문 목록을 보여주는 합수.
     fun show(activity: OrderListActivity, binding: ActivityOrderListBinding, userId: String) {
         RetrofitClient.instance.getOrders(userId)
             .enqueue(object : Callback<ArrayList<OrderResponse>> {
@@ -66,6 +69,7 @@ class OrderManagementSystem {
             })
     }
 
+    // 현재 접속 사용자의 식재료를 삭제하는 함수.
     fun delete(activity: OrderListActivity, orderId: String) {
         RetrofitClient.instance.deleteOrder(orderId)
             .enqueue(object : Callback<MessageResponse> {
@@ -84,6 +88,7 @@ class OrderManagementSystem {
             })
     }
 
+    // 식재료를 주문하기 전 공급자 목록을 불러오는 함수.
     fun bringProvider(activity: RegisterOrderActivity, binding: ActivityRegisterOrderBinding) {
         RetrofitClient.instance.getProvider()
             .enqueue(object : Callback<java.util.ArrayList<UserResponse>> {
@@ -134,6 +139,7 @@ class OrderManagementSystem {
             })
     }
 
+    // 현재 접속한 소비자가 선택한 공급자의 식재료 목록을 불러오는 함수.
     fun showProviderIngredient(
         activity: RegisterOrderActivity,
         binding: ActivityRegisterOrderBinding,
@@ -175,6 +181,7 @@ class OrderManagementSystem {
             })
     }
 
+    // 소비자가 선택한 공급자의 식재료 주문을 수행하는 함수.
     fun orderIngredient(activity: RegisterOrderActivity, body: HashMap<String, String?>) {
         RetrofitClient.instance.registerOrder(body)
             .enqueue(object : Callback<MessageResponse> {
