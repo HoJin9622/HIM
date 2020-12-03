@@ -1,7 +1,9 @@
 package com.example.him
 
+import android.net.Uri
 import android.util.Log
 import android.widget.Toast
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.him.databinding.ActivityIngredientBinding
@@ -164,6 +166,7 @@ class IngredientManagementSystem {
                         // 불러온 식재료의 URL를 이용하여 해당 사진을 적재하는 함수.
                         Glide.with(binding.photoButton.context).load(response.body()?.image)
                             .into(binding.photoButton)
+                        binding.imageUrl.setText(response.body()?.image)
                     }
                 }
 

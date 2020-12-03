@@ -95,7 +95,7 @@ class IngredientActivity : AppCompatActivity() {
         if (!inputCheck()) return
         val body = HashMap<String, Any?>()
         body["user"] = userId
-        body["image"] = cloudUri
+        body["image"] = binding.imageUrl.text.toString()
         body["barcode"] = binding.barcodeEdit.text.toString()
         body["name"] = binding.nameEdit.text.toString()
         body["expirationDate"] = binding.shelfLifeEdit.text.toString()
@@ -110,7 +110,7 @@ class IngredientActivity : AppCompatActivity() {
         body["barcode"] = binding.barcodeEdit.text.toString()
         body["name"] = binding.nameEdit.text.toString()
         body["expirationDate"] = binding.shelfLifeEdit.text.toString()
-        body["image"] = cloudUri
+        body["image"] = binding.imageUrl.text.toString()
         body["price"] = binding.priceEdit.text.toString().toInt()
         IngredientManagementSystem().edit(this, body)
     }
@@ -171,6 +171,7 @@ class IngredientActivity : AppCompatActivity() {
             Toast.makeText(this, "업로드 성공", Toast.LENGTH_LONG).show()
             storageRef.downloadUrl.addOnSuccessListener { uri ->
                 cloudUri = uri.toString()
+                binding.imageUrl.setText(uri.toString())
             }
         }
     }
