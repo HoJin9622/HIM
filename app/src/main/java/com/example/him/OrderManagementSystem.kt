@@ -183,8 +183,10 @@ class OrderManagementSystem {
 
     // 소비자가 선택한 공급자의 식재료 주문을 수행하는 함수.
     fun orderIngredient(activity: RegisterOrderActivity, body: HashMap<String, String?>) {
+        // HTTP 통신 중 POST 명령을 수행하여 식재료 주문 목록을 등록한다.
         RetrofitClient.instance.registerOrder(body)
             .enqueue(object : Callback<MessageResponse> {
+                // HTTP POST에 대한 정상적인 응답을 수실할 때 수행하는 함수.
                 override fun onResponse(
                     call: Call<MessageResponse>, response: Response<MessageResponse>
                 ) {
@@ -198,6 +200,7 @@ class OrderManagementSystem {
                     }
                 }
 
+                // HTTP POST에 대한 응답이 실패할 때 수행하는 함수.
                 override fun onFailure(call: Call<MessageResponse>, t: Throwable) {
                     Log.d("Response", t.message.toString())
                     Toast.makeText(activity, "서버와의 접속이 원활하지 않습니다.", Toast.LENGTH_SHORT).show()
