@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.him.databinding.ActivityRegisterOrderBinding
 
+// 주문 등록 UI를 구현하는 Boundary 클래스.
 class RegisterOrderActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterOrderBinding
 

@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Toast
 import com.example.him.databinding.ActivityMainBinding
 
+// 식재료 목록 UI를 구현하는 Boundary 클래스.
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 

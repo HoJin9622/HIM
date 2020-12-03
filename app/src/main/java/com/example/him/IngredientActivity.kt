@@ -20,14 +20,14 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.HashMap
 
-
+// 식재료 등록 혹은 수정 UI를 구현하는 Boundary 클래스.
 class IngredientActivity : AppCompatActivity() {
     private lateinit var binding: ActivityIngredientBinding
 
     private var PICK_IMAGE_FROM_ALBUM = 0
     private var storage: FirebaseStorage? = null
-    private var photoUri : Uri? = null
-    private var cloudUri : String? = null
+    private var photoUri: Uri? = null
+    private var cloudUri: String? = null
 
     @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +36,11 @@ class IngredientActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         // View Binding 완료. 아래부터 작성.
-        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1)
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+            1
+        )
         storage = FirebaseStorage.getInstance()
 
         val photoPickerIntent = Intent(Intent.ACTION_PICK)
@@ -57,7 +61,8 @@ class IngredientActivity : AppCompatActivity() {
                 binding.barcodeEdit.setText(ingredient.barcode)
                 binding.shelfLifeEdit.setText(SimpleDateFormat("yyyy-MM-dd").format(ingredient.expirationDate))
                 binding.confirmButton.setOnClickListener { editIngredientHandler(ingredient._id) }
-                Glide.with(binding.photoButton.context).load(ingredient.image).into(binding.photoButton)
+                Glide.with(binding.photoButton.context).load(ingredient.image)
+                    .into(binding.photoButton)
             }
             else -> {
                 Log.d("Response", "userId: null, ingredient: null")
@@ -139,13 +144,13 @@ class IngredientActivity : AppCompatActivity() {
                 binding.barcodeEdit.setText(barcode)
                 val body = HashMap<String, String?>()
                 body["barcode"] = barcode
-                body["user"] =intent.getStringExtra("userId")
+                body["user"] = intent.getStringExtra("userId")
                 IngredientManagementSystem().searchByBarcode(this, binding, body)
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data)
-            if(requestCode == PICK_IMAGE_FROM_ALBUM) {
-                if(resultCode == Activity.RESULT_OK) {
+            if (requestCode == PICK_IMAGE_FROM_ALBUM) {
+                if (resultCode == Activity.RESULT_OK) {
                     photoUri = data?.data
                     binding.photoButton.setImageURI(photoUri)
                     binding.photoButton.scaleType = ImageView.ScaleType.FIT_CENTER

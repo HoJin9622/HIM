@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Toast
 import com.example.him.databinding.ActivityOrderListBinding
 
+// 주문 목록 UI를 구현하는 Boundary 클래스.
 class OrderListActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOrderListBinding
 

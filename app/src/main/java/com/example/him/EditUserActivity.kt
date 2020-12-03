@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.example.him.databinding.ActivityEditUserBinding
 
+// 회원 변경 UI를 구현하는 Boundary 클래스.
 class EditUserActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditUserBinding
 

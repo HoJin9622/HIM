@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.example.him.databinding.ActivityRegisterUserBinding
 
+// 회원가입 UI를 구현하는 Boundary 클래스.
 class RegisterUserActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterUserBinding
 

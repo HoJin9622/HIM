@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.him.databinding.ActivityLoginBinding
 
+// 로그인 UI를 구현하는 Boundary 클래스.
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
 
